@@ -2,3 +2,11 @@
 title: "Geospatail exploratory data analysis"
 editor: visual
 ---
+
+```{r}
+library(osmdata)
+library(sf)
+library(sfnetworks)
+library(dplyr)
+library(ggplot2)
+```
