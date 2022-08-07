@@ -9,4 +9,39 @@ library(sf)
 library(sfnetworks)
 library(dplyr)
 library(ggplot2)
+library(foot)
+```
+
+My story begins in Mumbai. Now, in 2022, it is a roaring megacity of almost 21 million people. While large, this number
+
+The city bustles in some way every second of the day - rhythms rising, fading, cresting to a manic frenzy or just a staccato march. The beat of the place is bound to the people but the people too are constrained to their place. 20 million people squashed into an area just three quarters the area of New York city resulting in a crush of 20,000 people into one square kilometer. To put that into a realistic terms TODO - find one!
+
+```{r}
+q <- opq(bbox = c(72.795468,18.889571,72.82379,18.916382)) %>%
+    add_osm_feature(key = 'building')
+df <- osmdata_sf(q)
+colaba_bldgs <- df$osm_polygons %>% select(osm_id, name, geometry)
+```
+
+```{r}
+q <- opq(bbox = c(72.805099,18.899535,72.816249,18.91005)) %>%
+    add_osm_feature(key = 'building')
+df <- osmdata_sf(q)
+colaba_bldgs <- df$osm_polygons %>% select(osm_id, name, geometry)
+ggplot(colaba_bldgs) + 
+  geom_sf()
+```
+
+```{r}
+q <- opq(bbox = c(72.841104,19.095217,72.852255,19.10572)) %>%
+    add_osm_feature(key = 'building')
+df <- osmdata_sf(q)
+andheri_bldgs <- df$osm_polygons %>% select(osm_id, name, geometry)
+ggplot(andheri_bldgs) + 
+  geom_sf()
+```
+
+```{python}
+import os
+
 ```
