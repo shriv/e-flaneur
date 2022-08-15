@@ -8,7 +8,40 @@
       }
     ]
   },
+  "Bioconductor": {
+    "Version": "3.15"
+  },
   "Packages": {
+    "BiocGenerics": {
+      "Package": "BiocGenerics",
+      "Version": "0.42.0",
+      "Source": "Bioconductor",
+      "git_url": "https://git.bioconductor.org/packages/BiocGenerics",
+      "git_branch": "RELEASE_3_15",
+      "git_last_commit": "3582d47",
+      "git_last_commit_date": "2022-04-26",
+      "Hash": "37348ee784e82c0a6b650146275b459d",
+      "Requirements": []
+    },
+    "BiocManager": {
+      "Package": "BiocManager",
+      "Version": "1.30.18",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b1a93bed5debda5775636086fdca017b",
+      "Requirements": []
+    },
+    "BiocVersion": {
+      "Package": "BiocVersion",
+      "Version": "3.15.2",
+      "Source": "Bioconductor",
+      "git_url": "https://git.bioconductor.org/packages/BiocVersion",
+      "git_branch": "master",
+      "git_last_commit": "818ab03",
+      "git_last_commit_date": "2022-03-29",
+      "Hash": "48e545a2fa24a967de72b1114bfe96ac",
+      "Requirements": []
+    },
     "DBI": {
       "Package": "DBI",
       "Version": "1.1.3",
@@ -216,6 +249,14 @@
       "Hash": "36b67b5adf57b292923f5659f5f0c853",
       "Requirements": []
     },
+    "deldir": {
+      "Package": "deldir",
+      "Version": "1.0-6",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "65a3d4e2a1619bb85ae0fb64628da972",
+      "Requirements": []
+    },
     "digest": {
       "Package": "digest",
       "Version": "0.6.29",
@@ -399,6 +440,17 @@
         "sp"
       ]
     },
+    "ggm": {
+      "Package": "ggm",
+      "Version": "2.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "028aeecfb67995948925e73b484cbdf7",
+      "Requirements": [
+        "graph",
+        "igraph"
+      ]
+    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.3.6",
@@ -425,6 +477,27 @@
       "Repository": "CRAN",
       "Hash": "4f2596dfb05dac67b9dc558e5c6fba2e",
       "Requirements": []
+    },
+    "goftest": {
+      "Package": "goftest",
+      "Version": "1.2-3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "dbe0201f91eeb15918dd3fbf01ee689a",
+      "Requirements": []
+    },
+    "graph": {
+      "Package": "graph",
+      "Version": "1.74.0",
+      "Source": "Bioconductor",
+      "git_url": "https://git.bioconductor.org/packages/graph",
+      "git_branch": "RELEASE_3_15",
+      "git_last_commit": "4af608a",
+      "git_last_commit_date": "2022-04-26",
+      "Hash": "08e64017b9fc86340df1a13eb89573cc",
+      "Requirements": [
+        "BiocGenerics"
+      ]
     },
     "gtable": {
       "Package": "gtable",
@@ -616,6 +689,24 @@
       "Hash": "7ce2733a9826b3aeb1775d56fd305472",
       "Requirements": []
     },
+    "mapproj": {
+      "Package": "mapproj",
+      "Version": "1.2.8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2cf1fa05b9757c1885d2ae63d96ade1d",
+      "Requirements": [
+        "maps"
+      ]
+    },
+    "maps": {
+      "Package": "maps",
+      "Version": "3.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "b3d98a967ec17c80f795719529812fa0",
+      "Requirements": []
+    },
     "memoise": {
       "Package": "memoise",
       "Version": "2.0.1",
@@ -695,6 +786,36 @@
         "xml2"
       ]
     },
+    "osmplotr": {
+      "Package": "osmplotr",
+      "Version": "0.3.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a11f59bea3f88c5c50ee273594d8c21a",
+      "Requirements": [
+        "e1071",
+        "ggm",
+        "ggplot2",
+        "mapproj",
+        "osmdata",
+        "rgeos",
+        "sp",
+        "spatstat",
+        "spatstat.core",
+        "spatstat.geom"
+      ]
+    },
+    "patchwork": {
+      "Package": "patchwork",
+      "Version": "1.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c446b30cb33ec125ff02588b60660ccb",
+      "Requirements": [
+        "ggplot2",
+        "gtable"
+      ]
+    },
     "pillar": {
       "Package": "pillar",
       "Version": "1.8.0",
@@ -717,6 +838,14 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "01f28d4278f15c76cddbea05899c5d6f",
+      "Requirements": []
+    },
+    "polyclip": {
+      "Package": "polyclip",
+      "Version": "1.10-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "cb167f328b3ada4ec5cf67a7df4c900a",
       "Requirements": []
     },
     "proj4": {
@@ -774,6 +903,16 @@
         "proj4"
       ]
     },
+    "rgeos": {
+      "Package": "rgeos",
+      "Version": "0.5-9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7cfa4f73a070042ecf141d5c1d1bfcae",
+      "Requirements": [
+        "sp"
+      ]
+    },
     "rlang": {
       "Package": "rlang",
       "Version": "1.0.4",
@@ -800,6 +939,14 @@
         "xfun",
         "yaml"
       ]
+    },
+    "rpart": {
+      "Package": "rpart",
+      "Version": "4.1.16",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "ea3ca1d9473daabb3cd0f1b4f974c1ed",
+      "Requirements": []
     },
     "rvest": {
       "Package": "rvest",
@@ -925,6 +1072,115 @@
         "lattice"
       ]
     },
+    "spatstat": {
+      "Package": "spatstat",
+      "Version": "2.3-4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f52cbe8bfe269cc6c6615531ce430e9b",
+      "Requirements": [
+        "spatstat.core",
+        "spatstat.data",
+        "spatstat.geom",
+        "spatstat.linnet",
+        "spatstat.random",
+        "spatstat.utils"
+      ]
+    },
+    "spatstat.core": {
+      "Package": "spatstat.core",
+      "Version": "2.4-4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "545286d6a69ff647be18aab77306fa54",
+      "Requirements": [
+        "Matrix",
+        "abind",
+        "goftest",
+        "mgcv",
+        "nlme",
+        "rpart",
+        "spatstat.data",
+        "spatstat.geom",
+        "spatstat.random",
+        "spatstat.sparse",
+        "spatstat.utils",
+        "tensor"
+      ]
+    },
+    "spatstat.data": {
+      "Package": "spatstat.data",
+      "Version": "2.2-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5b4f6c12d1a222680579070a045786bb",
+      "Requirements": [
+        "Matrix",
+        "spatstat.utils"
+      ]
+    },
+    "spatstat.geom": {
+      "Package": "spatstat.geom",
+      "Version": "2.4-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "33f4612dc27fa9228cac4713bb2edfd7",
+      "Requirements": [
+        "deldir",
+        "polyclip",
+        "spatstat.data",
+        "spatstat.utils"
+      ]
+    },
+    "spatstat.linnet": {
+      "Package": "spatstat.linnet",
+      "Version": "2.3-2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "d1f816d9a1ca219ac58f4b8ca351d991",
+      "Requirements": [
+        "Matrix",
+        "spatstat.core",
+        "spatstat.data",
+        "spatstat.geom",
+        "spatstat.random",
+        "spatstat.sparse",
+        "spatstat.utils"
+      ]
+    },
+    "spatstat.random": {
+      "Package": "spatstat.random",
+      "Version": "2.2-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c08d6e00855f11e04ac863dce8d6779e",
+      "Requirements": [
+        "spatstat.data",
+        "spatstat.geom",
+        "spatstat.utils"
+      ]
+    },
+    "spatstat.sparse": {
+      "Package": "spatstat.sparse",
+      "Version": "2.1-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "cde91679dea4a2fb53833a86f32c94f5",
+      "Requirements": [
+        "Matrix",
+        "abind",
+        "spatstat.utils",
+        "tensor"
+      ]
+    },
+    "spatstat.utils": {
+      "Package": "spatstat.utils",
+      "Version": "2.3-1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "cd59e2bcc05a5e34c00fe4760f118960",
+      "Requirements": []
+    },
     "stars": {
       "Package": "stars",
       "Version": "0.5-6",
@@ -966,6 +1222,14 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "b227d13e29222b4574486cfcbde077fa",
+      "Requirements": []
+    },
+    "tensor": {
+      "Package": "tensor",
+      "Version": "1.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "25cfab6cf405c15bccf7e69ec39df090",
       "Requirements": []
     },
     "tibble": {
