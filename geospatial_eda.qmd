@@ -1,5 +1,5 @@
 ---
-title: "Geospatial exploratory data analysis"
+title: "Patterns in space"
 execute:
   echo: false
   message: false
@@ -93,9 +93,9 @@ p3 <- holborn$map + labs(title = "Holborn, London")
 ## Urban morphometrics
 
 ```{r}
-all_dat <- bind_rows(dat$osm_data)
-all_dat$polygon <- st_is(all_dat, "POLYGON") 
-holborn_stats <- all_dat %>% select(-area) %>% 
+holborn_osm <- bind_rows(holborn$osm_data)
+holborn_osm$polygon <- st_is(holborn_osm, "POLYGON") 
+holborn_stats <- holborn_osm %>% select(-area) %>% 
   filter(polygon == TRUE) %>% 
   calculate_footstats(what = "all")
 ```
