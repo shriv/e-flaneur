@@ -8,7 +8,8 @@ editor: visual
 
 ```{r}
 #| include: false
-
+library(quarto)
+library(raster)
 library(osmdata)
 library(sf)
 library(sfnetworks)
@@ -17,14 +18,96 @@ library(ggplot2)
 library(foot)
 library(osmplotr)
 library(patchwork)
+library(stars)
 source("R/centroid_bbox.R")
 ```
 
-My story begins in Mumbai. Now, in 2022, it is a roaring megacity of almost 21 million people. While large, this number
+## People
+
+My story begins in Mumbai. Now, in 2022, it is a roaring megacity of almost 21 million people. Though, we stutter here already with this simple fact. The [last census was in 2011 and recorded a population of 18.4M for the metropolitan region](https://www.census2011.co.in/census/metropolitan/305-mumbai.html) and due to the pandemic it's unclear whether the 2021 census has even happened. So, a ten year old population estimate for the island has recorded 12.4M with 9.4 M in Mumbai suburban and 3.1M in Mumbai. The remaining population is across the cities in the wider region including Navi Mumbai where I grew up.
+
+My attempts to find a more recent estimate for the island city (rather than the metropolitan region) led me to the Worldpop estimations which even provide population counts at a 100m$^2$ resolution. The latest estimate for 2020 using some clever models and adjustments to UN values gives Mumbai island at 14.5M in 2020.
+
+```{r}
+#\ include: false
+
+# get population counts from world pop data
+pop <- read_stars("~/Documents/worldpop-data/ind_ppp_2020_UNadj_constrained.tif")
+
+# get mumbai polygon for subsetting
+mumbai_poly <-  getbb("mumbai india", format_out = "polygon")[[1]] %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+# get mumbai polygon for subsetting
+mumbai_suburban_poly <- getbb("mumbai suburban india", format_out = "polygon") %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+mumbai_city_poly <- getbb("mumbai city india", format_out = "polygon")[[1]] %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+```
+
+```{r}
+mumbai_pop <- st_crop(pop, mumbai_poly)
+mumbai_suburban_pop <- st_crop(pop, mumbai_suburban_poly)
+mumbai_city_pop <- st_crop(pop, mumbai_city_poly)
+
+p1 <- ggplot() + 
+  geom_stars(data = mumbai_pop) + 
+  geom_sf(data = mumbai_poly, size = 1, fill = NA) + 
+  scale_fill_viridis_c(na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "",
+       title = 'Mumbai') + 
+  guides(fill = guide_legend("Population")) 
+
+p2 <- ggplot() + 
+  geom_stars(data = mumbai_city_pop) + 
+  geom_sf(data = mumbai_city_poly, colour = "red", size = 1, fill = NA) + 
+  scale_fill_viridis_c(na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "",
+       title = "City") + 
+  theme(legend.position = "None")
+
+p3 <- ggplot() + 
+  geom_stars(data = mumbai_suburban_pop) + 
+  geom_sf(data = mumbai_suburban_poly, colour = "red", size = 1, fill = NA) + 
+  scale_fill_viridis_c(na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "", 
+       title = "Suburban") + 
+  theme(legend.position = "None") 
+
+((p1 | p3 / p2)) + 
+  plot_layout(guides = 'collect')
+
+```
 
 The city bustles in some way every second of the day - rhythms rising, fading, cresting to a manic frenzy or just a staccato march. The beat of the place is bound to the people but the people too are constrained to their place. 20 million people squashed into an area just three quarters the area of New York city resulting in a crush of 20,000 people into one square kilometer. To put that into a realistic terms TODO - find one!
 
-## Comparing Mumbai and London
+## Buildings
 
 ```{r}
 #| output: false
@@ -90,12 +173,16 @@ p3 <- holborn$map + labs(title = "Holborn, London")
   (p3) 
 ```
 
-## Urban morphometrics
+## Morphometrics
 
 ```{r}
+#| output: false
+
 holborn_osm <- bind_rows(holborn$osm_data)
 holborn_osm$polygon <- st_is(holborn_osm, "POLYGON") 
 holborn_stats <- holborn_osm %>% select(-area) %>% 
   filter(polygon == TRUE) %>% 
   calculate_footstats(what = "all")
 ```
+
+## 
