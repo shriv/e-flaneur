@@ -3,8 +3,8 @@ project:
 
 book:
   title: "e-flaneur"
-  author: "Jane Doe"
-  date: "6/08/2022"
+  author: "Shrividya Ravi"
+  date: "2022"
   chapters:
     - index.qmd
     - intro.qmd
@@ -17,8 +17,6 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
-  pdf:
-    documentclass: scrreprt
 
 editor: visual
 
