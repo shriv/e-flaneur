@@ -1,0 +1,79 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "e-flaneur",
+    "section": "",
+    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book explores a space through time and time through the space of my birth city, Mumbai. There is no grandiose undertaking in this endeavour. This book is a humble pastiche of quantitative explorations, memories and musings."
+  },
+  {
+    "objectID": "intro.html#space-through-time",
+    "href": "intro.html#space-through-time",
+    "title": "1  Introduction",
+    "section": "1.1 Space through time",
+    "text": "1.1 Space through time\nI’m interested in the temporal characteristics of a space - avatars over time, pulses and rhythms at different time scales and perceptions of these aspects as a human who wanders the streets, both physically and virtually."
+  },
+  {
+    "objectID": "intro.html#time-through-space",
+    "href": "intro.html#time-through-space",
+    "title": "1  Introduction",
+    "section": "1.2 Time through space",
+    "text": "1.2 Time through space\nThe changing nature of space is an indicator of the passing times. Megapolises like Mumbai have neighbourhoods that rose in the blink of an eye and neighbourhoods that still hold on to century old characteristics."
+  },
+  {
+    "objectID": "intro.html#memories",
+    "href": "intro.html#memories",
+    "title": "1  Introduction",
+    "section": "1.3 Memories",
+    "text": "1.3 Memories\nMy memories of growing up in outer urban Mumbai lend another layer of perspective and ones that I wish to re-examine against Mumbai of now and bygone."
+  },
+  {
+    "objectID": "intro.html#musings",
+    "href": "intro.html#musings",
+    "title": "1  Introduction",
+    "section": "1.4 Musings",
+    "text": "1.4 Musings\nNo travel writing (virtual or wandering) is complete without some abstract speculations or wistful thinking."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "geospatial_eda.html",
+    "href": "geospatial_eda.html",
+    "title": "3  Patterns in space",
+    "section": "",
+    "text": "My story begins in Mumbai. Now, in 2022, it is a roaring megacity of almost 21 million people. Though, we stutter here already with this simple fact. The last census was in 2011 and recorded a population of 18.4M for the metropolitan region and due to the pandemic it’s unclear whether the 2021 census has even happened. So, a ten year old population estimate for the island has recorded 12.4M with 9.4 M in Mumbai suburban and 3.1M in Mumbai. The remaining population is across the cities in the wider region including Navi Mumbai where I grew up.\nMy attempts to find a more recent estimate for the island city (rather than the metropolitan region) led me to the Worldpop estimations which even provide population counts at a 100m\\(^2\\) resolution. The latest estimate for 2020 using some clever models and adjustments to UN values gives Mumbai island at 14.5M in 2020.\n\n\n\n\n\n\n\n\n\n\n\nFlattening the spatial population distribution reveals modalities as an overall pattern. In Mumbai City, the older southern part of the island, there are two distinct types of areas: those with population counts of ~250 people /100m\\(^2\\) and those with 50% more density ~375 people / 100m\\(^2\\). The larger zone of Mumbai suburban is more varied containing up to 4 modes - 2 in addition to the ones in Mumbai city.\nWhether these modes relate to specific urban typologies or if they are an artefact of the population count derivation model is still to be understand. Likely it is both. The population counts are derived from an approximate typology.\n\n\n`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.\n\n\nWarning: Removed 64559 rows containing non-finite values (stat_bin).\n\n\nWarning: Removed 4 rows containing missing values (geom_bar).\n\n\n\n\n\nThe city bustles in some way every second of the day - rhythms rising, fading, cresting to a manic frenzy or just a staccato march. The beat of the place is bound to the people but the people too are constrained to their place. 20 million people squashed into an area just three quarters the area of New York city resulting in a crush of 20,000 people into one square kilometer. To put that into a realistic terms TODO - find one!"
+  },
+  {
+    "objectID": "geospatial_eda.html#buildings",
+    "href": "geospatial_eda.html#buildings",
+    "title": "3  Patterns in space",
+    "section": "3.2 Buildings",
+    "text": "3.2 Buildings"
+  },
+  {
+    "objectID": "geospatial_eda.html#morphometrics",
+    "href": "geospatial_eda.html#morphometrics",
+    "title": "3  Patterns in space",
+    "section": "3.3 Morphometrics",
+    "text": "3.3 Morphometrics"
+  },
+  {
+    "objectID": "geospatial_eda.html#section",
+    "href": "geospatial_eda.html#section",
+    "title": "3  Patterns in space",
+    "section": "3.4 ",
+    "text": "3.4"
+  }
+]
