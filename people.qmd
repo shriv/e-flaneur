@@ -1,33 +1,26 @@
 ---
-title: "Patterns in space"
+title: "People"
 execute:
   echo: false
   message: false
+  output: false
 editor: visual
 ---
 
 ```{r}
 #| include: false
-library(quarto)
 library(raster)
-library(osmdata)
 library(sf)
-library(sfnetworks)
 library(dplyr)
 library(ggplot2)
-library(foot)
-library(osmplotr)
 library(patchwork)
 library(stars)
 library(latex2exp)
-source("R/centroid_bbox.R")
 ```
 
-## People
+In 2022 Mumbai is supposedly a roaring megacity of around 18-25 million people @demographiaWorldUrbanAreas2022. Sadly, even a simple population count is difficult since the [last census was in 2011](https://www.census2011.co.in/census/metropolitan/305-mumbai.html)and due to the pandemic it's unclear whether the 2021 census has even happened[.](https://www.census2011.co.in/census/metropolitan/305-mumbai.html) Ten years ago, the recorded population of the Mumbai metropolitan region was 18.4M while the island city recorded 12.4M - with 9.4 M in Mumbai suburban and 3.1M in Mumbai City. The remaining population is across the cities in the wider region including Navi Mumbai where I grew up.
 
-My story begins in Mumbai. Now, in 2022, it is a roaring megacity of almost 21 million people. Though, we stutter here already with this simple fact. The [last census was in 2011 and recorded a population of 18.4M for the metropolitan region](https://www.census2011.co.in/census/metropolitan/305-mumbai.html) and due to the pandemic it's unclear whether the 2021 census has even happened. So, a ten year old population estimate for the island has recorded 12.4M with 9.4 M in Mumbai suburban and 3.1M in Mumbai. The remaining population is across the cities in the wider region including Navi Mumbai where I grew up.
-
-My attempts to find a more recent estimate for the island city (rather than the metropolitan region) led me to the Worldpop estimations which even provide population counts at a 100m$^2$ resolution. The latest estimate for 2020 using some clever models and adjustments to UN values gives Mumbai island at 14.5M in 2020.
+My attempts to find a more recent, spatially distributed estimates for the island city (rather than the metropolitan region) led me to the Worldpop estimations (\@SpatialDistributionPopulatin). The latest estimate for 2020, using some clever models and adjustments to UN values, indicates 14.5M people living in Mumbai.
 
 ```{r}
 #\ include: false
@@ -62,6 +55,8 @@ mumbai_city_poly <- getbb("mumbai city india", format_out = "polygon")[[1]] %>%
   st_set_crs(4326) 
 
 ```
+
+The worldpop estimates even provide population counts at a 100m$^2$ spatial resolution. Cropping the estimates to the two zones in the island city shows some useful spatial patterns that I would like to use with some neighbourhood-level building footprint analysis.
 
 ```{r}
 mumbai_pop <- st_crop(pop, mumbai_poly)
@@ -123,7 +118,7 @@ Flattening the spatial population distribution reveals modalities as an overall 
 Whether these modes relate to specific urban typologies or if they are an artefact of the population count derivation model is still to be understand. Likely it is both. The population counts are derived *from an approximate typology.*
 
 ```{r}
-
+#| output: false
 ggplot(mumbai_pop_df) + 
   geom_histogram(aes(x = ind_ppp_2020_UNadj_constrained.tif, 
                      fill = zone),
@@ -136,83 +131,5 @@ ggplot(mumbai_pop_df) +
 ```
 
 The city bustles in some way every second of the day - rhythms rising, fading, cresting to a manic frenzy or just a staccato march. The beat of the place is bound to the people but the people too are constrained to their place. 20 million people squashed into an area just three quarters the area of New York city resulting in a crush of 20,000 people into one square kilometer. To put that into a realistic terms TODO - find one!
-
-## Buildings
-
-```{r}
-#| output: false
-
-bbox <- get_centroid_bounding_box(
-  c("lat" = 19.01879, "lng" = 72.85141),
-  distance = 500,
-  dist.unit = "m") %>% 
-  get_bbox()
-
-structs <- c ("highway", "building", "park", "landuse")
-structures <- osm_structures (structures = structs, col_scheme = "dark")
-structures$value [4] <- "recreation_ground"
-structures$cols[4] <- "#647864FF"
-
-parsi_colony <- make_osm_map (structures = structures, bbox = bbox)
-p1 <- parsi_colony$map  + labs(title = "Parsi Colony, Dadar")
-```
-
-```{r}
-#| output: false
-
-bbox <- get_centroid_bounding_box(
-  c("lat" = 19.07403, "lng" = 72.99571),
-  distance = 500,
-  dist.unit = "m") %>% 
-  get_bbox()
-structs <- c ("highway", "building", "park", "landuse", "leisure")
-structures <- osm_structures (structures = structs, col_scheme = "dark")
-structures$value [4] <- "recreation_ground"
-structures$cols[4] <- "#647864FF"
-structures$value [5] <- "sports_centre"
-structures$cols[5] <- "#647864FF"
-
-navi_mumbai_s2 <- make_osm_map (structures = structures, bbox = bbox)
-p2 <- navi_mumbai_s2$map  + labs(title = "Sector 2, Vashi")
-```
-
-```{r}
-#| output: false
-
-bbox <- get_centroid_bounding_box(
-  c("lat" = 51.51961, "lng" = -0.11370),
-  distance = 500,
-  dist.unit = "m") %>% 
-  get_bbox()
-
-structs <- c ("highway", "building", "park", "landuse", "leisure")
-structures <- osm_structures (structures = structs, col_scheme = "dark")
-structures$value [4] <- "recreation_ground"
-structures$cols[4] <- "#647864FF"
-structures$value [5] <- "garden"
-structures$cols[5] <- "#647864FF"
-
-holborn <- make_osm_map (structures = structures, bbox = bbox)
-p3 <- holborn$map + labs(title = "Holborn, London")
-```
-
-```{r}
-#| out.width="100%"
-(p1 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
-  (p2 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
-  (p3) 
-```
-
-## Morphometrics
-
-```{r}
-#| output: false
-
-holborn_osm <- bind_rows(holborn$osm_data)
-holborn_osm$polygon <- st_is(holborn_osm, "POLYGON") 
-holborn_stats <- holborn_osm %>% select(-area) %>% 
-  filter(polygon == TRUE) %>% 
-  calculate_footstats(what = "all")
-```
 
 ## 

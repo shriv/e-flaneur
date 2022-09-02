@@ -8,8 +8,8 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - summary.qmd
-    - geospatial_eda.qmd
+    - people.qmd
+    - buildings.qmd
     - references.qmd
 
 bibliography: references.bib

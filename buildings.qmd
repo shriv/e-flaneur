@@ -1,0 +1,101 @@
+---
+title: "Buildings"
+execute:
+  echo: false
+  message: false
+  output: false
+editor: visual
+---
+
+```{r}
+#| include: false
+library(osmdata)
+library(sf)
+library(sfnetworks)
+library(dplyr)
+library(ggplot2)
+library(foot)
+library(osmplotr)
+library(patchwork)
+library(stars)
+library(latex2exp)
+source("R/centroid_bbox.R")
+```
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 19.01879, "lng" = 72.85141),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+structs <- c ("highway", "building", "park", "landuse")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+
+parsi_colony <- make_osm_map (structures = structures, bbox = bbox)
+p1 <- parsi_colony$map  + labs(title = "Parsi Colony, Dadar")
+```
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 19.07403, "lng" = 72.99571),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+structs <- c ("highway", "building", "park", "landuse", "leisure")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+structures$value [5] <- "sports_centre"
+structures$cols[5] <- "#647864FF"
+
+navi_mumbai_s2 <- make_osm_map (structures = structures, bbox = bbox)
+p2 <- navi_mumbai_s2$map  + labs(title = "Sector 2, Vashi")
+```
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 51.51961, "lng" = -0.11370),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+structs <- c ("highway", "building", "park", "landuse", "leisure")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+structures$value [5] <- "garden"
+structures$cols[5] <- "#647864FF"
+
+holborn <- make_osm_map (structures = structures, bbox = bbox)
+p3 <- holborn$map + labs(title = "Holborn, London")
+```
+
+```{r}
+#| out.width="100%"
+(p1 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
+  (p2 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
+  (p3) 
+```
+
+## Morphometrics
+
+```{r}
+#| output: false
+
+holborn_osm <- bind_rows(holborn$osm_data)
+holborn_osm$polygon <- st_is(holborn_osm, "POLYGON") 
+holborn_stats <- holborn_osm %>% select(-area) %>% 
+  filter(polygon == TRUE) %>% 
+  calculate_footstats(what = "all")
+```
+
+## 
