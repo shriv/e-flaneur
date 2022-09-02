@@ -19,6 +19,7 @@ library(foot)
 library(osmplotr)
 library(patchwork)
 library(stars)
+library(latex2exp)
 source("R/centroid_bbox.R")
 ```
 
@@ -70,7 +71,7 @@ mumbai_city_pop <- st_crop(pop, mumbai_city_poly)
 p1 <- ggplot() + 
   geom_stars(data = mumbai_pop) + 
   geom_sf(data = mumbai_poly, size = 1, fill = NA) + 
-  scale_fill_viridis_c(na.value = "transparent") +
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
   scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
   theme_minimal() + 
   labs(x = "",
@@ -81,7 +82,7 @@ p1 <- ggplot() +
 p2 <- ggplot() + 
   geom_stars(data = mumbai_city_pop) + 
   geom_sf(data = mumbai_city_poly, colour = "red", size = 1, fill = NA) + 
-  scale_fill_viridis_c(na.value = "transparent") +
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
   scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
   theme_minimal() + 
   labs(x = "",
@@ -92,7 +93,7 @@ p2 <- ggplot() +
 p3 <- ggplot() + 
   geom_stars(data = mumbai_suburban_pop) + 
   geom_sf(data = mumbai_suburban_poly, colour = "red", size = 1, fill = NA) + 
-  scale_fill_viridis_c(na.value = "transparent") +
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
   scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
   theme_minimal() + 
   labs(x = "",
@@ -103,6 +104,35 @@ p3 <- ggplot() +
 ((p1 | p3 / p2)) + 
   plot_layout(guides = 'collect')
 
+```
+
+```{r}
+mumbai_city_pop_df <- mumbai_city_pop %>% 
+  as.data.frame() %>% 
+  mutate(zone = "Mumbai City")
+mumbai_suburban_pop_df <- mumbai_suburban_pop %>% 
+  as.data.frame() %>% 
+  mutate(zone = "Mumbai Suburban")
+
+mumbai_pop_df <- bind_rows(mumbai_city_pop_df, mumbai_suburban_pop_df)
+
+```
+
+Flattening the spatial population distribution reveals modalities as an overall pattern. In Mumbai City, the older southern part of the island, there are two distinct types of areas: those with population counts of \~250 people /100m$^2$ and those with 50% more density \~375 people / 100m$^2$. The larger zone of Mumbai suburban is more varied containing up to 4 modes - 2 in addition to the ones in Mumbai city.
+
+Whether these modes relate to specific urban typologies or if they are an artefact of the population count derivation model is still to be understand. Likely it is both. The population counts are derived *from an approximate typology.*
+
+```{r}
+
+ggplot(mumbai_pop_df) + 
+  geom_histogram(aes(x = ind_ppp_2020_UNadj_constrained.tif, 
+                     fill = zone),
+                 show.legend = FALSE) + 
+  facet_wrap(~zone, ncol = 1) + 
+  theme_minimal() +
+  scale_x_continuous(unname(TeX("Population count per 100$m^2$")),
+                   limits = c(0, 600)) + 
+  labs(y = "") 
 ```
 
 The city bustles in some way every second of the day - rhythms rising, fading, cresting to a manic frenzy or just a staccato march. The beat of the place is bound to the people but the people too are constrained to their place. 20 million people squashed into an area just three quarters the area of New York city resulting in a crush of 20,000 people into one square kilometer. To put that into a realistic terms TODO - find one!
