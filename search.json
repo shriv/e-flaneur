@@ -4,70 +4,35 @@
     "href": "index.html",
     "title": "e-flaneur",
     "section": "",
-    "text": "This is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introduction",
-    "section": "",
-    "text": "This is a book explores a space through time and time through the space of my birth city, Mumbai. There is no grandiose undertaking in this endeavour. This book is a humble pastiche of quantitative explorations, memories and musings."
-  },
-  {
-    "objectID": "intro.html#space-through-time",
-    "href": "intro.html#space-through-time",
-    "title": "1  Introduction",
-    "section": "1.1 Space through time",
-    "text": "1.1 Space through time\nI’m interested in the temporal characteristics of a space - avatars over time, pulses and rhythms at different time scales and perceptions of these aspects as a human who wanders the streets, both physically and virtually."
-  },
-  {
-    "objectID": "intro.html#time-through-space",
-    "href": "intro.html#time-through-space",
-    "title": "1  Introduction",
-    "section": "1.2 Time through space",
-    "text": "1.2 Time through space\nThe changing nature of space is an indicator of the passing times. Megapolises like Mumbai have neighbourhoods that rose in the blink of an eye and neighbourhoods that still hold on to century old characteristics."
-  },
-  {
-    "objectID": "intro.html#memories",
-    "href": "intro.html#memories",
-    "title": "1  Introduction",
-    "section": "1.3 Memories",
-    "text": "1.3 Memories\nMy memories of growing up in outer urban Mumbai lend another layer of perspective and ones that I wish to re-examine against Mumbai of now and bygone."
-  },
-  {
-    "objectID": "intro.html#musings",
-    "href": "intro.html#musings",
-    "title": "1  Introduction",
-    "section": "1.4 Musings",
-    "text": "1.4 Musings\nNo travel writing (virtual or wandering) is complete without some abstract speculations or wistful thinking."
+    "text": "This is a book explores a space through time and time through the space of my birth city, Mumbai. There is no grandiose undertaking in this endeavour. This book is a humble pastiche of quantitative explorations, memories and musings.\n\n\nI’m interested in the temporal characteristics of a space - avatars over time, pulses and rhythms at different time scales and perceptions of these aspects as a human who wanders the streets, both physically and virtually.\n\n\n\nThe changing nature of space is an indicator of the passing times. Megapolises like Mumbai have neighbourhoods that rose in the blink of an eye and neighbourhoods that still hold on to century old characteristics.\n\n\n\nMy memories of growing up in outer urban Mumbai lend another layer of perspective and ones that I wish to re-examine against Mumbai of now and bygone.\n\n\n\nNo travel writing (virtual or wandering) is complete without some abstract speculations or wistful thinking."
   },
   {
     "objectID": "people.html",
     "href": "people.html",
-    "title": "2  People",
+    "title": "1  People",
     "section": "",
     "text": "In 2022 Mumbai is supposedly a roaring megacity of around 18-25 million people Demographia (2022). Sadly, even a simple population count is difficult since the last census was in 2011and due to the pandemic it’s unclear whether the 2021 census has even happened. Ten years ago, the recorded population of the Mumbai metropolitan region was 18.4M while the island city recorded 12.4M - with 9.4 M in Mumbai suburban and 3.1M in Mumbai City. The remaining population is across the cities in the wider region including Navi Mumbai where I grew up.\nMy attempts to find a more recent, spatially distributed estimates for the island city (rather than the metropolitan region) led me to the Worldpop estimations (@SpatialDistributionPopulatin). The latest estimate for 2020, using some clever models and adjustments to UN values, indicates 14.5M people living in Mumbai.\nThe worldpop estimates even provide population counts at a 100m\\(^2\\) spatial resolution. Cropping the estimates to the two zones in the island city shows some useful spatial patterns that I would like to use with some neighbourhood-level building footprint analysis.\nFlattening the spatial population distribution reveals modalities as an overall pattern. In Mumbai City, the older southern part of the island, there are two distinct types of areas: those with population counts of ~250 people /100m\\(^2\\) and those with 50% more density ~375 people / 100m\\(^2\\). The larger zone of Mumbai suburban is more varied containing up to 4 modes - 2 in addition to the ones in Mumbai city.\nWhether these modes relate to specific urban typologies or if they are an artefact of the population count derivation model is still to be understand. Likely it is both. The population counts are derived from an approximate typology.\nThe city bustles in some way every second of the day - rhythms rising, fading, cresting to a manic frenzy or just a staccato march. The beat of the place is bound to the people but the people too are constrained to their place. 20 million people squashed into an area just three quarters the area of New York city resulting in a crush of 20,000 people into one square kilometer. To put that into a realistic terms TODO - find one!"
   },
   {
     "objectID": "people.html#section",
     "href": "people.html#section",
-    "title": "2  People",
-    "section": "2.1 ",
-    "text": "2.1 \n\n\n\n\nDemographia. 2022. “World Urban Areas.” http://demographia.com/db-worldua.pdf."
+    "title": "1  People",
+    "section": "1.1 ",
+    "text": "1.1 \n\n\n\n\nDemographia. 2022. “World Urban Areas.” http://demographia.com/db-worldua.pdf."
   },
   {
     "objectID": "buildings.html#morphometrics",
     "href": "buildings.html#morphometrics",
-    "title": "3  Buildings",
-    "section": "3.1 Morphometrics",
-    "text": "3.1 Morphometrics"
+    "title": "2  Buildings",
+    "section": "2.1 Morphometrics",
+    "text": "2.1 Morphometrics"
   },
   {
     "objectID": "buildings.html#section",
     "href": "buildings.html#section",
-    "title": "3  Buildings",
-    "section": "3.2 ",
-    "text": "3.2"
+    "title": "2  Buildings",
+    "section": "2.2 ",
+    "text": "2.2"
   },
   {
     "objectID": "references.html",
