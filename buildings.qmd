@@ -3,7 +3,6 @@ title: "Buildings"
 execute:
   echo: false
   message: false
-  output: false
 editor: visual
 ---
 

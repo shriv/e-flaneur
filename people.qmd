@@ -3,13 +3,13 @@ title: "People"
 execute:
   echo: false
   message: false
-  output: false
 editor: visual
 ---
 
 ```{r}
 #| include: false
 library(raster)
+library(osmdata)
 library(sf)
 library(dplyr)
 library(ggplot2)

@@ -1,9 +1,19 @@
 # Preface {.unnumbered}
 
-This is a Quarto book.
+This is a book explores a space through time and time through the space of my birth city, Mumbai. There is no grandiose undertaking in this endeavour. This book is a humble pastiche of quantitative explorations, memories and musings.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+## Space through time
 
-```{r}
-1 + 1
-```
+I'm interested in the temporal characteristics of a space - avatars over time, pulses and rhythms at different time scales and perceptions of these aspects as a human who wanders the streets, both physically and virtually.
+
+## Time through space
+
+The changing nature of space is an indicator of the passing times. Megapolises like Mumbai have neighbourhoods that rose in the blink of an eye and neighbourhoods that still hold on to century old characteristics.
+
+## Memories
+
+My memories of growing up in outer urban Mumbai lend another layer of perspective and ones that I wish to re-examine against Mumbai of now and bygone.
+
+## Musings
+
+No travel writing (virtual or wandering) is complete without some abstract speculations or wistful thinking.
