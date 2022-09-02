@@ -7,7 +7,6 @@ book:
   date: "2022"
   chapters:
     - index.qmd
-    - intro.qmd
     - people.qmd
     - buildings.qmd
     - references.qmd

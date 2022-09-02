@@ -118,7 +118,8 @@ Flattening the spatial population distribution reveals modalities as an overall 
 Whether these modes relate to specific urban typologies or if they are an artefact of the population count derivation model is still to be understand. Likely it is both. The population counts are derived *from an approximate typology.*
 
 ```{r}
-#| output: false
+#| message: false
+#| warning: false
 ggplot(mumbai_pop_df) + 
   geom_histogram(aes(x = ind_ppp_2020_UNadj_constrained.tif, 
                      fill = zone),
