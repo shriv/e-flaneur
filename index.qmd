@@ -1,6 +1,6 @@
 # Preface {.unnumbered}
 
-This is a book explores a space through time and time through the space of my birth city, Mumbai. There is no grandiose undertaking in this endeavour. This book is a humble pastiche of quantitative explorations, memories and musings.
+This is a book explores aspects of urbanism through mini overviews of specific cities or deeper explorations of a concept. I'm attempting to learn more about urban economics, urban processes from a hands-on data science practice. But I hope the book is not limited to quantitative explorations alone! It is also an attempt to reflect on our urban lives, transformations and memories. 
 
 ## Space through time
 
