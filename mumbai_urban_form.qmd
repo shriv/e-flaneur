@@ -1,0 +1,337 @@
+---
+title: "Urban form of Mumbai"
+execute:
+  echo: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(raster)
+library(osmdata)
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(sfnetworks)
+library(foot)
+library(units)
+library(osmplotr)
+source("R/centroid_bbox.R")
+```
+
+Mumbai bustles in some way every second of the day - rhythms rising, fading, cresting to a manic frenzy or just a staccato march. With 20 million people squashed into an area just three quarters the area of New York city - the resulting crush puts 20,000 people into one square kilometre. However, unlike
+
+
+```{r}
+#| output: false
+
+# load the Global ML footprints for approx Mumbai suburban and metropolitan region bbox
+global_ml <- sf::st_read("~/Documents/global-ml-footprints/part-00055-2cb4a5ad-6652-48b0-a336-f09518f4c9e5.c000.geojson")
+
+# need this for the bbox cropping to work
+sf_use_s2(FALSE)
+```
+
+
+### Old Mumbai neighbourhoods
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 19.01879, "lng" = 72.85141),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+structs <- c ("highway", "building", "park", "landuse")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+
+parsi_colony <- make_osm_map (structures = structures, bbox = bbox)
+p1 <- parsi_colony$map  + labs(title = "Parsi Colony, Dadar (Mumbai City)")
+```
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 18.93566, "lng" = 72.8401),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+structs <- c ("highway", "building", "park", "landuse")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+
+ballard_estate <- make_osm_map (structures = structures, bbox = bbox)
+p1_a <- ballard_estate$map  + labs(title = "Ballard Estate, Fort (Mumbai City)")
+```
+
+```{r}
+#| out.width="100%"
+(p1 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
+  (p1_a) 
+```
+
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 51.521062787744135, "lng" = -0.14722085751994027),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+structs <- c ("highway", "building", "park", "landuse", "leisure")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+structures$value [5] <- "garden"
+structures$cols[5] <- "#647864FF"
+
+fitzrovia <- make_osm_map (structures = structures, bbox = bbox)
+p3 <- fitzrovia$map + labs(title = "Fittzrovia, London")
+```
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 40.78183, "lng" =  -73.95267),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+structs <- c ("highway", "building", "park", "landuse", "leisure")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+structures$value [5] <- "garden"
+structures$cols[5] <- "#647864FF"
+
+manhattan <- make_osm_map (structures = structures, bbox = bbox)
+p4 <-manhattan$map + labs(title = "Manhattan, New York City")
+```
+
+```{r}
+#| out.width="100%"
+(p3 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
+  (p4) 
+```
+
+### Urban density
+
+
+```{r}
+#| output: false
+
+fitzrovia_osm <- fitzrovia$osm_data$dat_B
+fitzrovia_osm$polygon <- st_is(fitzrovia_osm, "POLYGON") 
+fitzrovia_stats <- fitzrovia_osm %>% select(-area) %>% 
+  filter(polygon == TRUE) %>% 
+  calculate_footstats(what = "all")
+
+manhattan_osm <- manhattan$osm_data$dat_B
+manhattan_osm$polygon <- st_is(manhattan_osm, "POLYGON") 
+manhattan_stats <- manhattan_osm %>% 
+  filter(polygon == TRUE) %>% 
+  calculate_footstats(what = "all")
+
+parsi_colony_osm <- parsi_colony$osm_data$dat_B
+parsi_colony_osm$polygon <- st_is(parsi_colony_osm, "POLYGON") 
+parsi_colony_stats <- parsi_colony_osm %>% 
+  filter(polygon == TRUE) %>% 
+  calculate_footstats(what = "all")
+
+
+ballard_estate_osm <- ballard_estate$osm_data$dat_B
+ballard_estate_osm$polygon <- st_is(ballard_estate_osm, "POLYGON") 
+ballard_estate_stats <- ballard_estate_osm %>% 
+  filter(polygon == TRUE) %>% 
+  calculate_footstats(what = "all")
+
+foot_metrics <- bind_rows(
+  parsi_colony_stats %>% select(nndist) %>% mutate(name = "Parsi Colony, Dadar (Mumbai city)"), 
+  ballard_estate_stats %>% select(nndist) %>% mutate(name = "Ballard Estate, For (Mumbai city)"), 
+  fitzrovia_stats %>% select(nndist) %>% mutate(name = "Fitzrovia, London"), 
+  manhattan_stats %>% select(nndist) %>% mutate(name = "Manhattan, New York City"), 
+) %>% 
+  mutate(nndist = drop_units(nndist))
+
+```
+
+```{r}
+#| warning: false
+
+ggplot(foot_metrics) + 
+  geom_histogram(aes(x = nndist, fill = name)) + 
+  facet_wrap(~name) + 
+  theme_minimal() + 
+  theme(legend.position = "None") + 
+  labs(x = "Nearest neighbour distance (m)")
+```
+
+
+### OSM quality issues
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 19.07403, "lng" = 72.99571),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+structs <- c ("highway", "building", "park", "landuse", "leisure")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+structures$value [5] <- "sports_centre"
+structures$cols[5] <- "#647864FF"
+
+navi_mumbai_s2 <- make_osm_map (structures = structures, bbox = bbox)
+p2 <- navi_mumbai_s2$map  + labs(title = "Sector 2, Vashi (OSM)")
+
+## Global ML comparison
+streets <- extract_osm_objects(bbox, key = "highway")
+nm_bldgs <- st_crop(global_ml, xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]) %>% st_cast("POLYGON")
+nm_map <- osm_basemap(bbox = bbox, bg = "gray20")
+nm_map <- add_osm_objects(nm_map, obj = nm_bldgs, col = "#646464FF") + labs(title = "Sector 2, Vashi (Global ML buildings)")
+nm_map <- add_osm_objects(nm_map, streets, col = "#000000FF")
+```
+
+```{r}
+#| out.width="100%"
+(p2 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
+  nm_map
+```
+### Mumbai slums
+```{r}
+#| output: false
+slums <- sf::st_read("~/Documents/mumbai-slums/open-city/mumbai_slum_cluster.kml")
+
+```
+
+
+
+```{r}
+#| output: false
+
+# get mumbai polygon for subsetting
+mumbai_poly <-  getbb("mumbai india", format_out = "polygon")[[1]] %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+# get mumbai polygon for subsetting
+mumbai_suburban_poly <- getbb("mumbai suburban india", format_out = "polygon") %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+mumbai_city_poly <- getbb("mumbai city india", format_out = "polygon")[[1]] %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+mumbai_suburban_slums <- st_intersection(
+  st_make_valid(slums),
+  mumbai_suburban_poly %>% st_as_sf() %>% st_cast("POLYGON"),
+  )
+
+mumbai_city_slums <- st_intersection(
+  st_make_valid(slums), 
+  mumbai_city_poly %>% st_cast("POLYGON"),
+  )
+
+p1 <- ggplot() + 
+  geom_sf(data = slums) + 
+  geom_sf(data = mumbai_poly, size = 1, fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "",
+       title = 'Mumbai') + 
+  guides(fill = guide_legend("Population")) 
+
+p2 <- ggplot() + 
+  geom_sf(data = mumbai_city_slums) + 
+  geom_sf(data = mumbai_city_poly, colour = "red", size = 1, fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "",
+       title = "City") + 
+  theme(legend.position = "None")
+
+p3 <- ggplot() + 
+  geom_sf(data = mumbai_suburban_slums) + 
+  geom_sf(data = mumbai_suburban_poly, colour = "red", size = 1, fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "", 
+       title = "Suburban") + 
+  theme(legend.position = "None") 
+```
+
+```{r}
+
+((p1 | p3 / p2)) + 
+  plot_layout(guides = 'collect')
+
+
+```
+
+
+### OSM quality issues in slums
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 19.063637617804797, "lng" = 72.92389549177575),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+structs <- c ("highway", "building", "park", "landuse", "leisure")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+structures$value [5] <- "sports_centre"
+structures$cols[5] <- "#647864FF"
+
+shivaji_nagar <- make_osm_map (structures = structures, bbox = bbox)
+p5 <- shivaji_nagar$map  + labs(title = "Shivaji Nagar (OSM)")
+
+## Global ML comparison
+streets <- extract_osm_objects(bbox, key = "highway")
+sn_bldgs <- st_crop(global_ml, xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]) %>% st_cast("POLYGON")
+sn_map <- osm_basemap(bbox = bbox, bg = "gray20")
+sn_map <- add_osm_objects(sn_map, obj = sn_bldgs, col = "#646464FF")
+sn_map <- add_osm_objects(sn_map, streets, col = "#000000FF") + labs(title = "Shivaji Nagar (Global ML buildings)")
+
+```
+
+```{r}
+#| out.width="100%"
+(p5 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
+  sn_map
+```
+
