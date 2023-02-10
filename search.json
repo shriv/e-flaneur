@@ -1,58 +1,44 @@
 [
   {
+    "objectID": "posts/osm_mumbai/index.html",
+    "href": "posts/osm_mumbai/index.html",
+    "title": "OSM issues in Mumbai",
+    "section": "",
+    "text": "# load the Global ML footprints for approx Mumbai suburban and metropolitan region bbox\nglobal_ml <- sf::st_read(\"~/Documents/global-ml-footprints/part-00055-2cb4a5ad-6652-48b0-a336-f09518f4c9e5.c000.geojson\")\n\n# need this for the bbox cropping to work\nsf_use_s2(FALSE)\n\n\nbbox <- get_centroid_bounding_box(\n  c(\"lat\" = 19.07403, \"lng\" = 72.99571),\n  distance = 500,\n  dist.unit = \"m\") %>% \n  get_bbox()\nstructs <- c (\"highway\", \"building\", \"park\", \"landuse\", \"leisure\")\nstructures <- osm_structures (structures = structs, col_scheme = \"dark\")\nstructures$value [4] <- \"recreation_ground\"\nstructures$cols[4] <- \"#647864FF\"\nstructures$value [5] <- \"sports_centre\"\nstructures$cols[5] <- \"#647864FF\"\n\nnavi_mumbai_s2 <- make_osm_map (structures = structures, bbox = bbox)\np2 <- navi_mumbai_s2$map  + labs(title = \"Sector 2, Vashi (OSM)\")\n\n## Global ML comparison\nstreets <- extract_osm_objects(bbox, key = \"highway\")\nnm_bldgs <- st_crop(global_ml, xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]) %>% st_cast(\"POLYGON\")\nnm_map <- osm_basemap(bbox = bbox, bg = \"gray20\")\nnm_map <- add_osm_objects(nm_map, obj = nm_bldgs, col = \"#646464FF\") + labs(title = \"Sector 2, Vashi (Global ML buildings)\")\nnm_map <- add_osm_objects(nm_map, streets, col = \"#000000FF\")\n\n\n(p2 + theme(plot.margin = unit(c(0,5,0,0), \"pt\"))) + \n  nm_map\n\n\n\n\n\nbbox <- get_centroid_bounding_box(\n  c(\"lat\" = 19.063637617804797, \"lng\" = 72.92389549177575),\n  distance = 500,\n  dist.unit = \"m\") %>% \n  get_bbox()\nstructs <- c (\"highway\", \"building\", \"park\", \"landuse\", \"leisure\")\nstructures <- osm_structures (structures = structs, col_scheme = \"dark\")\nstructures$value [4] <- \"recreation_ground\"\nstructures$cols[4] <- \"#647864FF\"\nstructures$value [5] <- \"sports_centre\"\nstructures$cols[5] <- \"#647864FF\"\n\nshivaji_nagar <- make_osm_map (structures = structures, bbox = bbox)\np5 <- shivaji_nagar$map  + labs(title = \"Shivaji Nagar (OSM)\")\n\n## Global ML comparison\nstreets <- extract_osm_objects(bbox, key = \"highway\")\nsn_bldgs <- st_crop(global_ml, xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]) %>% st_cast(\"POLYGON\")\nsn_map <- osm_basemap(bbox = bbox, bg = \"gray20\")\nsn_map <- add_osm_objects(sn_map, obj = sn_bldgs, col = \"#646464FF\")\nsn_map <- add_osm_objects(sn_map, streets, col = \"#000000FF\") + labs(title = \"Shivaji Nagar (Global ML buildings)\")\n\n\n(p5 + theme(plot.margin = unit(c(0,5,0,0), \"pt\"))) + \n  sn_map"
+  },
+  {
+    "objectID": "posts/mumbai_pop/index.html",
+    "href": "posts/mumbai_pop/index.html",
+    "title": "Population of Mumbai",
+    "section": "",
+    "text": "Megacities of the world are fascinating places. However, it’s amazing to realise that they thrive in a data poor landscape. For example, a simple population count is difficult to pin down for Mumbai since the last census was in 2011 and the 2021 census has been delayed due to the pandemic. The Indian census recently updated population estimates for Mumbai as 17.2 million @MumbaiGreaterMumbai. An addition 8 million are spread across the metropolitan region on mainland - including the nearby planned-city-turned-urban-sprawl called Navi Mumbai where I grew up.\nMy attempts to find fine spatial resolution of population for Mumbai led me to Worldpop(@bondarenkoCensusProjectiondisaggregatedGridded2020a). While these estimates use clever statistical models, Worldpop estimates 13.38 million people in Mumbai as at 2020 (@SpatialDistributionPopulation). These values are difficult to reconcile against the estimates from the Indian government which estimate almost twice as many people!\nThe value of Worldpop estimates is their provision of population counts at a 100m\\(^2\\) spatial resolution. Cropping the estimates to the two zones of Mumbai (Mumbai city and Mumbai suburban) shows some interesting spatial patterns. For example, Mumbai city appears to be much more homogeneous in population density than Mumbai suburban. The northern and eastern areas of Mumbai suburban are considerably more populated than the city zone.\n\n\n\n\n\n\n\n\n\nReferences\n\nPost photo by Harsh Kondekar on Unsplash"
+  },
+  {
+    "objectID": "posts/mumbai_slums/index.html",
+    "href": "posts/mumbai_slums/index.html",
+    "title": "GIS of slums",
+    "section": "",
+    "text": "A large part of the heterogeneity can be explained by the presence of slums.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nReferences\n\nPost photo by Alfarnas Solkar on Unsplash"
+  },
+  {
+    "objectID": "posts/osmplotr/index.html",
+    "href": "posts/osmplotr/index.html",
+    "title": "Urban form of Mumbai",
+    "section": "",
+    "text": "References\n\nPost photo from https://www.architecturaldigest.in/story/dadar-parsi-colony-cherishing-the-bombay-that-was-mumbai-history-pictures/"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "e-flaneur",
     "section": "",
-    "text": "Preface\nThis is a book explores aspects of urbanism through mini overviews of specific cities or deeper explorations of a concept. I’m attempting to learn more about urban economics, urban processes from a hands-on data science practice. But I hope the book is not limited to quantitative explorations alone! It is also an attempt to reflect on our urban lives, transformations and memories."
-  },
-  {
-    "objectID": "index.html#space-through-time",
-    "href": "index.html#space-through-time",
-    "title": "e-flaneur",
-    "section": "Space through time",
-    "text": "Space through time\nI’m interested in the temporal characteristics of a space - avatars over time, pulses and rhythms at different time scales and perceptions of these aspects as a human who wanders the streets, both physically and virtually."
-  },
-  {
-    "objectID": "index.html#time-through-space",
-    "href": "index.html#time-through-space",
-    "title": "e-flaneur",
-    "section": "Time through space",
-    "text": "Time through space\nThe changing nature of space is an indicator of the passing times. Megapolises like Mumbai have neighbourhoods that rose in the blink of an eye and neighbourhoods that still hold on to century old characteristics."
-  },
-  {
-    "objectID": "index.html#memories",
-    "href": "index.html#memories",
-    "title": "e-flaneur",
-    "section": "Memories",
-    "text": "Memories\nMy memories of growing up in outer urban Mumbai lend another layer of perspective and ones that I wish to re-examine against Mumbai of now and bygone."
-  },
-  {
-    "objectID": "index.html#musings",
-    "href": "index.html#musings",
-    "title": "e-flaneur",
-    "section": "Musings",
-    "text": "Musings\nNo travel writing (virtual or wandering) is complete without some abstract speculations or wistful thinking."
-  },
-  {
-    "objectID": "mumbai_population.html",
-    "href": "mumbai_population.html",
-    "title": "1  Population of Mumbai",
-    "section": "",
-    "text": "The Mumbai of 2022 is estimated as a roaring megacity of a population anywhere between 18 and 25 million people Demographia (2022). A simple population count is difficult to pin down since the last census was in 2011and due to the pandemic it’s unclear whether the 2021 census has even happened\nTen years ago, the recorded population of the Mumbai metropolitan region was 18.4 million. The island city recorded a population 12.4 million - with 9.4 million in Mumbai suburban and 3.1 million in Mumbai City. The remaining population is spread across the metropolitan region on mainland - including the nearby exurb planned city turned to urban sprawl called Navi Mumbai where I grew up.\nMy attempts to find a more recent, spatially distributed estimates for the island city (rather than the metropolitan region) led me to the Worldpop estimations (Bondarenko et al. (2020)). Some clever statistical models that are calibrated against UNDP counts gives population estimates for Mumbai island in 2020 as 13.38 million people living in Mumbai (“The Spatial Distribution of Population in 2020 with Country Total Adjusted to Match the Corresponding UNPD Estimate, India” (2020)). The total splits 2.8 million to Mumbai city and 10.6 million to Mumbai suburban. These values are a little difficult to reconcile against the census from a decade prior as they note little increase and in the case of the city zone, population appears to have decreased!\n\n\n\nThe worldpop estimates even provide population counts at a 100m\\(^2\\) spatial resolution. Cropping the estimates to the two zones in the island city shows some interesting spatial patterns. For example, Mumbai city appears to be much more homogeneous in population density than Mumbai suburban.\n\n\n\n\n\n\n\n\nFlattening the spatial population distribution reveals modalities as an overall pattern. In Mumbai City, the older southern part of the island, there are two distinct types of areas: those with population counts of ~250 people /100m\\(^2\\) and those with 50% more density ~375 people / 100m\\(^2\\). The larger zone of Mumbai suburban is more varied containing up to 4 modes - 2 in addition to the ones in Mumbai city. Whether these modes relate to specific urban typologies or if they are an artefact of the population count derivation model is still to be understand. Likely it is both.\n\n\n\n\n\n\n\n\n\nBondarenko, Maksym, David Kerr, Alessandro Sorichetta, and Andrew Tatem. 2020. “Census/Projection-Disaggregated Gridded Population Datasets, Adjusted to Match the Corresponding UNPD 2020 Estimates, for 183 Countries in 2020 Using Built-Settlement Growth Model (BSGM) Outputs.” University of Southampton. https://doi.org/10.5258/SOTON/WP00685.\n\n\nDemographia. 2022. “World Urban Areas.” http://demographia.com/db-worldua.pdf.\n\n\n“The Spatial Distribution of Population in 2020 with Country Total Adjusted to Match the Corresponding UNPD Estimate, India.” 2020. 2020. https://hub.worldpop.org/geodata/summary?id=49992."
-  },
-  {
-    "objectID": "mumbai_urban_form.html",
-    "href": "mumbai_urban_form.html",
-    "title": "2  Urban form of Mumbai",
-    "section": "",
-    "text": "Mumbai bustles in some way every second of the day - rhythms rising, fading, cresting to a manic frenzy or just a staccato march. With 20 million people squashed into an area just three quarters the area of New York city - the resulting crush puts 20,000 people into one square kilometre. However, unlike\n\n\n\n\n2.0.1 Old Mumbai neighbourhoods\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2.0.2 Urban density\n\n\n\n\n\n\n\n\n\n\n2.0.3 OSM quality issues\n\n\n\n\n\n\n\n\n\n\n2.0.4 Mumbai slums\n\n\n\n\n\n\n\n\n\n\n\n\n\n2.0.5 OSM quality issues in slums"
+    "text": "GIS of slums\n\n\n\n\n\n\n\ndata-science\n\n\nurban\n\n\nindia\n\n\nmumbai\n\n\n\n\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nShrividya Ravi\n\n\n\n\n\n\n  \n\n\n\n\nUrban form of Mumbai\n\n\n\n\n\n\n\ndata-science\n\n\nurban\n\n\nindia\n\n\nmumbai\n\n\n\n\n\n\n\n\n\n\n\nNov 1, 2022\n\n\nShrividya Ravi\n\n\n\n\n\n\n  \n\n\n\n\nOSM issues in Mumbai\n\n\n\n\n\n\n\ndata-science\n\n\nurban\n\n\nindia\n\n\nosm\n\n\nmumbai\n\n\n\n\n\n\n\n\n\n\n\nAug 1, 2022\n\n\nShrividya Ravi\n\n\n\n\n\n\n  \n\n\n\n\nPopulation of Mumbai\n\n\n\n\n\n\n\ndata-science\n\n\nurban\n\n\nindia\n\n\nmumbai\n\n\n\n\n\n\n\n\n\n\n\nAug 1, 2022\n\n\nShrividya Ravi\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "references.html",
     "href": "references.html",
-    "title": "References",
+    "title": "e-flaneur",
     "section": "",
-    "text": "Bondarenko, Maksym, David Kerr, Alessandro Sorichetta, and Andrew Tatem.\n2020. “Census/Projection-Disaggregated Gridded Population\nDatasets, Adjusted to Match the Corresponding UNPD 2020\nEstimates, for 183 Countries in 2020 Using Built-Settlement Growth\nModel (BSGM) Outputs.” University of\nSouthampton. https://doi.org/10.5258/SOTON/WP00685.\n\n\nDemographia. 2022. “World Urban Areas.” http://demographia.com/db-worldua.pdf.\n\n\n“The Spatial Distribution of Population in 2020 with Country Total\nAdjusted to Match the Corresponding UNPD Estimate, India.” 2020.\n2020. https://hub.worldpop.org/geodata/summary?id=49992."
+    "text": "References"
   }
 ]
