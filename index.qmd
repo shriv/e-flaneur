@@ -1,19 +1,14 @@
-# Preface {.unnumbered}
+---
+title: "e-flaneur"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+---
 
-This is a book explores aspects of urbanism through mini overviews of specific cities or deeper explorations of a concept. I'm attempting to learn more about urban economics, urban processes from a hands-on data science practice. But I hope the book is not limited to quantitative explorations alone! It is also an attempt to reflect on our urban lives, transformations and memories. 
 
-## Space through time
-
-I'm interested in the temporal characteristics of a space - avatars over time, pulses and rhythms at different time scales and perceptions of these aspects as a human who wanders the streets, both physically and virtually.
-
-## Time through space
-
-The changing nature of space is an indicator of the passing times. Megapolises like Mumbai have neighbourhoods that rose in the blink of an eye and neighbourhoods that still hold on to century old characteristics.
-
-## Memories
-
-My memories of growing up in outer urban Mumbai lend another layer of perspective and ones that I wish to re-examine against Mumbai of now and bygone.
-
-## Musings
-
-No travel writing (virtual or wandering) is complete without some abstract speculations or wistful thinking.

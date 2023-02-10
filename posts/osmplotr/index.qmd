@@ -1,0 +1,112 @@
+---
+title: "Urban form of Mumbai"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2022-11-01"
+categories: [data-science, urban, india, mumbai]
+image: "image.jpg"
+---
+
+```{r}
+#| include: false
+library(osmdata)
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(osmplotr)
+source("../../R/centroid_bbox.R")
+```
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 19.01879, "lng" = 72.85141),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+structs <- c ("highway", "building", "park", "landuse")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+
+parsi_colony <- make_osm_map (structures = structures, bbox = bbox)
+p1 <- parsi_colony$map  + labs(title = "Parsi Colony, Dadar (Mumbai City)")
+```
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 18.93566, "lng" = 72.8401),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+structs <- c ("highway", "building", "park", "landuse")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+
+ballard_estate <- make_osm_map (structures = structures, bbox = bbox)
+p1_a <- ballard_estate$map  + labs(title = "Ballard Estate, Fort (Mumbai City)")
+```
+
+```{r}
+#| out.width="100%"
+(p1 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
+  (p1_a) 
+```
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 51.521062787744135, "lng" = -0.14722085751994027),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+structs <- c ("highway", "building", "park", "landuse", "leisure")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+structures$value [5] <- "garden"
+structures$cols[5] <- "#647864FF"
+
+fitzrovia <- make_osm_map (structures = structures, bbox = bbox)
+p3 <- fitzrovia$map + labs(title = "Fittzrovia, London")
+```
+
+```{r}
+#| output: false
+
+bbox <- get_centroid_bounding_box(
+  c("lat" = 40.78183, "lng" =  -73.95267),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+structs <- c ("highway", "building", "park", "landuse", "leisure")
+structures <- osm_structures (structures = structs, col_scheme = "dark")
+structures$value [4] <- "recreation_ground"
+structures$cols[4] <- "#647864FF"
+structures$value [5] <- "garden"
+structures$cols[5] <- "#647864FF"
+
+manhattan <- make_osm_map (structures = structures, bbox = bbox)
+p4 <-manhattan$map + labs(title = "Manhattan, New York City")
+```
+
+```{r}
+#| out.width="100%"
+(p3 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
+  (p4) 
+```
+
+### References
+- Post photo from https://www.architecturaldigest.in/story/dadar-parsi-colony-cherishing-the-bombay-that-was-mumbai-history-pictures/

@@ -1,0 +1,121 @@
+---
+title: "GIS of slums"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2023-02-01"
+categories: [data-science, urban, india, mumbai]
+image: "image.jpg"
+---
+
+
+```{r}
+#| include: false
+library(raster)
+library(osmdata)
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(sfnetworks)
+library(foot)
+library(units)
+library(osmplotr)
+source("../../R/centroid_bbox.R")
+```
+A large part of the heterogeneity can be explained by the presence of slums.
+
+```{r}
+#| output: false
+slums <- sf::st_read("~/Documents/mumbai-slums/open-city/mumbai_slum_cluster.kml")
+sf_use_s2(FALSE)
+```
+
+```{r}
+
+# get mumbai polygon for subsetting
+mumbai_poly <-  getbb("mumbai india", format_out = "polygon")[[1]] %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+# get mumbai polygon for subsetting
+mumbai_suburban_poly <- getbb("mumbai suburban india", format_out = "polygon") %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+mumbai_city_poly <- getbb("mumbai city india", format_out = "polygon")[[1]] %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+```
+
+```{r}
+#| output: false
+
+mumbai_suburban_slums <- st_intersection(
+  st_make_valid(slums),
+  mumbai_suburban_poly %>% st_as_sf() %>% st_cast("POLYGON"),
+  )
+
+mumbai_city_slums <- st_intersection(
+  st_make_valid(slums), 
+  mumbai_city_poly %>% st_cast("POLYGON"),
+  )
+
+p1 <- ggplot() + 
+  geom_sf(data = slums) + 
+  geom_sf(data = mumbai_poly, size = 1, fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "",
+       title = 'Mumbai') + 
+  guides(fill = guide_legend("Population")) 
+
+p2 <- ggplot() + 
+  geom_sf(data = mumbai_city_slums) + 
+  geom_sf(data = mumbai_city_poly, colour = "red", size = 1, fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "",
+       title = "City") + 
+  theme(legend.position = "None")
+
+p3 <- ggplot() + 
+  geom_sf(data = mumbai_suburban_slums) + 
+  geom_sf(data = mumbai_suburban_poly, colour = "red", size = 1, fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "", 
+       title = "Suburban") + 
+  theme(legend.position = "None") 
+```
+
+```{r}
+
+((p1 | p3 / p2)) + 
+  plot_layout(guides = 'collect')
+```
+
+
+### References
+- Post photo by <a href="https://unsplash.com/pt-br/@alfarnassolkar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alfarnas Solkar</a> on <a href="https://unsplash.com/photos/oqjl1kTw_Bo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  

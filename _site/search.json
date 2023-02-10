@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "posts/osm_mumbai/index.html",
+    "href": "posts/osm_mumbai/index.html",
+    "title": "OSM issues in Mumbai",
+    "section": "",
+    "text": "# load the Global ML footprints for approx Mumbai suburban and metropolitan region bbox\nglobal_ml <- sf::st_read(\"~/Documents/global-ml-footprints/part-00055-2cb4a5ad-6652-48b0-a336-f09518f4c9e5.c000.geojson\")\n\n# need this for the bbox cropping to work\nsf_use_s2(FALSE)\n\n\nbbox <- get_centroid_bounding_box(\n  c(\"lat\" = 19.07403, \"lng\" = 72.99571),\n  distance = 500,\n  dist.unit = \"m\") %>% \n  get_bbox()\nstructs <- c (\"highway\", \"building\", \"park\", \"landuse\", \"leisure\")\nstructures <- osm_structures (structures = structs, col_scheme = \"dark\")\nstructures$value [4] <- \"recreation_ground\"\nstructures$cols[4] <- \"#647864FF\"\nstructures$value [5] <- \"sports_centre\"\nstructures$cols[5] <- \"#647864FF\"\n\nnavi_mumbai_s2 <- make_osm_map (structures = structures, bbox = bbox)\np2 <- navi_mumbai_s2$map  + labs(title = \"Sector 2, Vashi (OSM)\")\n\n## Global ML comparison\nstreets <- extract_osm_objects(bbox, key = \"highway\")\nnm_bldgs <- st_crop(global_ml, xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]) %>% st_cast(\"POLYGON\")\nnm_map <- osm_basemap(bbox = bbox, bg = \"gray20\")\nnm_map <- add_osm_objects(nm_map, obj = nm_bldgs, col = \"#646464FF\") + labs(title = \"Sector 2, Vashi (Global ML buildings)\")\nnm_map <- add_osm_objects(nm_map, streets, col = \"#000000FF\")\n\n\n(p2 + theme(plot.margin = unit(c(0,5,0,0), \"pt\"))) + \n  nm_map\n\n\n\n\n\nbbox <- get_centroid_bounding_box(\n  c(\"lat\" = 19.063637617804797, \"lng\" = 72.92389549177575),\n  distance = 500,\n  dist.unit = \"m\") %>% \n  get_bbox()\nstructs <- c (\"highway\", \"building\", \"park\", \"landuse\", \"leisure\")\nstructures <- osm_structures (structures = structs, col_scheme = \"dark\")\nstructures$value [4] <- \"recreation_ground\"\nstructures$cols[4] <- \"#647864FF\"\nstructures$value [5] <- \"sports_centre\"\nstructures$cols[5] <- \"#647864FF\"\n\nshivaji_nagar <- make_osm_map (structures = structures, bbox = bbox)\np5 <- shivaji_nagar$map  + labs(title = \"Shivaji Nagar (OSM)\")\n\n## Global ML comparison\nstreets <- extract_osm_objects(bbox, key = \"highway\")\nsn_bldgs <- st_crop(global_ml, xmin = bbox[1], ymin = bbox[2], xmax = bbox[3], ymax = bbox[4]) %>% st_cast(\"POLYGON\")\nsn_map <- osm_basemap(bbox = bbox, bg = \"gray20\")\nsn_map <- add_osm_objects(sn_map, obj = sn_bldgs, col = \"#646464FF\")\nsn_map <- add_osm_objects(sn_map, streets, col = \"#000000FF\") + labs(title = \"Shivaji Nagar (Global ML buildings)\")\n\n\n(p5 + theme(plot.margin = unit(c(0,5,0,0), \"pt\"))) + \n  sn_map"
+  },
+  {
+    "objectID": "posts/mumbai_pop/index.html",
+    "href": "posts/mumbai_pop/index.html",
+    "title": "Population of Mumbai",
+    "section": "",
+    "text": "Megacities of the world are fascinating places. However, it’s amazing to realise that they thrive in a data poor landscape. For example, a simple population count is difficult to pin down for Mumbai since the last census was in 2011 and the 2021 census has been delayed due to the pandemic. The Indian census recently updated population estimates for Mumbai as 17.2 million @MumbaiGreaterMumbai. An addition 8 million are spread across the metropolitan region on mainland - including the nearby planned-city-turned-urban-sprawl called Navi Mumbai where I grew up.\nMy attempts to find fine spatial resolution of population for Mumbai led me to Worldpop(@bondarenkoCensusProjectiondisaggregatedGridded2020a). While these estimates use clever statistical models, Worldpop estimates 13.38 million people in Mumbai as at 2020 (@SpatialDistributionPopulation). These values are difficult to reconcile against the estimates from the Indian government which estimate almost twice as many people!\nThe value of Worldpop estimates is their provision of population counts at a 100m\\(^2\\) spatial resolution. Cropping the estimates to the two zones of Mumbai (Mumbai city and Mumbai suburban) shows some interesting spatial patterns. For example, Mumbai city appears to be much more homogeneous in population density than Mumbai suburban. The northern and eastern areas of Mumbai suburban are considerably more populated than the city zone.\n\n\n\n\n\n\n\n\n\nReferences\n\nPost photo by Harsh Kondekar on Unsplash"
+  },
+  {
+    "objectID": "posts/mumbai_slums/index.html",
+    "href": "posts/mumbai_slums/index.html",
+    "title": "GIS of slums",
+    "section": "",
+    "text": "A large part of the heterogeneity can be explained by the presence of slums.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nReferences\n\nPost photo by Alfarnas Solkar on Unsplash"
+  },
+  {
+    "objectID": "posts/osmplotr/index.html",
+    "href": "posts/osmplotr/index.html",
+    "title": "Urban form of Mumbai",
+    "section": "",
+    "text": "References\n\nPost photo from https://www.architecturaldigest.in/story/dadar-parsi-colony-cherishing-the-bombay-that-was-mumbai-history-pictures/"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "e-flaneur",
+    "section": "",
+    "text": "GIS of slums\n\n\n\n\n\n\n\ndata-science\n\n\nurban\n\n\nindia\n\n\nmumbai\n\n\n\n\n\n\n\n\n\n\n\nFeb 1, 2023\n\n\nShrividya Ravi\n\n\n\n\n\n\n  \n\n\n\n\nUrban form of Mumbai\n\n\n\n\n\n\n\ndata-science\n\n\nurban\n\n\nindia\n\n\nmumbai\n\n\n\n\n\n\n\n\n\n\n\nNov 1, 2022\n\n\nShrividya Ravi\n\n\n\n\n\n\n  \n\n\n\n\nOSM issues in Mumbai\n\n\n\n\n\n\n\ndata-science\n\n\nurban\n\n\nindia\n\n\nosm\n\n\nmumbai\n\n\n\n\n\n\n\n\n\n\n\nAug 1, 2022\n\n\nShrividya Ravi\n\n\n\n\n\n\n  \n\n\n\n\nPopulation of Mumbai\n\n\n\n\n\n\n\ndata-science\n\n\nurban\n\n\nindia\n\n\nmumbai\n\n\n\n\n\n\n\n\n\n\n\nAug 1, 2022\n\n\nShrividya Ravi\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "e-flaneur",
+    "section": "",
+    "text": "References"
+  }
+]
