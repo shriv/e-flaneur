@@ -22,6 +22,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -112,9 +131,10 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-title">
 <h1 class="title">Population of Mumbai</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">data-science</div>
+    <div class="quarto-category">data science</div>
     <div class="quarto-category">urban</div>
     <div class="quarto-category">india</div>
+    <div class="quarto-category">mumbai</div>
   </div>
   </div>
 
@@ -142,22 +162,34 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>Megacities of the world are fascinating places. However, it’s amazing to realise that they thrive in a data poor landscape. For example, a simple population count is difficult to pin down for Mumbai since the last census was in 2011 and the 2021 census has been delayed due to the pandemic. The Indian census recently updated population estimates for Mumbai as 17.2 million <span class="citation" data-cites="MumbaiGreaterMumbai">@MumbaiGreaterMumbai</span>. An addition 8 million are spread across the metropolitan region on mainland - including the nearby planned-city-turned-urban-sprawl called <a href="https://en.wikipedia.org/wiki/Navi_Mumbai">Navi Mumbai</a> where I grew up.</p>
-<p>My attempts to find fine spatial resolution of population for Mumbai led me to Worldpop(<span class="citation" data-cites="bondarenkoCensusProjectiondisaggregatedGridded2020a">@bondarenkoCensusProjectiondisaggregatedGridded2020a</span>). While these estimates use clever statistical models, Worldpop estimates 13.38 million people in Mumbai as at 2020 (<span class="citation" data-cites="SpatialDistributionPopulation">@SpatialDistributionPopulation</span>). These values are difficult to reconcile against the estimates from the Indian government which estimate almost twice as many people!</p>
-<p>The value of Worldpop estimates is their provision of population counts at a 100m<span class="math inline">\(^2\)</span> spatial resolution. Cropping the estimates to the two zones of Mumbai (Mumbai city and Mumbai suburban) shows some interesting spatial patterns. For example, Mumbai city appears to be much more homogeneous in population density than Mumbai suburban. The northern and eastern areas of Mumbai suburban are considerably more populated than the city zone.</p>
+<p>My attempts to find spatially resolved population data for Mumbai led me to WorldPop <span class="citation" data-cites="bondarenkoCensusProjectiondisaggregatedGridded2020a"><a href="#ref-bondarenkoCensusProjectiondisaggregatedGridded2020a" role="doc-biblioref">[1]</a></span> which provides population counts at a 100m<span class="math inline">\(^2\)</span> spatial resolution. While the WorldPop estimates use clever statistical models for generating spatial distribution of population, the total for Mumbai comes to 13.38 million people as at 2020 <span class="citation" data-cites="SpatialDistributionPopulation"><a href="#ref-SpatialDistributionPopulation" role="doc-biblioref">[2]</a></span>. This value is 25% lower than the recent 2023 population estimate of 17.2 million from the Indian government <span class="citation" data-cites="MumbaiGreaterMumbai"><a href="#ref-MumbaiGreaterMumbai" role="doc-biblioref">[3]</a></span>. It is likely that the mismatch results from the Indian population being generated from a generic top-down model that covers the world while the Indian government has projected population using past trends in growth rates specific to the area.</p>
+<p>Despite low confidence in its accuracy, the WorldPop dataset was a good opportunity to learn how to wrangle raster data and to combine it with vector data. The population data from WorldPop covers the entire country so cropping to the Mumbai boundaries (full and by the two main districts) was required before any plotting or analysis. After some initial confusion over which package to use, I found that the R package <code>stars</code> <span class="citation" data-cites="SpatiotemporalArraysRaster"><a href="#ref-SpatiotemporalArraysRaster" role="doc-biblioref">[4]</a></span> is a very convenient way to read raster data into R and the <code>geom_stars</code> geom allows for easy plotting with <code>ggplot2</code>. Usefully, <code>st_crop</code> also works out of the box when combining polygon <code>sf</code> objects with a <code>stars</code> object.</p>
+<p>Separating the population counts for the two districts of Mumbai, draws attention apparent homogeneity of Mumbai city. This corresponds well to the more business-centric landuse of Mumbai city especially at the southern tip of Colaba. The northern and eastern areas of Mumbai suburban are significantly more populated than the city district, and are spatially congruous with extensive slum settlements though the population estimates smear out the higher density of slums beyond the expected slum limits.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
-</div>
-<div class="cell">
-
 </div>
 <section id="references" class="level3">
 <h3 class="anchored" data-anchor-id="references">References</h3>
-<ul>
-<li>Post photo by <a href="https://unsplash.com/ja/@harsh_jpeg?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Harsh Kondekar</a> on <a href="https://unsplash.com/photos/SDZOP6R95k4?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></li>
-</ul>
+<div id="refs" class="references csl-bib-body" role="doc-bibliography">
+<div id="ref-bondarenkoCensusProjectiondisaggregatedGridded2020a" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">M. Bondarenko, D. Kerr, A. Sorichetta, and A. Tatem, <span>“Census/projection-disaggregated gridded population datasets, adjusted to match the corresponding <span>UNPD</span> 2020 estimates, for 183 countries in 2020 using <span>Built-Settlement Growth Model</span> (<span>BSGM</span>) outputs.”</span> <span>University of Southampton</span>, 2020. doi: <a href="https://doi.org/10.5258/SOTON/WP00685">10.5258/SOTON/WP00685</a>.</div>
+</div>
+<div id="ref-SpatialDistributionPopulation" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span>“The spatial distribution of population in 2020 with country total adjusted to match the corresponding UNPD estimate, india,”</span> 2020. <a href="https://hub.worldpop.org/geodata/summary?id=49992">https://hub.worldpop.org/geodata/summary?id=49992</a></div>
+</div>
+<div id="ref-MumbaiGreaterMumbai" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">C. O. of India, <span>“Mumbai (<span>Greater Mumbai</span>) <span>City Population Census</span> 2011-2023 | <span>Maharashtra</span>.”</span> <a href="https://www.census2011.co.in/census/city/365-mumbai.html">https://www.census2011.co.in/census/city/365-mumbai.html</a> (accessed Feb. 10, 2023).</div>
+</div>
+<div id="ref-SpatiotemporalArraysRaster" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><span>“Spatiotemporal <span>Arrays</span>, <span>Raster</span> and <span>Vector Data Cubes</span>.”</span> <a href="https://r-spatial.github.io/stars/">https://r-spatial.github.io/stars/</a> (accessed Feb. 11, 2023).</div>
+</div>
+</div>
+</section>
+<section id="credits" class="level3">
+<h3 class="anchored" data-anchor-id="credits">Credits</h3>
+<p>Post photo by <a href="https://unsplash.com/ja/@harsh_jpeg?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Harsh Kondekar</a> on <a href="https://unsplash.com/photos/SDZOP6R95k4?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
 
 
 </section>
