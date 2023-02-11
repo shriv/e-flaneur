@@ -9,7 +9,7 @@
 <meta name="author" content="Shrividya Ravi">
 <meta name="dcterms.date" content="2022-11-01">
 
-<title>e-flaneur - Comparing urban form in R</title>
+<title>e-flaneur - Schematic maps of urban form in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -191,12 +191,13 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Comparing urban form in R</h1>
+<h1 class="title">Schematic maps of urban form in R</h1>
   <div class="quarto-categories">
     <div class="quarto-category">data science</div>
     <div class="quarto-category">urban</div>
     <div class="quarto-category">india</div>
     <div class="quarto-category">mumbai</div>
+    <div class="quarto-category">R</div>
   </div>
   </div>
 
@@ -234,7 +235,7 @@ div.csl-indent {
 <p>However, there was no tutorial (that I could find) or even examples for creating these in R making it a great learning project. After some googling around for existing code or packages that would help me build the required schematics in a systematic way, I landed on the following franken-hack:</p>
 <ul>
 <li>Specifying a bounding box with consistent extent based on a user specification. This code was taken from <code>spacey</code> <span class="citation" data-cites="SpaceyEasilyObtain"><a href="#ref-SpaceyEasilyObtain" role="doc-biblioref">[3]</a></span> instead of writing equivalent code myself. The functions <code>get_centroid_bounding_box()</code>, <code>extract_coords()</code>, <code>rad_to_deg()</code> and <code>deg_to_rad()</code> are needed.</li>
-<li>Using <code>osmplotr</code> <span class="citation" data-cites="RopensciOsmplotr2022"><a href="#ref-RopensciOsmplotr2022" role="doc-biblioref">[4]</a></span> to pull specific spatial elements like parks, building networks and street works and print a visually consistent map.</li>
+<li>Using <code>osmplotr</code> <span class="citation" data-cites="RopensciOsmplotr2022"><a href="#ref-RopensciOsmplotr2022" role="doc-biblioref">[4]</a></span> to pull specific spatial elements like parks, building networks and street works and print a visually consistent map. The handy <code>make_osm_map()</code> function both gets the data and prints the map according to the set colour scheme for the different elements.</li>
 <li>Using <code>patchwork</code> <span class="citation" data-cites="ComposerPlots"><a href="#ref-ComposerPlots" role="doc-biblioref">[5]</a></span> to put together multiple schematics for side by side comparison.</li>
 </ul>
 <div class="cell">
@@ -247,7 +248,7 @@ div.csl-indent {
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  structures<span class="sc">$</span>cols[<span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="st">"#647864FF"</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make map</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  osmplotr_map <span class="ot">&lt;-</span> <span class="fu">make_osm_map</span> (<span class="at">structures =</span> structures, <span class="at">bbox =</span> bbox)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  osmplotr_map <span class="ot">&lt;-</span> <span class="fu">make_osm_map</span>(<span class="at">structures =</span> structures, <span class="at">bbox =</span> bbox)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  plot <span class="ot">&lt;-</span> osmplotr_map<span class="sc">$</span>map  <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> map_title)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(plot)</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -275,23 +276,6 @@ div.csl-indent {
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" style="width:100.0%"></p>
-</div>
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 <section id="references" class="level3">
