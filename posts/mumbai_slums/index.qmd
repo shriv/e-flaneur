@@ -1,5 +1,5 @@
 ---
-title: "GIS of slums"
+title: "Getting GIS data of Mumbai slums"
 execute:
   echo: false
   message: false
@@ -7,6 +7,8 @@ author: "Shrividya Ravi"
 date: "2023-02-01"
 categories: [data science, urban, india, mumbai]
 image: "image.jpg"
+bibliography: "references.bib"
+csl: "ieee.csl"
 ---
 
 
@@ -17,26 +19,39 @@ library(sf)
 library(dplyr)
 library(ggplot2)
 library(patchwork)
-library(osmplotr)
 ```
 
+According the 2011 census, around 42% of the population resides in slums [@MumbaiGreaterMumbai]. Given the rapid rates of growth in a megacity like Mumbai, it's likely that both the extent and the population of slum residents has only increased in the last decade. While the source of the GIS data is also several years old (circa 2015) [@GISMISSlumData], we can use it to understand the extent of slums in the city. 
+
+Like many sources of data from India, the original data from the Slum Rehabiliation Authority (SRA) [@GISMISSlumData] is provided as a pdf map - putting yet another item on my growing list of required R geospatial skills for urban analytics - digitising pdf maps to digital shapefiles. However, I can defer this lesson for a little longer thanks to Opencity [@MumbaiSlumCluster] who have digitised this file as KML that can be directly read in as an `sf` object. 
+
+
+I have a long list of questions for understanding how slums are part of the urban fabric: 
+
+- Slum concentrations around the city?
+- How large are individual slums?
+- How big are slum clusters? 
+- What type of urban typologies exist between and next to slums?
+- How did slums evolve in various parts of the city?
+
+As a first step, I'm starting with the simplest question: extent of slums across the city.
 
 ```{r}
 #| output: false
+# (Download and) read data from open-city
+
+# file <- download.file(
+#   url = "https://data.opencity.in/dataset/3ddbe9fc-a390-4140-b579-69bd01b4b1af/resource/5d6f72ed-a290-4931-821f-5476c148407b/download/mumbai_slum_cluster.kml", 
+#   destfile = "~/Documents/mumbai-slums/open-city/mumbai_slum_cluster.kml"
+# )
+
 slums <- sf::st_read("~/Documents/mumbai-slums/open-city/mumbai_slum_cluster.kml")
 sf_use_s2(FALSE)
 ```
 
 ```{r}
-
-# get mumbai polygon for subsetting
-mumbai_poly <-  getbb("mumbai india", format_out = "polygon")[[1]] %>% 
-  as.data.frame() %>%
-  st_as_sf(coords = c("V1", "V2")) %>% 
-  # Combine so that whole dataframe becomes one polygon
-  st_combine() %>% 
-  st_cast("POLYGON") %>% 
-  st_set_crs(4326) 
+#| output: false
+# get mumbai polygons for subsetting
 
 # get mumbai polygon for subsetting
 mumbai_suburban_poly <- getbb("mumbai suburban india", format_out = "polygon") %>% 
@@ -70,17 +85,12 @@ mumbai_city_slums <- st_intersection(
   mumbai_city_poly %>% st_cast("POLYGON"),
   )
 
-p1 <- ggplot() + 
-  geom_sf(data = slums) + 
-  geom_sf(data = mumbai_poly, size = 1, fill = NA) + 
-  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
-  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
-  theme_minimal() + 
-  labs(x = "",
-       y = "",
-       title = 'Mumbai') + 
-  guides(fill = guide_legend("Population")) 
+```
 
+
+```{r}
+#| output: false
+# Set up plots
 p2 <- ggplot() + 
   geom_sf(data = mumbai_city_slums) + 
   geom_sf(data = mumbai_city_poly, colour = "red", size = 1, fill = NA) + 
@@ -104,13 +114,19 @@ p3 <- ggplot() +
   theme(legend.position = "None") 
 ```
 
-```{r}
 
-((p1 | p3 / p2)) + 
-  plot_layout(guides = 'collect')
+```{r}
+#| out-width: 100%
+((p3 | p2)) + plot_layout(guides = 'collect')
 ```
 
 
+
 ### References
+
+::: {#refs}
+:::
+
+### Credits
 - Post photo by <a href="https://unsplash.com/pt-br/@alfarnassolkar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alfarnas Solkar</a> on <a href="https://unsplash.com/photos/oqjl1kTw_Bo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
   

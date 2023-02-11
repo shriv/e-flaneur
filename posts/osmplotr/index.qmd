@@ -1,11 +1,11 @@
 ---
-title: "Comparing urban form in R"
+title: "Schematic maps of urban form in R"
 execute:
   echo: false
   message: false
 author: "Shrividya Ravi"
 date: "2022-11-01"
-categories: [data science, urban, india, mumbai]
+categories: [data science, urban, india, mumbai, R]
 image: "image.jpg"
 bibliography: "references.bib"
 csl: "ieee.csl"
@@ -29,7 +29,7 @@ I became interested in the qualitative and quantitative analysis of urban form o
 However, there was no tutorial (that I could find) or even examples for creating these in R making it a great learning project. After some googling around for existing code or packages that would help me build the required schematics in a systematic way, I landed on the following franken-hack: 
 
 - Specifying a bounding box with consistent extent based on a user specification. This code was taken from `spacey` [@SpaceyEasilyObtain] instead of writing equivalent code myself. The functions `get_centroid_bounding_box()`, `extract_coords()`, `rad_to_deg()` and `deg_to_rad()` are needed. 
-- Using `osmplotr` [@RopensciOsmplotr2022] to pull specific spatial elements like parks, building networks and street works and print a visually consistent map. 
+- Using `osmplotr` [@RopensciOsmplotr2022] to pull specific spatial elements like parks, building networks and street works and print a visually consistent map. The handy `make_osm_map()` function both gets the data and prints the map according to the set colour scheme for the different elements. 
 - Using `patchwork` [@ComposerPlots] to put together multiple schematics for side by side comparison. 
 
 
@@ -47,7 +47,7 @@ return_osmplotr_map <- function(bbox, map_title){
   structures$cols[4] <- "#647864FF"
   
   # make map
-  osmplotr_map <- make_osm_map (structures = structures, bbox = bbox)
+  osmplotr_map <- make_osm_map(structures = structures, bbox = bbox)
   plot <- osmplotr_map$map  + labs(title = map_title)
   return(plot)
 }
@@ -72,56 +72,12 @@ p2 <- return_osmplotr_map(be_bbox, "Ballard Estate, Fort (Mumbai City)")
 # Compose plot
 (p1 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + (p2) 
 ```
+
+
 ```{r}
 #| out-width: 100%
 # Compose plot
 (p1 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + (p2) 
-```
-
-```{r}
-#| output: false
-
-bbox <- get_centroid_bounding_box(
-  c("lat" = 18.93566, "lng" = 72.8401),
-  distance = 500,
-  dist.unit = "m") %>% 
-  get_bbox()
-
-p2 <- return_osmplotr_map(bbox, "Ballard Estate, Fort (Mumbai City)")
-```
-
-```{r}
-
-```
-
-```{r}
-#| output: false
-
-bbox <- get_centroid_bounding_box(
-  c("lat" = 51.521062787744135, "lng" = -0.14722085751994027),
-  distance = 500,
-  dist.unit = "m") %>% 
-  get_bbox()
-
-p3 <- return_osmplotr_map(bbox, "Fittzrovia, London")
-```
-
-```{r}
-#| output: false
-
-bbox <- get_centroid_bounding_box(
-  c("lat" = 40.78183, "lng" =  -73.95267),
-  distance = 500,
-  dist.unit = "m") %>% 
-  get_bbox()
-
-p4 <- return_osmplotr_map(bbox, "Manhattan, New York City")
-```
-
-```{r}
-#| out.width="100%"
-(p3 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
-  (p4) 
 ```
 
 
