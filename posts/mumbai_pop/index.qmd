@@ -5,8 +5,10 @@ execute:
   message: false
 author: "Shrividya Ravi"
 date: "2022-08-01"
-categories: [data-science, urban, india, mumbai]
+categories: [data science, urban, india, mumbai]
 image: "image.jpg"
+bibliography: references.bib
+csl: ieee.csl
 ---
 
 ```{r}
@@ -21,9 +23,7 @@ library(stars)
 library(latex2exp)
 ```
 
-Megacities of the world are fascinating places. However, it's amazing to realise that they thrive in a data poor landscape. For example, a simple population count is difficult to pin down for Mumbai since the last census was in 2011 and the 2021 census has been delayed due to the pandemic. The Indian census recently updated population estimates for Mumbai as 17.2 million @MumbaiGreaterMumbai. An addition 8 million are spread across the metropolitan region on mainland - including the nearby planned-city-turned-urban-sprawl called [Navi Mumbai](https://en.wikipedia.org/wiki/Navi_Mumbai) where I grew up.
-
-My attempts to find fine spatial resolution of population for Mumbai led me to Worldpop(@bondarenkoCensusProjectiondisaggregatedGridded2020a). While these estimates use clever statistical models, Worldpop estimates 13.38 million people in Mumbai as at 2020 (@SpatialDistributionPopulation). These values are difficult to reconcile against the estimates from the Indian government which estimate almost twice as many people!
+My attempts to find spatially resolved population data for Mumbai led me to WorldPop [@bondarenkoCensusProjectiondisaggregatedGridded2020a] which provides population counts at a 100m$^2$ spatial resolution. While the WorldPop estimates use clever statistical models for generating spatial distribution of population, the total for Mumbai comes to 13.38 million people as at 2020 [@SpatialDistributionPopulation]. This value is 25% lower than the recent 2023 population estimate of 17.2 million from the Indian government [@MumbaiGreaterMumbai]. It is likely that the mismatch results from the Indian population being generated from a generic top-down model that covers the world while the Indian government has projected population using past trends in growth rates specific to the area.
 
 ```{r}
 #| include: false
@@ -59,16 +59,20 @@ mumbai_city_poly <- getbb("mumbai city india", format_out = "polygon")[[1]] %>%
 
 ```
 
-The value of Worldpop estimates is their provision of population counts at a 100m$^2$ spatial resolution. Cropping the estimates to the two zones of Mumbai (Mumbai city and Mumbai suburban) shows some interesting spatial patterns. For example, Mumbai city appears to be much more homogeneous in population density than Mumbai suburban. The northern and eastern areas of Mumbai suburban are considerably more populated than the city zone.
+Despite low confidence in its accuracy, the WorldPop dataset was a good opportunity to learn how to wrangle raster data and to combine it with vector data. The population data from WorldPop covers the entire country so cropping to the Mumbai boundaries (full and by the two main districts) was required before any plotting or analysis. After some initial confusion over which package to use, I found that the R package `stars` [@SpatiotemporalArraysRaster] is a very convenient way to read raster data into R and the `geom_stars` geom allows for easy plotting with `ggplot2`. Usefully, `st_crop` also works out of the box when combining polygon `sf` objects with a `stars` object.
+
+Separating the population counts for the two districts of Mumbai, draws attention apparent homogeneity of Mumbai city. This corresponds well to the more business-centric landuse of Mumbai city especially at the southern tip of Colaba. The northern and eastern areas of Mumbai suburban are significantly more populated than the city district, and are spatially congruous with extensive slum settlements though the population estimates smear out the higher density of slums beyond the expected slum limits.
 
 ```{r}
+#| out.width="100%"
+
 mumbai_pop <- st_crop(pop, mumbai_poly)
 mumbai_suburban_pop <- st_crop(pop, mumbai_suburban_poly)
 mumbai_city_pop <- st_crop(pop, mumbai_city_poly)
 
 p1 <- ggplot() + 
   geom_stars(data = mumbai_pop) + 
-  geom_sf(data = mumbai_poly, size = 1, fill = NA) + 
+  geom_sf(data = mumbai_poly, fill = NA) + 
   scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
   scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
   theme_minimal() + 
@@ -79,7 +83,7 @@ p1 <- ggplot() +
 
 p2 <- ggplot() + 
   geom_stars(data = mumbai_city_pop) + 
-  geom_sf(data = mumbai_city_poly, colour = "red", size = 1, fill = NA) + 
+  geom_sf(data = mumbai_city_poly, colour = "red",  fill = NA) + 
   scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
   scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
   theme_minimal() + 
@@ -90,7 +94,7 @@ p2 <- ggplot() +
 
 p3 <- ggplot() + 
   geom_stars(data = mumbai_suburban_pop) + 
-  geom_sf(data = mumbai_suburban_poly, colour = "red", size = 1, fill = NA) + 
+  geom_sf(data = mumbai_suburban_poly, colour = "red",  fill = NA) + 
   scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
   scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
   theme_minimal() + 
@@ -104,19 +108,11 @@ p3 <- ggplot() +
 
 ```
 
-```{r}
-mumbai_city_pop_df <- mumbai_city_pop %>% 
-  as.data.frame() %>% 
-  mutate(zone = "Mumbai City")
-
-mumbai_suburban_pop_df <- mumbai_suburban_pop %>% 
-  as.data.frame() %>% 
-  mutate(zone = "Mumbai Suburban")
-
-mumbai_pop_df <- bind_rows(mumbai_city_pop_df, mumbai_suburban_pop_df)
-
-```
-
 ### References
-- Post photo by <a href="https://unsplash.com/ja/@harsh_jpeg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Harsh Kondekar</a> on <a href="https://unsplash.com/photos/SDZOP6R95k4?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-  
+
+::: {#refs}
+:::
+
+### Credits
+
+Post photo by <a href="https://unsplash.com/ja/@harsh_jpeg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Harsh Kondekar</a> on <a href="https://unsplash.com/photos/SDZOP6R95k4?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>

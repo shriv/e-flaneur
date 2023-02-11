@@ -2,7 +2,7 @@
 title: "OSM issues in Mumbai"
 author: "Shrividya Ravi"
 date: "2022-08-01"
-categories: [data-science, urban, india, osm, mumbai]
+categories: [data science, urban, india, osm, mumbai]
 image: "image.png"
 ---
 

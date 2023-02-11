@@ -1,12 +1,14 @@
 ---
-title: "Urban form of Mumbai"
+title: "Comparing urban form in R"
 execute:
   echo: false
   message: false
 author: "Shrividya Ravi"
 date: "2022-11-01"
-categories: [data-science, urban, india, mumbai]
+categories: [data science, urban, india, mumbai]
 image: "image.jpg"
+bibliography: "references.bib"
+csl: "ieee.csl"
 ---
 
 ```{r}
@@ -17,25 +19,63 @@ library(dplyr)
 library(ggplot2)
 library(patchwork)
 library(osmplotr)
-source("../../R/centroid_bbox.R")
+source("centroid_bbox.R")
 ```
+
+I became interested in the qualitative and quantitative analysis of urban form over a year ago. However, learning a useful set of foundational skills was elusive for some time as I didn't know where to start. A chance watch of Bimal Patel's slides and narrative of urban form in Indian cities [@AlainBertaudBimal] fired up my imagination and set out a simple path to pick up new skills. Architects like Bimal Patel dominate the vast literature of urban form and their classic set of explanatory images are 200m - 500m square schematics of building footprints, plots and street networks. 
+
+![An example of comparative urban form schematics from [@WhatUrbanFabric2012].](urban-form.jpeg){width=100%}
+
+However, there was no tutorial (that I could find) or even examples for creating these in R making it a great learning project. After some googling around for existing code or packages that would help me build the required schematics in a systematic way, I landed on the following franken-hack: 
+
+- Specifying a bounding box with consistent extent based on a user specification. This code was taken from `spacey` [@SpaceyEasilyObtain] instead of writing equivalent code myself. The functions `get_centroid_bounding_box()`, `extract_coords()`, `rad_to_deg()` and `deg_to_rad()` are needed. 
+- Using `osmplotr` [@RopensciOsmplotr2022] to pull specific spatial elements like parks, building networks and street works and print a visually consistent map. 
+- Using `patchwork` [@ComposerPlots] to put together multiple schematics for side by side comparison. 
+
 
 ```{r}
 #| output: false
+#| echo: true
+#| out.width: 100%
 
-bbox <- get_centroid_bounding_box(
+# custom osmplotr function
+return_osmplotr_map <- function(bbox, map_title){
+  # get data
+  structs <- c ("highway", "building", "park", "landuse")
+  structures <- osm_structures (structures = structs, col_scheme = "dark")
+  structures$value [4] <- "recreation_ground"
+  structures$cols[4] <- "#647864FF"
+  
+  # make map
+  osmplotr_map <- make_osm_map (structures = structures, bbox = bbox)
+  plot <- osmplotr_map$map  + labs(title = map_title)
+  return(plot)
+}
+
+# bounding boxes and extend with spacey function
+pc_bbox <- get_centroid_bounding_box(
   c("lat" = 19.01879, "lng" = 72.85141),
   distance = 500,
   dist.unit = "m") %>% 
   get_bbox()
 
-structs <- c ("highway", "building", "park", "landuse")
-structures <- osm_structures (structures = structs, col_scheme = "dark")
-structures$value [4] <- "recreation_ground"
-structures$cols[4] <- "#647864FF"
+be_bbox <- get_centroid_bounding_box(
+  c("lat" = 18.93566, "lng" = 72.8401),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
 
-parsi_colony <- make_osm_map (structures = structures, bbox = bbox)
-p1 <- parsi_colony$map  + labs(title = "Parsi Colony, Dadar (Mumbai City)")
+# return individual plot objects
+p1 <- return_osmplotr_map(pc_bbox, "Parsi Colony, Dadar (Mumbai City)")
+p2 <- return_osmplotr_map(be_bbox, "Ballard Estate, Fort (Mumbai City)")
+
+# Compose plot
+(p1 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + (p2) 
+```
+```{r}
+#| out-width: 100%
+# Compose plot
+(p1 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + (p2) 
 ```
 
 ```{r}
@@ -47,19 +87,11 @@ bbox <- get_centroid_bounding_box(
   dist.unit = "m") %>% 
   get_bbox()
 
-structs <- c ("highway", "building", "park", "landuse")
-structures <- osm_structures (structures = structs, col_scheme = "dark")
-structures$value [4] <- "recreation_ground"
-structures$cols[4] <- "#647864FF"
-
-ballard_estate <- make_osm_map (structures = structures, bbox = bbox)
-p1_a <- ballard_estate$map  + labs(title = "Ballard Estate, Fort (Mumbai City)")
+p2 <- return_osmplotr_map(bbox, "Ballard Estate, Fort (Mumbai City)")
 ```
 
 ```{r}
-#| out.width="100%"
-(p1 + theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
-  (p1_a) 
+
 ```
 
 ```{r}
@@ -71,15 +103,7 @@ bbox <- get_centroid_bounding_box(
   dist.unit = "m") %>% 
   get_bbox()
 
-structs <- c ("highway", "building", "park", "landuse", "leisure")
-structures <- osm_structures (structures = structs, col_scheme = "dark")
-structures$value [4] <- "recreation_ground"
-structures$cols[4] <- "#647864FF"
-structures$value [5] <- "garden"
-structures$cols[5] <- "#647864FF"
-
-fitzrovia <- make_osm_map (structures = structures, bbox = bbox)
-p3 <- fitzrovia$map + labs(title = "Fittzrovia, London")
+p3 <- return_osmplotr_map(bbox, "Fittzrovia, London")
 ```
 
 ```{r}
@@ -91,15 +115,7 @@ bbox <- get_centroid_bounding_box(
   dist.unit = "m") %>% 
   get_bbox()
 
-structs <- c ("highway", "building", "park", "landuse", "leisure")
-structures <- osm_structures (structures = structs, col_scheme = "dark")
-structures$value [4] <- "recreation_ground"
-structures$cols[4] <- "#647864FF"
-structures$value [5] <- "garden"
-structures$cols[5] <- "#647864FF"
-
-manhattan <- make_osm_map (structures = structures, bbox = bbox)
-p4 <-manhattan$map + labs(title = "Manhattan, New York City")
+p4 <- return_osmplotr_map(bbox, "Manhattan, New York City")
 ```
 
 ```{r}
@@ -108,5 +124,11 @@ p4 <-manhattan$map + labs(title = "Manhattan, New York City")
   (p4) 
 ```
 
+
 ### References
+
+::: {#refs}
+:::
+
+### Credits
 - Post photo from https://www.architecturaldigest.in/story/dadar-parsi-colony-cherishing-the-bombay-that-was-mumbai-history-pictures/

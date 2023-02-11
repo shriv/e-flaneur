@@ -5,26 +5,21 @@ execute:
   message: false
 author: "Shrividya Ravi"
 date: "2023-02-01"
-categories: [data-science, urban, india, mumbai]
+categories: [data science, urban, india, mumbai]
 image: "image.jpg"
 ---
 
 
 ```{r}
 #| include: false
-library(raster)
 library(osmdata)
 library(sf)
 library(dplyr)
 library(ggplot2)
 library(patchwork)
-library(sfnetworks)
-library(foot)
-library(units)
 library(osmplotr)
-source("../../R/centroid_bbox.R")
 ```
-A large part of the heterogeneity can be explained by the presence of slums.
+
 
 ```{r}
 #| output: false
