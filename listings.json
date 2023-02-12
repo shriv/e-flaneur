@@ -2,10 +2,11 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/mumbai_slums/index.html",
+      "/posts/mumbai-slums/index.html",
+      "/posts/osm-mumbai/index.html",
+      "/posts/global-ml/index.html",
       "/posts/osmplotr/index.html",
-      "/posts/osm_mumbai/index.html",
-      "/posts/mumbai_pop/index.html"
+      "/posts/mumbai-pop/index.html"
     ]
   }
 ]
