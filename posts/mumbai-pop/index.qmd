@@ -1,0 +1,118 @@
+---
+title: "Population distribution in Mumbai"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2022-08-01"
+categories: [data science, urban, india, mumbai]
+image: "image.jpg"
+bibliography: references.bib
+csl: ieee.csl
+---
+
+```{r}
+#| include: false
+library(raster)
+library(osmdata)
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(stars)
+library(latex2exp)
+```
+
+Mumbai is a city of incredible heterogeneity and diversity. One of the many indicators of this aspect is how and where people live. My attempts to find spatially resolved population data for Mumbai led me to WorldPop [@bondarenkoCensusProjectiondisaggregatedGridded2020a] which provides population counts at a 100m$^2$ spatial resolution. While the WorldPop estimates use clever statistical models for generating spatial distribution of population, the total for Mumbai comes to 13.38 million people as at 2020 [@SpatialDistributionPopulation]. This value is 25% lower than the recent 2023 population estimate of 17.2 million from the Indian government [@MumbaiGreaterMumbai]. It is likely that the mismatch results from the Indian population being generated from a generic top-down model that covers the world while the Indian government has projected population using past trends in growth rates specific to the area.
+
+```{r}
+#| include: false
+
+# get population counts from world pop data
+pop <- read_stars("~/Documents/worldpop-data/ind_ppp_2020_constrained.tif")
+
+# get mumbai polygon for subsetting
+mumbai_poly <-  getbb("mumbai india", format_out = "polygon")[[1]] %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+# get mumbai polygon for subsetting
+mumbai_suburban_poly <- getbb("mumbai suburban india", format_out = "polygon") %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+mumbai_city_poly <- getbb("mumbai city india", format_out = "polygon")[[1]] %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+```
+
+Despite low confidence in its accuracy, the WorldPop dataset was a good opportunity to learn how to wrangle raster data and to combine it with vector data. The population data from WorldPop covers the entire country so cropping to the Mumbai boundaries (full and by the two main districts) was required before any plotting or analysis. After some initial confusion over which package to use, I found that the R package `stars` [@SpatiotemporalArraysRaster] is a very convenient way to read raster data into R and the `geom_stars` geom allows for easy plotting with `ggplot2`. Usefully, `st_crop` also works out of the box when combining polygon `sf` objects with a `stars` object.
+
+Separating the population counts for the two districts of Mumbai, draws attention apparent homogeneity of Mumbai city. This corresponds well to the more business-centric landuse of Mumbai city especially at the southern tip of Colaba. The northern and eastern areas of Mumbai suburban are significantly more populated than the city district, and are spatially congruous with extensive slum settlements though the population estimates smear out the higher density of slums beyond the expected slum limits.
+
+```{r}
+#| out.width="100%"
+
+mumbai_pop <- st_crop(pop, mumbai_poly)
+mumbai_suburban_pop <- st_crop(pop, mumbai_suburban_poly)
+mumbai_city_pop <- st_crop(pop, mumbai_city_poly)
+
+p1 <- ggplot() + 
+  geom_stars(data = mumbai_pop) + 
+  geom_sf(data = mumbai_poly, fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "",
+       title = 'Mumbai') + 
+  guides(fill = guide_legend("Population")) 
+
+p2 <- ggplot() + 
+  geom_stars(data = mumbai_city_pop) + 
+  geom_sf(data = mumbai_city_poly, colour = "red",  fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "",
+       title = "City") + 
+  theme(legend.position = "None")
+
+p3 <- ggplot() + 
+  geom_stars(data = mumbai_suburban_pop) + 
+  geom_sf(data = mumbai_suburban_poly, colour = "red",  fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 600), na.value = "transparent") +
+  scale_x_continuous(breaks = seq(72.8, 73, by = 0.1)) + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "", 
+       title = "Suburban") + 
+  theme(legend.position = "None") 
+
+((p1 | p3 / p2)) + 
+  plot_layout(guides = 'collect')
+
+```
+
+### References
+
+::: {#refs}
+:::
+
+### Credits
+
+Post photo by <a href="https://unsplash.com/ja/@harsh_jpeg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Harsh Kondekar</a> on <a href="https://unsplash.com/photos/SDZOP6R95k4?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
