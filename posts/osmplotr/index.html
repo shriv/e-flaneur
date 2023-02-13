@@ -225,14 +225,14 @@ div.csl-indent {
 
 </header>
 
-<p>I became interested in the qualitative and quantitative analysis of urban form over a year ago. However, learning a useful set of foundational skills was elusive for some time as I didn’t know where to start. A chance watch of Bimal Patel’s slides and narrative of urban form in Indian cities <span class="citation" data-cites="AlainBertaudBimal"><a href="#ref-AlainBertaudBimal" role="doc-biblioref">[1]</a></span> fired up my imagination and set out a simple path to pick up new skills. Architects like Bimal Patel dominate the vast literature of urban form and their classic set of explanatory images are 200m - 500m square schematics of building footprints, plots and street networks.</p>
+<p>I became interested in the qualitative and quantitative analysis of urban form over a year ago. Architects like Bimal Patel <span class="citation" data-cites="AlainBertaudBimal"><a href="#ref-AlainBertaudBimal" role="doc-biblioref">[1]</a></span> dominate the vast literature of urban form and their classic set of explanatory images are 200m - 500m square schematics of building footprints, plots and street networks. However, there was no tutorial (that I could find) or even examples for creating these in R.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="urban-form.jpeg" class="img-fluid figure-img" style="width:100.0%"></p>
 <p></p><figcaption class="figure-caption">An example of comparative urban form schematics from <span class="citation" data-cites="WhatUrbanFabric2012"><a href="#ref-WhatUrbanFabric2012" role="doc-biblioref">[2]</a></span>.</figcaption><p></p>
 </figure>
 </div>
-<p>However, there was no tutorial (that I could find) or even examples for creating these in R making it a great learning project. After some googling around for existing code or packages that would help me build the required schematics in a systematic way, I landed on the following franken-hack:</p>
+<p>After some googling around for existing code or packages that would help me build the required schematics in a systematic way, I landed on the following franken-hack:</p>
 <ul>
 <li>Specifying a bounding box with consistent extent based on a user specification. The code for this functionality was taken from <code>spacey</code> <span class="citation" data-cites="SpaceyEasilyObtain"><a href="#ref-SpaceyEasilyObtain" role="doc-biblioref">[3]</a></span>. The functions <code>get_centroid_bounding_box()</code>, <code>extract_coords()</code>, <code>rad_to_deg()</code> and <code>deg_to_rad()</code> are needed. I keep them in a local R script since I don’t need the other functionality of <code>spacey</code>.</li>
 <li>Using <code>osmplotr</code> <span class="citation" data-cites="RopensciOsmplotr2022"><a href="#ref-RopensciOsmplotr2022" role="doc-biblioref">[4]</a></span> to pull specific spatial elements like parks, building networks and street works and print a visually consistent map. The handy <code>make_osm_map()</code> function both gets the data and outputs the map as a <code>ggplot</code> object. Colours can be set for the different structures in the map.</li>

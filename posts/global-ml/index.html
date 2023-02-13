@@ -225,7 +225,7 @@ div.csl-indent {
 
 </header>
 
-<p>I’ve recently learned of the <code>GlobalML</code> dataset from Microsoft <span class="citation" data-cites="MicrosoftGlobalMLBuildingFootprints2023"><a href="#ref-MicrosoftGlobalMLBuildingFootprints2023" role="doc-biblioref">[1]</a></span>. However, the organisation of the data was hard to follow as only a handful of countries have specific data releases. The rest of the world, including India, needed could only be downloaded based on the <code>quadkey</code> for the required map tile.</p>
+<p>I’ve recently learned of the <code>GlobalML</code> dataset from Microsoft <span class="citation" data-cites="MicrosoftGlobalMLBuildingFootprints2023"><a href="#ref-MicrosoftGlobalMLBuildingFootprints2023" role="doc-biblioref">[1]</a></span> which has extracted building footprints from satellite imagery. However, accessing the data is not trivial as only a handful of countries have specific data releases. The rest of the world, including India, are available as compressed files and can be downloaded using the <code>quadkey</code> for the required map tile.</p>
 <p>The challenge I faced was figuring out which <code>quadkey</code> tile contained the latitude and longitudes I was interested in. Luckily, I found a very useful snippet <span class="citation" data-cites="HowConvertLatitude"><a href="#ref-HowConvertLatitude" role="doc-biblioref">[2]</a></span> that makes use of the <code>pyquadkey2</code> python package.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pip install pyquadkey2</span>
