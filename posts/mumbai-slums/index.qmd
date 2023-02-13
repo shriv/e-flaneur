@@ -30,11 +30,11 @@ According the 2011 census, around 42% of the population resides in slums [@Mumba
 -   What type of urban typologies exist between and next to slums?
 -   How did slums evolve in various parts of the city?
 
-Like many sources of data from India, the original data from the Slum Rehabilitation Authority (SRA) [@GISMISSlumData] is provided as a pdf map and a separate set of attributes also in pdf - putting yet another item on my growing list of required R geospatial skills for urban analytics - digitising pdf maps to digital shapefiles. However, I can defer this lesson for a little longer thanks to Opencity [@MumbaiSlumCluster] who have digitised the map as KML that can be directly read in as an `sf` object.
+Alongside the quantitative aspects also come the qualitative: how did slums start, how do they continue despite such incredible difficulties of life and what is their future?
 
-As a first step, I'm trying to get a sense of the extent of slums across the city. I've added key natural areas since Mumbai has several wetland areas and a large national park within the city boundaries. Slums are mostly distributed in Mumbai suburban district of Mumbai with a few exceptions like the well-known slum of Dharavi at the northwestern boundary of Mumbai city district.
+Like many sources of data from India, the original data from the Slum Rehabilitation Authority (SRA) [@GISMISSlumData] is provided as a pdf map and a separate set of attributes also in pdf. This adds yet another item on my growing list of required R geospatial skills for urban analytics: converting pdf maps to digital shapefiles. However, I can defer this lesson for a little longer thanks to Opencity [@MumbaiSlumCluster] who have digitised the map to a KML format that can be directly read in as an `sf` object.
 
-Given the extensive spread of slums, understanding how they dovetail with middle class and upper class urban typologies will be a key focus of my future analysis. Alongside the quantitative aspects also come the qualitative: how did slums start, how do they continue despite such incredible difficulties of life and what is their future?
+As a first step, I'm trying to get a sense of the extent of slums across the city. I've added key natural areas (in green) since Mumbai has several wetland areas and a large national park within the city boundaries. Slums (in red) are mostly distributed in Mumbai suburban district of Mumbai with a few exceptions like the well-known slum of Dharavi at the northwestern boundary of Mumbai city district. Given the extensive spread of slums, understanding how they dovetail with middle class and upper class urban typologies will be a key focus of my future analysis.
 
 ```{r}
 #| output: false

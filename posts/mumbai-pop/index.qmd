@@ -23,7 +23,9 @@ library(stars)
 library(latex2exp)
 ```
 
-Mumbai is a city of incredible heterogeneity and diversity. One of the many indicators of this aspect is how and where people live. My attempts to find spatially resolved population data for Mumbai led me to WorldPop [@bondarenkoCensusProjectiondisaggregatedGridded2020a] which provides population counts at a 100m$^2$ spatial resolution. While the WorldPop estimates use clever statistical models for generating spatial distribution of population, the total for Mumbai comes to 13.38 million people as at 2020 [@SpatialDistributionPopulation]. This value is 25% lower than the recent 2023 population estimate of 17.2 million from the Indian government [@MumbaiGreaterMumbai]. It is likely that the mismatch results from the Indian population being generated from a generic top-down model that covers the world while the Indian government has projected population using past trends in growth rates specific to the area.
+Mumbai is a city of incredible heterogeneity and diversity. One of the many indicators of this aspect is how and where people live. To answer questions of where people live, we can either find census information per ward or other spatially resolved sources. Census information is unfortunately rather out of date, over 12 years old [@MumbaiGreaterMumbai], so an alternative source is required.
+
+The search led me to WorldPop [@bondarenkoCensusProjectiondisaggregatedGridded2020a] which provides population counts at a 100m$^2$ spatial resolution. While the WorldPop estimates use clever statistical models for generating spatial distribution of population, the total for Mumbai comes to 13.38 million people as at 2020 [@SpatialDistributionPopulation]. This value is 25% lower than the recent 2023 population estimate of 17.2 million from the Indian government [@MumbaiGreaterMumbai]. It is likely that the mismatch results from the Indian population being generated from a generic top-down model that covers the world while the Indian government has projected population using past trends in growth rates specific to the area.
 
 ```{r}
 #| include: false

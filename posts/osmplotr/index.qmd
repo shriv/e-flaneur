@@ -22,11 +22,11 @@ library(osmplotr)
 source("../../R/centroid_bbox.R")
 ```
 
-I became interested in the qualitative and quantitative analysis of urban form over a year ago. However, learning a useful set of foundational skills was elusive for some time as I didn't know where to start. A chance watch of Bimal Patel's slides and narrative of urban form in Indian cities [@AlainBertaudBimal] fired up my imagination and set out a simple path to pick up new skills. Architects like Bimal Patel dominate the vast literature of urban form and their classic set of explanatory images are 200m - 500m square schematics of building footprints, plots and street networks.
+I became interested in the qualitative and quantitative analysis of urban form over a year ago. Architects like Bimal Patel [@AlainBertaudBimal] dominate the vast literature of urban form and their classic set of explanatory images are 200m - 500m square schematics of building footprints, plots and street networks. However, there was no tutorial (that I could find) or even examples for creating these in R.
 
 ![An example of comparative urban form schematics from [@WhatUrbanFabric2012].](urban-form.jpeg){width="100%"}
 
-However, there was no tutorial (that I could find) or even examples for creating these in R making it a great learning project. After some googling around for existing code or packages that would help me build the required schematics in a systematic way, I landed on the following franken-hack:
+After some googling around for existing code or packages that would help me build the required schematics in a systematic way, I landed on the following franken-hack:
 
 -   Specifying a bounding box with consistent extent based on a user specification. The code for this functionality was taken from `spacey` [@SpaceyEasilyObtain]. The functions `get_centroid_bounding_box()`, `extract_coords()`, `rad_to_deg()` and `deg_to_rad()` are needed. I keep them in a local R script since I don't need the other functionality of `spacey`.
 -   Using `osmplotr` [@RopensciOsmplotr2022] to pull specific spatial elements like parks, building networks and street works and print a visually consistent map. The handy `make_osm_map()` function both gets the data and outputs the map as a `ggplot` object. Colours can be set for the different structures in the map.

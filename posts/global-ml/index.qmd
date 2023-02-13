@@ -19,7 +19,7 @@ library(ggplot2)
 library(osmdata)
 ```
 
-I've recently learned of the `GlobalML` dataset from Microsoft [@MicrosoftGlobalMLBuildingFootprints2023]. However, the organisation of the data was hard to follow as only a handful of countries have specific data releases. The rest of the world, including India, needed could only be downloaded based on the `quadkey` for the required map tile.
+I've recently learned of the `GlobalML` dataset from Microsoft [@MicrosoftGlobalMLBuildingFootprints2023] which has extracted building footprints from satellite imagery. However, accessing the data is not trivial as only a handful of countries have specific data releases. The rest of the world, including India, are available as compressed files and can be downloaded using the `quadkey` for the required map tile.
 
 The challenge I faced was figuring out which `quadkey` tile contained the latitude and longitudes I was interested in. Luckily, I found a very useful snippet [@HowConvertLatitude] that makes use of the `pyquadkey2` python package.
 
