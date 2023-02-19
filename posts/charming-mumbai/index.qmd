@@ -6,7 +6,7 @@ execute:
 author: "Shrividya Ravi"
 date: "2023-02-19"
 categories: [data science, urban, india, mumbai]
-image: "image.jpg"
+image: "./assets/parsi-colony.jpeg"
 bibliography: references.bib
 csl: ieee.csl
 ---
