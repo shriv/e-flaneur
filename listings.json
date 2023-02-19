@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/charming-mumbai/index.html",
       "/posts/mumbai-slums/index.html",
       "/posts/osm-mumbai/index.html",
       "/posts/global-ml/index.html",
