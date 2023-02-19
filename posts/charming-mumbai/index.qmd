@@ -1,0 +1,140 @@
+---
+title: "Charming neighbourhoods of Mumbai"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2023-02-19"
+categories: [data science, urban, india, mumbai]
+image: "image.jpg"
+bibliography: references.bib
+csl: ieee.csl
+---
+
+```{r}
+#| include: false
+library(osmdata)
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(osmplotr)
+library(ggsn)
+library(googleway)
+source("../../R/centroid_bbox.R")
+```
+
+```{r}
+#| output: false
+key <- config::get("google_api_key")
+
+if (!file.exists("./assets/ballard-estate.jpeg")){
+  url <- google_streetview(location = c(18.9351988,72.8406469),
+                    size = c(400,400),
+                    panorama_id = NULL,
+                    output = "html",
+                    heading = 115,
+                    fov = 70,
+                    pitch = 3,
+                    response_check = FALSE,
+                    key = key)
+  
+  download.file(url, "./assets/ballard-estate.jpeg", model="wb")  
+}
+
+
+if (!file.exists("./assets/parsi-colony.jpeg")){
+  url <- google_streetview(location = c(19.0179927,72.8516431),
+                    size = c(400,400),
+                    panorama_id = NULL,
+                    output = "html",
+                    heading = 305,
+                    fov = 70,
+                    pitch = 5,
+                    response_check = FALSE,
+                    key = key)
+  
+  download.file(url, "./assets/parsi-colony.jpeg", model="wb")  
+}
+```
+One of the many stereotypes of Mumbai is that it is a city filled with abject poverty and slums wherever you look. While slums are a deeply intrinsic part of Mumbai's urban reality, [given their extensive spread](https://shriv.github.io/e-flaneur/posts/mumbai-slums/), the city also has many beautiful spaces where people live (and work) in comfort. Here we look briefly at two such charming areas: the residential paradise of Parsi Colony in Dadar [@DadarParsiColony2022] and the business district of Ballard Estate [@BallardEstate2022] in Fort.
+
+::: {layout-ncol=2}
+
+![Parsi colony](./assets/parsi-colony.jpeg)
+
+![Ballard Estate](./assets/ballard-estate.jpeg)
+:::
+
+Both neighbourhoods are planned designs from the British era of the early twentieth century where buildings were designed accommodate the available plot of land. The urban skeletons of both neighbourhoods have a pleasing flow even within unusual plot shapes. Parsi Colony takes it further by incorporating green space in different shapes within the overall design. In his book _Boombay_, Kamu Iyer describes the history, architecture and lived experience of Parsi Colony and nearby Hindy Colony in some detail [@iyerBoombayPrecinctsSprawl2014]. I'm particularly interested in understanding how people lived in and moved about these neighbourhoods and contrast it with my own lived experience within a very different neighbourhood in the urban sprawl of Navi Mumbai. 
+
+```{r}
+#| output: false
+
+# custom osmplotr function
+return_osmplotr_map <-
+  function(bbox,
+           map_title,
+           scale_increment = 250,
+           dist_unit = "m",
+           x_min_offset = 0.005) {
+    # get data
+    structs <- c ("highway", "building", "park", "landuse")
+    structures <-
+      osm_structures (structures = structs, col_scheme = "dark")
+    structures$value [4] <- "recreation_ground"
+    structures$cols[4] <- "#647864FF"
+    
+    # make map and add scalebar
+    osmplotr_map <- make_osm_map(structures = structures, bbox = bbox)
+    plot <- osmplotr_map$map  +
+      labs(title = map_title) +
+      scalebar(
+        x.min = bbox[1] + x_min_offset,
+        x.max = bbox[2],
+        y.min = bbox[2],
+        y.max = bbox[4],
+        st.size = 4,
+        st.bottom = FALSE,
+        box.fill = c("yellow", "white"),
+        st.color = "white",
+        dist = scale_increment,
+        dist_unit = dist_unit,
+        transform = TRUE,
+        model = 'WGS84'
+      )
+    
+    return(plot)
+  }
+
+# bounding boxes and extend with spacey function
+pc_bbox <- get_centroid_bounding_box(
+  c("lat" = 19.01879, "lng" = 72.85141),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+be_bbox <- get_centroid_bounding_box(
+  c("lat" = 18.93566, "lng" = 72.8401),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+# return individual plot objects
+p1 <- return_osmplotr_map(pc_bbox, "Parsi Colony, Dadar (Mumbai City)")
+p2 <- return_osmplotr_map(be_bbox, "Ballard Estate, Fort (Mumbai City)")
+
+```
+
+```{r}
+#| out-width: 100%
+# Compose plot
+(p1 + 
+    theme(plot.margin = unit(c(0,5,0,0), "pt"))) + 
+  (p2 )
+```
+
+### References
+
+::: {#refs}
+:::
