@@ -57,7 +57,7 @@ if (!file.exists("./assets/parsi-colony.jpeg")){
   download.file(url, "./assets/parsi-colony.jpeg", model="wb")  
 }
 ```
-One of the many stereotypes of Mumbai is that it is a city filled with abject poverty and slums wherever you look. While slums are a deeply intrinsic part of Mumbai's urban reality, [given their extensive spread](https://shriv.github.io/e-flaneur/posts/mumbai-slums/), the city also has many beautiful spaces where people live (and work) in comfort. Here we look briefly at two such charming areas: the residential paradise of Parsi Colony in Dadar [@DadarParsiColony2022] and the business district of Ballard Estate [@BallardEstate2022] in Fort.
+One of the many stereotypes of Mumbai is that it is a city filled with abject poverty and slums wherever you look. While slums are a deeply intrinsic part of Mumbai's urban reality, [given their extensive spread](https://shriv.github.io/e-flaneur/posts/mumbai-slums/), the city also has many beautiful spaces where people live and work amidst comfortable and beautiful urban environs. Here we look briefly at two such areas: the residential Parsi Colony in Dadar [@DadarParsiColony2022] and the business district of Ballard Estate in Fort [@BallardEstate2022].
 
 ::: {layout-ncol=2}
 
@@ -66,7 +66,9 @@ One of the many stereotypes of Mumbai is that it is a city filled with abject po
 ![Ballard Estate](./assets/ballard-estate.jpeg)
 :::
 
-Both neighbourhoods are planned designs from the British era of the early twentieth century where buildings were designed accommodate the available plot of land. The urban skeletons of both neighbourhoods have a pleasing flow even within unusual plot shapes. Parsi Colony takes it further by incorporating green space in different shapes within the overall design. In his book _Boombay_, Kamu Iyer describes the history, architecture and lived experience of Parsi Colony and nearby Hindy Colony in some detail [@iyerBoombayPrecinctsSprawl2014]. I'm particularly interested in understanding how people lived in and moved about these neighbourhoods and contrast it with my own lived experience within a very different neighbourhood in the urban sprawl of Navi Mumbai. 
+Both neighbourhoods are planned designs from the British era of the early twentieth century where buildings were designed accommodate the available plot of land. The urban skeletons of both neighbourhoods have a pleasing flow even within unusual plot shapes. Parsi Colony takes it further by incorporating green space in different shapes within the overall design. 
+
+I'm particularly interested in understanding how people lived in and moved about these neighbourhoods and contrast it with my own lived experience within a very different neighbourhood in the urban sprawl of Navi Mumbai. So, my next set of readings is _Boombay_ by Kamu Iyer which starts with the history, architecture and lived experience of Parsi Colony and nearby Hindy Colony [@iyerBoombayPrecinctsSprawl2014]. 
 
 ```{r}
 #| output: false
