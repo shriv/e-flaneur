@@ -5,11 +5,18 @@ website:
   title: "e-flaneur"
   navbar:
     right:
-      - about.qmd
       - icon: github
         href: https://github.com/shriv
       - icon: twitter
         href: https://twitter.com/ShrividyaRavi
+    left:
+      - text: "Blog"
+        file: index.qmd
+      - text: "Essays"
+        file: essays.qmd
+      - text: "About"
+        file: about.qmd
+
 format:
   html:
     theme: cosmo

@@ -16,7 +16,7 @@ about:
 
 :::{#hero-heading}
 
-Shrividya is a Principal Data Analyst at Te Manatū Waka (Ministry of Transport) in New Zealand. Her main blog and website can be found [here](https://shriv-portfolio.netlify.app/). This blog is dedicated to learning urbanism through practice - mainly in R but also some Python. 
+Shrividya is a Principal Data Analyst at Te Manatū Waka (Ministry of Transport) in New Zealand. Her main blog and website can be found [here](https://shriv-portfolio.netlify.app/). This site is dedicated to learning urbanism through practice - mainly in R but also some Python. The blog is a repository of raw thoughts and short technical lessons while essays are pieces with a little more heft and consideration. Everything here is my own personal opinion.  
 
 :::
 
