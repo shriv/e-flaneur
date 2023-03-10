@@ -6,10 +6,12 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/figure-ground/index.html",
       "/posts/charming-mumbai/index.html",
       "/posts/mumbai-slums/index.html",
       "/posts/osm-mumbai/index.html",
       "/posts/global-ml/index.html",
+      "/posts/precincts-defn/index.html",
       "/posts/osmplotr/index.html",
       "/posts/mumbai-pop/index.html"
     ]
