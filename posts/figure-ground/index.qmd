@@ -97,11 +97,11 @@ ldn_bbox <- get_centroid_bounding_box(
 
 ```
 
-When I wrote my earlier posts on creating urban form schematics in R (see [here](https://shriv.github.io/e-flaneur/posts/osmplotr/) and [here](https://shriv.github.io/e-flaneur/posts/charming-mumbai/)), I was unaware that they are known as `figure-ground` diagrams whose main purpose is to highlight `built` and `unbuilt` space - alternatively the `mass` and the `void` or, the `figure` and the `ground`. Only built structures are typically included resulting in a stark black and white schematic that allows for visual examination and qualitative bird's eye analysis of urban form and structures. Note, I have reversed the colour scheme from my other posts to follow the common style of `figure-ground` diagrams. 
+When I wrote my earlier posts on urban form schematics (see [here](https://shriv.github.io/e-flaneur/posts/osmplotr/) and [here](https://shriv.github.io/e-flaneur/posts/charming-mumbai/)), I was unaware that they are known as `figure-ground` diagrams - whose main purpose is to highlight `built` and `unbuilt` space. The contrast is also referred to as the `mass` vs. the `void` or, the `figure` vs. the `ground`. Only built structures are typically included resulting in a stark black and white schematic that allows for visual examination and qualitative bird's eye analysis of urban form and structures. Note, I have reversed the colour scheme from my other posts to follow the common style of `figure-ground` diagrams. 
 
-`Square mile` comparisons of different urban areas (or the same area of time) features extensively in the book _Great Streets_ by Allan Jacobs [@jacobsGreatStreets1996] according to [@boeingUrbanFormFigureGround2017] but I don't know if this is a widely followed convention. Given the highly heterogenous urban mosaic of Mumbai, smaller areas are more meaningful as we can zoom into a consistently designed space.    
+`Square mile` comparisons of different urban areas (or the same area across time) features extensively in the book _Great Streets_ by Allan Jacobs [@jacobsGreatStreets1996] according to [@boeingUrbanFormFigureGround2017] but I don't know if this is a widely followed convention. Given the highly heterogenous urban mosaic of Mumbai, smaller areas are more meaningful as we can zoom into a consistently designed space. For this reason, I have maintained the 500m bounding box around a central coordinate like the previous posts. 
 
-Without the street network or parks coloured in like in my earlier posts, the urban fabric of Dadar Parsi Colony and Ballard Estate appear more similar to each other than to the examples from the Upper West Side and Islington. The famous blocks of New York City are a stark contrast to the more sinuous forms of British (local and colonial) urbanism. 
+Without the street network or parks coloured in, the urban fabric of Dadar Parsi Colony and Ballard Estate appear more similar to each other than to the examples from the Upper West Side and Islington. The famous blocks of New York City are a stark contrast to the more sinuous blocks of British (local and colonial) urbanism. 
 
 ```{r}
 #| output: false
@@ -123,7 +123,7 @@ p4 <- return_poche_map(ldn_bbox, "Islington, London", bldg_colour = "black", map
    (p4))
 ```
 
-While the more conventional `figure-ground` diagram ignores the street network [@morphocodeFiguregroundDiagram2019], the combination of streets and buildings offers more insights - especially when the street widths in the diagram qualitatively reflect their importance [@boeingUrbanFormFigureGround2017]. For example, primary and trunk roads are given the largest widths followed by medium widths secondary and tertiary roads and light lines for all others. This allows for qualitative interpretations of various aspects of urban mobility like walkability and connectivity overlaid with building densities of residence and / or commerce.
+While the more conventional `figure-ground` diagram ignores the street network [@morphocodeFiguregroundDiagram2019], the combination of streets and buildings offers more insights - especially when the street widths in the diagram are a tentative approximation of street importance [@boeingUrbanFormFigureGround2017]. For example, primary and trunk roads are given the largest widths followed by medium widths for secondary and tertiary roads and light lines for all others. This allows for qualitative analysis of urban mobility like walkability and connectivity overlaid with building densities of residence and / or commerce.
 
 ```{r}
 #| output: false
