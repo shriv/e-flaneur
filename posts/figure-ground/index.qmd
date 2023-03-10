@@ -1,0 +1,156 @@
+---
+title: "Learning about figure-ground diagrams"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2023-03-10"
+categories: [urban, R, data science, india, mumbai, london, new york city]
+image: "image.jpg"
+bibliography: "references.bib"
+csl: "ieee.csl"
+---
+
+
+```{r}
+#| include: false
+library(osmdata)
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(osmplotr)
+source("../../R/centroid_bbox.R")
+```
+
+```{r}
+#| output: false
+
+# custom osmplotr function
+return_poche_map <-  function(
+    bbox,
+    map_title,
+    bldg_colour = "white",
+    map_bg = "black", 
+    street_colour = "gray50") {
+  
+    
+  # get data
+  dat_B <- extract_osm_objects (key = "building", bbox = bbox)
+  dat_H <- extract_osm_objects (key = "highway", bbox = bbox)
+  
+  # selected data 
+  dat_H_main <- dat_H %>% 
+    filter(highway %in% c("primary", "trunk", "primary_link"))
+  
+  dat_H_impt <- dat_H %>% 
+    filter(highway %in% c("secondary", "tertiary"))
+  
+  dat_H_other <- dat_H %>% 
+    filter(!highway %in% c("primary", "trunk", "primary_link", "secondary", "tertiary"))
+  
+  # make map
+  map <- osm_basemap (bbox = bbox, bg = map_bg)
+  map <- add_osm_objects (map, dat_B, col = bldg_colour)
+  
+  # Only output maps if the filtered street types exist
+  if (nrow(dat_H_main) != 0){
+  map <- add_osm_objects (map, dat_H_main, col = street_colour, size = 2)  
+  }
+  
+  if (nrow(dat_H_impt) != 0){
+  map <- add_osm_objects (map, dat_H_impt, col = street_colour, size = 1)  
+  }
+  
+  map <- add_osm_objects (map, dat_H_other, col = street_colour)
+
+  plot <- print_osm_map (map) + 
+    labs(title = map_title) 
+  
+  return(plot)
+}
+
+# bounding boxes and extend with spacey function
+pc_bbox <- get_centroid_bounding_box(
+  c("lat" = 19.01879, "lng" = 72.85141),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+be_bbox <- get_centroid_bounding_box(
+  c("lat" = 18.93566, "lng" = 72.8401),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+nyc_bbox <- get_centroid_bounding_box(
+  c("lat" = 40.7921, "lng" = -73.9718),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+ldn_bbox <- get_centroid_bounding_box(
+  c("lat" = 51.53827, "lng" = -0.09772),
+  distance = 500,
+  dist.unit = "m") %>% 
+  get_bbox()
+
+```
+
+When I wrote my earlier posts on creating urban form schematics in R (see [here](https://shriv.github.io/e-flaneur/posts/osmplotr/) and [here](https://shriv.github.io/e-flaneur/posts/charming-mumbai/)), I was unaware that they are known as `figure-ground` diagrams whose main purpose is to highlight `built` and `unbuilt` space - alternatively the `mass` and the `void` or, the `figure` and the `ground`. Only built structures are typically included resulting in a stark black and white schematic that allows for visual examination and qualitative bird's eye analysis of urban form and structures. Note, I have reversed the colour scheme from my other posts to follow the common style of `figure-ground` diagrams. 
+
+`Square mile` comparisons of different urban areas (or the same area of time) features extensively in the book _Great Streets_ by Allan Jacobs [@jacobsGreatStreets1996] according to [@boeingUrbanFormFigureGround2017] but I don't know if this is a widely followed convention. Given the highly heterogenous urban mosaic of Mumbai, smaller areas are more meaningful as we can zoom into a consistently designed space.    
+
+Without the street network or parks coloured in like in my earlier posts, the urban fabric of Dadar Parsi Colony and Ballard Estate appear more similar to each other than to the examples from the Upper West Side and Islington. The famous blocks of New York City are a stark contrast to the more sinuous forms of British (local and colonial) urbanism. 
+
+```{r}
+#| output: false
+
+# return individual plot objects
+p1 <- return_poche_map(pc_bbox, "Parsi Colony, Dadar", bldg_colour = "black", map_bg = "white", street_colour = "white")
+p2 <- return_poche_map(be_bbox, "Ballard Estate, Fort", bldg_colour = "black", map_bg = "white", street_colour = "white")
+p3 <- return_poche_map(nyc_bbox, "Upper West Side, NYC", bldg_colour = "black", map_bg = "white", street_colour = "white")
+p4 <- return_poche_map(ldn_bbox, "Islington, London", bldg_colour = "black", map_bg = "white", street_colour = "white")
+```
+
+
+```{r}
+#| out.width: 100%
+# Compose plot
+((p1 + theme(plot.margin = unit(c(0,10,10,0), "pt"))) +
+  (p2  + theme(plot.margin = unit(c(0,10,10,0), "pt")))) / 
+  ((p3  + theme(plot.margin = unit(c(0,10,0,0), "pt"))) + 
+   (p4))
+```
+
+While the more conventional `figure-ground` diagram ignores the street network [@morphocodeFiguregroundDiagram2019], the combination of streets and buildings offers more insights - especially when the street widths in the diagram qualitatively reflect their importance [@boeingUrbanFormFigureGround2017]. For example, primary and trunk roads are given the largest widths followed by medium widths secondary and tertiary roads and light lines for all others. This allows for qualitative interpretations of various aspects of urban mobility like walkability and connectivity overlaid with building densities of residence and / or commerce.
+
+```{r}
+#| output: false
+
+# return individual plot objects
+p1 <- return_poche_map(pc_bbox, "Parsi Colony, Dadar", bldg_colour = "black", map_bg = "white")
+p2 <- return_poche_map(be_bbox, "Ballard Estate, Fort", bldg_colour = "black", map_bg = "white")
+p3 <- return_poche_map(nyc_bbox, "Upper West Side, NYC", bldg_colour = "black", map_bg = "white")
+p4 <- return_poche_map(ldn_bbox, "Islington, London", bldg_colour = "black", map_bg = "white")
+```
+
+
+```{r}
+#| out.width: 100%
+# Compose plot
+((p1 + theme(plot.margin = unit(c(0,10,10,0), "pt"))) +
+  (p2  + theme(plot.margin = unit(c(0,10,10,0), "pt")))) / 
+  ((p3  + theme(plot.margin = unit(c(0,10,0,0), "pt"))) + 
+   (p4))
+```
+Once again, NYC is stark contrast to the examples of British urbanism where secondary or tertiary roads surround all blocks. In Islington and Dadar Parsi Colony, two residential neighbourhoods of British design, building blocks are mostly connected by residential roads with arterial connections at least 100m - 200m away. There is much to analyse and understand from these diagrams and I hope to return to them many times over as I fumble my way through the vast literature of urban morphology. 
+
+### References
+
+::: {#refs}
+:::
+
+### Credits
+
+- Post photo is a figure-ground map of Giambattista Nolli’s 1748 “Pianta Grande di Roma” copied from https://morphocode.com/figure-ground-diagram/. 
