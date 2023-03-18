@@ -1,0 +1,96 @@
+---
+title: "A first look at building heights data"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2023-03-19"
+categories: [data science, urban, london, buildings]
+image: "image.jpg"
+bibliography: references.bib
+csl: ieee.csl
+---
+
+```{r}
+#| include: false
+library(raster)
+library(osmdata)
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(patchwork)
+library(stars)
+library(latex2exp)
+```
+
+## 500m grids
+```{r}
+#| include: false
+# get 500m average building heights data
+bldg_height_500m <- read_stars("~/Documents/building-heights/global-built-up-heights.tif")
+
+london_poly <- getbb("london united kingdom", format_out = "polygon")[[1]] %>% 
+  as.data.frame() %>%
+  st_as_sf(coords = c("V1", "V2")) %>% 
+  # Combine so that whole dataframe becomes one polygon
+  st_combine() %>% 
+  st_cast("POLYGON") %>% 
+  st_set_crs(4326) 
+
+```
+
+
+```{r}
+#| out.width="100%"
+london_bldg_height_500m <- st_crop(bldg_height_500m, london_poly) %>% st_as_stars()
+
+ggplot() + 
+  geom_stars(data = london_bldg_height_500m * 0.01) + 
+  geom_sf(data = london_poly, colour = "red",  fill = NA) + 
+  scale_fill_viridis_c(na.value = "transparent") +
+  # scale_x_continuous() + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "",
+       title = "London (500m grid)") + 
+  guides(fill = guide_legend("Building heights (m)")) 
+
+```
+
+## 90m grids
+
+```{r}
+#| include: false
+# get 90m average building heights data
+bldg_height_90m <- read_stars("~/Documents/building-heights/WSF3D_V02_BuildingHeight.tif")
+
+```
+
+```{r}
+#| out.width="100%"
+
+london_bldg_height_90m <- st_crop(bldg_height_90m, london_poly) %>% st_as_stars()
+
+ggplot() + 
+  geom_stars(data = london_bldg_height_90m) + 
+  geom_sf(data = london_poly, colour = "red",  fill = NA) + 
+  scale_fill_viridis_c(na.value = "transparent") +
+  # scale_x_continuous() + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "", 
+       title = "London (90m grid)") + 
+  guides(fill = guide_legend("Building heights (m)")) 
+
+
+```
+
+### References
+
+::: {#refs}
+:::
+
+### Credits
+
+Post photo by <a href="https://unsplash.com/@snapsbyfox?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Roman Fox</a> on <a href="https://unsplash.com/photos/cZGKIJdlYDU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
