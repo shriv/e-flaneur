@@ -11,23 +11,39 @@ bibliography: references.bib
 csl: ieee.csl
 ---
 
+Building heights are an important indicator for various urban analyses - from population / m$^{2}$ to Floor Area Ratio (FAR). However, getting this data is not easy. Building polygons in OpenStreetMap usually don't have this attribute unless it was part of a bulk upload and only some cities provide open data of building footprints with heights [@NYCBuildingHeights]. With time and skill, a digital elevation model from LIDAR data (or other sources of data) can be used to derive building heights. 
+
+None of these options are useful for a relative beginner in remote sensing interested in exploring urbanism of the Global South. Enter derived open data from academic papers. Here I look two datasets - average building heights in a 500m grid from [@zhouSatelliteMappingUrban2022] and 90m grid from [@eschWorldSettlementFootprint2022]. Both datasets are cropped to the London polygon for further analysis. 
+
 ```{r}
 #| include: false
+#| output: false
 library(raster)
 library(osmdata)
 library(sf)
 library(dplyr)
+library(stringr)
 library(ggplot2)
 library(patchwork)
 library(stars)
 library(latex2exp)
+
+lsoa <- st_read("~/Documents/london-boundaries/statistical-gis-boundaries-london/ESRI/LSOA_2011_London_gen_MHW.shp") %>% 
+  st_transform(crs = 4326)
 ```
 
-## 500m grids
+The supplementary information in [@zhouSatelliteMappingUrban2022] provides a Figshare link to download a global dataset of average building heights in a 500 m$^{2}$ grid area. The centre of London and the Canary Wharf areas show heights of 20m - which are considerably lower than the heights of actual buildings (100 - 300m), While this dataset is not useful for analysis pertaining to buildings, it is useful for comparing built-up _volumes_ derived from the average `built-up` heights as done in the paper. The data could also be useful for demarcating areas with higher proportions of tall buildings vs. medium height vs. single family homes. 
+
+A recent paper by Esch et al. [@eschWorldSettlementFootprint2022] described a methdology for deriving building heights for the established World Settlement Footprints data suite [@marconciniUnderstandingCurrentTrends2021]. The higher granularity of this dataset, 90 m$^{2}$, brings grid average heights much closer to real world building heights. However, the visual patterns of urbanisation at a city scale are lost.  
+
+
 ```{r}
 #| include: false
 # get 500m average building heights data
 bldg_height_500m <- read_stars("~/Documents/building-heights/global-built-up-heights.tif")
+
+# get 90m average building heights data
+bldg_height_90m <- read_stars("~/Documents/building-heights/WSF3D_V02_BuildingHeight.tif")
 
 london_poly <- getbb("london united kingdom", format_out = "polygon")[[1]] %>% 
   as.data.frame() %>%
@@ -43,35 +59,9 @@ london_poly <- getbb("london united kingdom", format_out = "polygon")[[1]] %>%
 ```{r}
 #| out.width="100%"
 london_bldg_height_500m <- st_crop(bldg_height_500m, london_poly) %>% st_as_stars()
-
-ggplot() + 
-  geom_stars(data = london_bldg_height_500m * 0.01) + 
-  geom_sf(data = london_poly, colour = "red",  fill = NA) + 
-  scale_fill_viridis_c(na.value = "transparent") +
-  # scale_x_continuous() + 
-  theme_minimal() + 
-  labs(x = "",
-       y = "",
-       title = "London (500m grid)") + 
-  guides(fill = guide_legend("Building heights (m)")) 
-
-```
-
-## 90m grids
-
-```{r}
-#| include: false
-# get 90m average building heights data
-bldg_height_90m <- read_stars("~/Documents/building-heights/WSF3D_V02_BuildingHeight.tif")
-
-```
-
-```{r}
-#| out.width="100%"
-
 london_bldg_height_90m <- st_crop(bldg_height_90m, london_poly) %>% st_as_stars()
 
-ggplot() + 
+p2 <- ggplot() + 
   geom_stars(data = london_bldg_height_90m) + 
   geom_sf(data = london_poly, colour = "red",  fill = NA) + 
   scale_fill_viridis_c(na.value = "transparent") +
@@ -82,8 +72,71 @@ ggplot() +
        title = "London (90m grid)") + 
   guides(fill = guide_legend("Building heights (m)")) 
 
+p1 <- ggplot() + 
+  geom_stars(data = london_bldg_height_500m * 0.01) + 
+  geom_sf(data = london_poly, colour = "red",  fill = NA) + 
+  scale_fill_viridis_c(na.value = "transparent") +
+  # scale_x_continuous() + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "",
+       title = "London (500m grid)") + 
+  guides(fill = guide_legend("Built-up heights (m)")) 
+
+
+((p1 /p2)) + 
+  plot_layout(guides = 'collect')  
+```
+
+
+
+```{r}
+#| out.width="100%"
+
 
 ```
+
+We need to zoom in to borough or MSOA (Middle Super Output Area) to better visualise areas with tall buildings. In City of London, we easily see higher granularity of the cluster around Liverpool Street that contains the Shard, the tallest building in London. Similarly, the zoom over the Canary Wharf business cluster shows the spread of areas with many tall buildings over 100m (list [here](https://en.wikipedia.org/wiki/Canary_Wharf)). The value of the grid cell is pretty close to the building heights though not exact as it is still an average and likely that the grid cell doesn't always overlap fully with the building footprint of a tall building. 
+
+```{r}
+#| out.width="100%"
+
+col <- lsoa %>% 
+  filter(str_detect(LSOA11NM, "City of London"))
+th <- lsoa %>% 
+  filter(str_detect(LSOA11NM, "Tower Hamlets 033"))
+
+
+city_london_bldg_height_90m <- st_crop(bldg_height_90m, col) %>% st_as_stars()
+th_london_bldg_height_90m <- st_crop(bldg_height_90m, th) %>% st_as_stars()
+
+p1<- ggplot() + 
+  geom_stars(data = city_london_bldg_height_90m) + 
+  geom_sf(data = col, colour = "red",  fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 250), na.value = "transparent") +
+  # scale_x_continuous() + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "", 
+       title = "City of London")+ 
+  guides(fill = guide_legend("Building heights (m)"))
+
+p2<- ggplot() + 
+  geom_stars(data = th_london_bldg_height_90m) + 
+  geom_sf(data = th, colour = "red",  fill = NA) + 
+  scale_fill_viridis_c(limits = c(0, 250), na.value = "transparent") +
+  # scale_x_continuous() + 
+  theme_minimal() + 
+  labs(x = "",
+       y = "", 
+       title = "Canary Wharf") + 
+  theme(legend.position = "None") 
+
+((p1 / p2)) + 
+  plot_layout(guides = 'collect')  
+```
+
+
 
 ### References
 

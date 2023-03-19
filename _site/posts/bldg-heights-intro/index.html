@@ -80,6 +80,7 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -173,16 +174,19 @@ div.csl-indent {
 
 </header>
 
-<section id="m-grids" class="level2">
-<h2 class="anchored" data-anchor-id="m-grids">500m grids</h2>
+<p>Building heights are an important indicator for various urban analyses - from population / m<span class="math inline">\(^{2}\)</span> to Floor Area Ratio (FAR). However, getting this data is not easy. Building polygons in OpenStreetMap usually don’t have this attribute unless it was part of a bulk upload and only some cities provide open data of building footprints with heights <span class="citation" data-cites="NYCBuildingHeights"><a href="#ref-NYCBuildingHeights" role="doc-biblioref">[1]</a></span>. With time and skill, a digital elevation model from LIDAR data (or other sources of data) can be used to derive building heights.</p>
+<p>None of these options are useful for a relative beginner in remote sensing interested in exploring urbanism of the Global South. Enter derived open data from academic papers. Here I look two datasets - average building heights in a 500m grid from <span class="citation" data-cites="zhouSatelliteMappingUrban2022"><a href="#ref-zhouSatelliteMappingUrban2022" role="doc-biblioref">[2]</a></span> and 90m grid from <span class="citation" data-cites="eschWorldSettlementFootprint2022"><a href="#ref-eschWorldSettlementFootprint2022" role="doc-biblioref">[3]</a></span>. Both datasets are cropped to the London polygon for further analysis.</p>
+<p>The supplementary information in <span class="citation" data-cites="zhouSatelliteMappingUrban2022"><a href="#ref-zhouSatelliteMappingUrban2022" role="doc-biblioref">[2]</a></span> provides a Figshare link to download a global dataset of average building heights in a 500 m<span class="math inline">\(^{2}\)</span> grid area. The centre of London and the Canary Wharf areas show heights of 20m - which are considerably lower than the heights of actual buildings (100 - 300m), While this dataset is not useful for analysis pertaining to buildings, it is useful for comparing built-up <em>volumes</em> derived from the average <code>built-up</code> heights as done in the paper. The data could also be useful for demarcating areas with higher proportions of tall buildings vs.&nbsp;medium height vs.&nbsp;single family homes.</p>
+<p>A recent paper by Esch et al. <span class="citation" data-cites="eschWorldSettlementFootprint2022"><a href="#ref-eschWorldSettlementFootprint2022" role="doc-biblioref">[3]</a></span> described a methdology for deriving building heights for the established World Settlement Footprints data suite <span class="citation" data-cites="marconciniUnderstandingCurrentTrends2021"><a href="#ref-marconciniUnderstandingCurrentTrends2021" role="doc-biblioref">[4]</a></span>. The higher granularity of this dataset, 90 m<span class="math inline">\(^{2}\)</span>, brings grid average heights much closer to real world building heights. However, the visual patterns of urbanisation at a city scale are lost.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
-</section>
-<section id="m-grids-1" class="level2">
-<h2 class="anchored" data-anchor-id="m-grids-1">90m grids</h2>
+<div class="cell">
+
+</div>
+<p>We need to zoom in to borough or MSOA (Middle Super Output Area) to better visualise areas with tall buildings. In City of London, we easily see higher granularity of the cluster around Liverpool Street that contains the Shard, the tallest building in London. Similarly, the zoom over the Canary Wharf business cluster shows the spread of areas with many tall buildings over 100m (list <a href="https://en.wikipedia.org/wiki/Canary_Wharf">here</a>). The value of the grid cell is pretty close to the building heights though not exact as it is still an average and likely that the grid cell doesn’t always overlap fully with the building footprint of a tall building.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" style="width:100.0%"></p>
@@ -190,8 +194,19 @@ div.csl-indent {
 </div>
 <section id="references" class="level3">
 <h3 class="anchored" data-anchor-id="references">References</h3>
-<div id="refs" role="doc-bibliography">
-
+<div id="refs" class="references csl-bib-body" role="doc-bibliography">
+<div id="ref-NYCBuildingHeights" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“<span>NYC Building Heights</span>.”</span> <a href="https://data.cityofnewyork.us/Housing-Development/Building-Heights/pffy-49n3">https://data.cityofnewyork.us/Housing-Development/Building-Heights/pffy-49n3</a> (accessed Mar. 18, 2023).</div>
+</div>
+<div id="ref-zhouSatelliteMappingUrban2022" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">Y. Zhou <em>et al.</em>, <span>“Satellite mapping of urban built-up heights reveals extreme infrastructure gaps and inequalities in the <span>Global South</span>,”</span> <em>Proc. Natl. Acad. Sci. U.S.A.</em>, vol. 119, no. 46, p. e2214813119, Nov. 2022, doi: <a href="https://doi.org/10.1073/pnas.2214813119">10.1073/pnas.2214813119</a>.</div>
+</div>
+<div id="ref-eschWorldSettlementFootprint2022" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">T. Esch <em>et al.</em>, <span>“World <span>Settlement Footprint 3D</span> - <span>A</span> first three-dimensional survey of the global building stock,”</span> <em>Remote Sensing of Environment</em>, vol. 270, p. 112877, Mar. 2022, doi: <a href="https://doi.org/10.1016/j.rse.2021.112877">10.1016/j.rse.2021.112877</a>.</div>
+</div>
+<div id="ref-marconciniUnderstandingCurrentTrends2021" class="csl-entry" role="doc-biblioentry">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">M. Marconcini, A. Metz- Marconcini, T. Esch, and N. Gorelick, <span>“Understanding <span>Current Trends</span> in <span>Global Urbanisation</span> - <span>The World Settlement Footprint Suite</span>,”</span> <em>giforum</em>, vol. 1, pp. 33–38, 2021, doi: <a href="https://doi.org/10.1553/giscience2021_01_s33">10.1553/giscience2021_01_s33</a>.</div>
+</div>
 </div>
 </section>
 <section id="credits" class="level3">
@@ -199,7 +214,6 @@ div.csl-indent {
 <p>Post photo by <a href="https://unsplash.com/@snapsbyfox?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Roman Fox</a> on <a href="https://unsplash.com/photos/cZGKIJdlYDU?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
