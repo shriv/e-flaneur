@@ -1,0 +1,129 @@
+---
+title: "Overlaying building heights and footprints"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2023-03-19"
+categories: [data science, urban, london, buildings, raster]
+image: "image.jpg"
+bibliography: references.bib
+csl: ieee.csl
+---
+
+In the [previous post](https://shriv.github.io/e-flaneur/posts/bldg-heights-intro/), I quickly looked at two options for global building height rasters. The 90m grid from [@eschWorldSettlementFootprint2022] looked more useful option the lower granularity provided more realistic values of real-world building heights. However, finding suitable data is only the first baby step. Figuring out how to calculate derived metrics like Floor Area Ratio (FAR) or population density per built area requires multiple datasets in different formats. 
+
+For FAR we can either associate the building footprint area to a raster cell, or associate an average building height per building polygon. To better understand which option is more suitable, we first overlay the rasters for City of London (full MSOA) and a portion of the Tower Hamlets MSOA around the Canary Wharf area. 
+
+
+When preparing the data for the following maps, I learned a couple of useful tips:
+
+- Dissolving boundary polygons to the outer boundary needs `st_make_valid()` after the group by to ensure a clean polygon with no straggling lines within the dissolved polygon.  
+```{r}
+#| echo: true
+#| eval: false
+boundaries_sf %>% 
+  group_by(`higher boundary name`) %>% 
+  st_make_valid() %>%
+  st_union() %>% 
+  st_as_sf()
+```
+- Use `st_intersection(poly1, poly2)` to cleanly crop `poly1` to the boundary of `poly2`. 
+
+In all my previous posts, I've stuck with the graphics workhorse, `ggplot2`. However, in this post I transitioned to the `tmap` package [@nowosadElegantInformativeMaps] and I highly recommend it. I am a relatively new user so I still don't know whether it's as comprehensive as `ggplot2` but so far many of the map conversions have come out considerably better (and with simpler code) with `tmap`. Furthermore, `tmap` has two modes - where the same map can be viewed as static (`tmap_mode("plot")`) or interactive (`tmap_mode("view")`). 
+
+Now coming back to the original question of FAR calculation options. The maps show that building polygons are of comparable size or much smaller than the raster cells and both datasets are quite mis-aligned. The building-centric option could be more useful - especially if we want to also associate a population to an area from a raster dataset like WorldPop [@SpatialDistributionPopulation]. It would be easier to assign a proportion of population to a building than trying to align two raster grids. 
+
+```{r}
+#| include: false
+#| output: false
+library(raster)
+library(osmdata)
+library(sf)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(tmap)
+library(patchwork)
+library(stars)
+library(latex2exp)
+
+lsoa <- st_read("~/Documents/london-boundaries/statistical-gis-boundaries-london/ESRI/LSOA_2011_London_gen_MHW.shp") %>% 
+  st_transform(crs = 4326)
+```
+
+
+```{r}
+#| include: false
+# get 90m average building heights data
+bldg_height_90m <- read_stars("~/Documents/building-heights/WSF3D_V02_BuildingHeight.tif")
+
+# Get polygons of specific LSOA
+col <- lsoa %>% 
+  filter(str_detect(LSOA11NM, "City of London")) %>%
+group_by(LAD11NM) %>%  
+  st_make_valid() %>% 
+  st_union() %>% 
+  st_as_sf()
+
+th <- lsoa %>% 
+  filter(str_detect(LSOA11NM, "Tower Hamlets 033")) %>%
+group_by(LAD11NM) %>%  
+  st_make_valid() %>% 
+  st_union() %>% 
+  st_as_sf()
+
+# Get building polygons
+th_buildings <- opq(bbox = c(-0.044085,51.477857,0.020632,51.517718)) %>%
+  add_osm_feature(key = "building") %>%
+  osmdata_sf()
+col_buildings <- opq(bbox = c(-0.127195,51.495906,-0.059522,51.524510)) %>%
+  add_osm_feature(key = "building") %>%
+  osmdata_sf()
+
+#get rid of the excess data again. This time I will keep the polygon sf object.
+th_buildings_crop <- st_intersection(th_buildings$osm_polygons, th)
+col_buildings_crop <- st_intersection(col_buildings$osm_polygons, col)
+
+city_london_bldg_height_90m <- st_crop(bldg_height_90m, col) %>% st_as_stars()
+th_london_bldg_height_90m <- st_crop(bldg_height_90m, th) %>% st_as_stars()
+
+```
+
+
+```{r}
+#| out.width="100%"
+p1 <- tm_shape(th) + 
+  tm_polygons() +
+tm_shape(th_buildings_crop) + 
+  tm_polygons() + 
+tm_shape(th_london_bldg_height_90m) + 
+tm_raster(alpha = 0.5, title = "Building heights 90m grid (m)") + 
+tm_layout(legend.outside = FALSE) +   
+tm_scale_bar(position = c("left", "bottom"), width = 0.15)
+
+p2 <- tm_shape(col) + 
+  tm_polygons() +
+tm_shape(col_buildings_crop) + 
+  tm_polygons() + 
+tm_shape(city_london_bldg_height_90m) + 
+tm_raster(alpha = 0.5, title = "Building heights 90m grid (m)") + 
+tm_layout(legend.only  = FALSE) +   
+tm_scale_bar(position = c("left", "bottom"), width = 0.15)
+
+
+tmap_arrange(p1, p2, ncol = 1)
+```
+
+
+
+### References
+
+::: {#refs}
+:::
+
+### Credits
+
+Post photo by <a href="https://unsplash.com/@dzheky?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Evgeny Klimenchenko</a> on <a href="https://unsplash.com/photos/O-J600qm45U?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
+  
