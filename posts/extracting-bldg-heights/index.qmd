@@ -1,0 +1,287 @@
+---
+title: "Raster heights to building heights"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2023-04-01"
+categories: [data science, urban, london, new york city, buildings, raster]
+image: "image.jpg"
+bibliography: references.bib
+csl: ieee.csl
+---
+
+In the [previous post](https://shriv.github.io/e-flaneur/posts/bldg-heights-footprints/), we discussed the utility of retrieving a summarised height data from the overlaid raster cells of a particular building polygon. In this post, I look at a quick method do this using the package `exactextractr` [@exactextractr]. While typically used in the calculation of `zonal statistics`, it can also be applied to deriving features from raster layers for building polygons. 
+
+Since I use `stars` to read and process raster data, I have an additional step before running the extraction function -  converting the `stars` object to a `raster` with a `st_as_raster()` convenience function [@262588213843476_convert].  
+
+```{r}
+#| echo: true
+#| eval: false
+st_as_raster <- function(rstars){
+  rext <- st_bbox(rstars)
+  raster(t(rstars[[1]]), xmn = rext[1], xmx = rext[3],
+         ymn = rext[2], ymx=rext[4],
+         crs = st_crs(rstars)$proj4string)
+}
+```
+
+```{r}
+#| include: false
+#| output: false
+library(raster)
+library(osmdata)
+library(sf)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(tmap)
+library(cowplot)
+library(stars)
+library(latex2exp)
+library(exactextractr)
+library(kableExtra)
+
+st_as_raster <- function(rstars){
+  rext <- st_bbox(rstars)
+  raster(t(rstars[[1]]), xmn = rext[1], xmx = rext[3],
+         ymn = rext[2], ymx=rext[4],
+         crs = st_crs(rstars)$proj4string)
+}
+
+lsoa <- st_read("~/Documents/london-boundaries/statistical-gis-boundaries-london/ESRI/LSOA_2011_London_gen_MHW.shp") %>% 
+  st_transform(crs = 4326)
+```
+
+The `exact_extract()` function assigns mean, median, minimum etc. values from the raster layer to the polygons. The full set of summary operations can be seen [here](https://isciences.gitlab.io/exactextractr/#summary-operations). I've opted for `mean` and `median` as summary statistics. At first glance it appears that areas with tall buildings are being capture well e.g. around Liverpool Street station (e.g. the Shard) on the eastern part of City of London and the tall buildings in Canary Wharf. 
+
+```{r}
+#| include: false
+# get 90m average building heights data
+bldg_height_90m <- read_stars("~/Documents/building-heights/WSF3D_V02_BuildingHeight.tif")
+
+# Get polygons of specific LSOA
+col <- lsoa %>% 
+  filter(str_detect(LSOA11NM, "City of London")) %>%
+group_by(LAD11NM) %>%  
+  st_make_valid() %>% 
+  st_union() %>% 
+  st_as_sf()
+
+th <- lsoa %>% 
+  filter(str_detect(LSOA11NM, "Tower Hamlets 033")) %>%
+group_by(LAD11NM) %>%  
+  st_make_valid() %>% 
+  st_union() %>% 
+  st_as_sf()
+
+# Get building polygons
+th_buildings <- opq(bbox = c(-0.044085,51.477857,0.020632,51.517718)) %>%
+  add_osm_feature(key = "building") %>%
+  osmdata_sf()
+col_buildings <- opq(bbox = c(-0.127195,51.495906,-0.059522,51.524510)) %>%
+  add_osm_feature(key = "building") %>%
+  osmdata_sf()
+
+#get rid of the excess data again. This time I will keep the polygon sf object.
+th_buildings_crop <- st_intersection(th_buildings$osm_polygons, th)
+col_buildings_crop <- st_intersection(col_buildings$osm_polygons, col)
+
+city_london_bldg_height_90m <- st_crop(bldg_height_90m, col) %>% st_as_stars()
+th_london_bldg_height_90m <- st_crop(bldg_height_90m, th) %>% st_as_stars()
+
+```
+
+```{r}
+#| include: false
+# Add mean height from raster to building polygon
+
+col_buildings_crop$mean_height <- exact_extract(
+  st_as_raster(city_london_bldg_height_90m), col_buildings_crop, 'mean')
+th_buildings_crop$mean_height <- exact_extract(
+  st_as_raster(th_london_bldg_height_90m), th_buildings_crop, 'mean')
+
+# Get extras for tower hamlets
+th_buildings_crop$median_height <- exact_extract(
+  st_as_raster(th_london_bldg_height_90m), th_buildings_crop, 'median')
+th_buildings_crop$majority_height <- exact_extract(
+  st_as_raster(th_london_bldg_height_90m), th_buildings_crop, 'majority')
+
+th_buildings_crop$frac <- exact_extract(
+  st_as_raster(th_london_bldg_height_90m), th_buildings_crop, 'frac')
+
+```
+
+ 
+```{r}
+#| out.width: "100%"
+p1 <- tm_shape(th) + 
+  tm_polygons() +
+tm_shape(th_buildings_crop) + 
+  tm_polygons(col = "mean_height", title = "Mean height (m)") +
+tm_layout(legend.outside = FALSE) +   
+tm_scale_bar(position = c("left", "bottom"), width = 0.15)
+
+p2 <- tm_shape(col) + 
+  tm_polygons() +
+tm_shape(col_buildings_crop) + 
+  tm_polygons(col = "mean_height", title = "Mean height (m)") + 
+tm_layout(legend.only  = FALSE) +   
+tm_scale_bar(position = c("left", "bottom"), width = 0.15)
+
+tmap_arrange(p1, p2, ncol = 1)
+
+```
+However, validation tells another story. Since only a small portion of buildings have height values in OpenStreetMap, I've used a conversion factor of 3 for deriving heights from building levels to increase the sample size for validation. The sample size is still small but considerably larger with building heights alone. The differences between raster-summarised heights and actual heights are very high in the Canary Wharf cluster - and there are good reasons for this. 
+
+- The grid is 90m but building footprints are typically 20m - 40m. 
+- Very tall buildings are often surrounded by much smaller buildings or parks making the polygon cell mean and median much lower.
+- Depending on the coverage of the raster cell, the height of the very tall building can be associated with a significantly smaller neighbour and vice versa. 
+
+```{r}
+#| output: false
+#| warning: false
+df_validate <- th_buildings_crop %>% 
+  mutate(height = as.numeric(height)) %>% 
+  mutate(
+    der_height = case_when(
+      is.na(height) & !is.na(building.levels) ~ as.numeric(building.levels) * 3,
+      TRUE ~ height
+      )
+    ) %>%
+  filter(!is.na(der_height)) %>% 
+  mutate(mean_height_difference = mean_height - der_height, 
+         median_height_difference = mean_height - der_height)
+
+```
+
+```{r}
+#| out.width: "100%"
+#| warning: false
+#| message: false
+
+p1 <- tm_shape(th) + 
+  tm_polygons() +
+tm_shape(df_validate) + 
+  tm_polygons(col = "mean_height_difference", 
+              title = "Difference from \nmean height (m)") +
+tm_layout(legend.outside = FALSE) +   
+tm_scale_bar(position = c("left", "bottom"),  width = 0.15)
+
+p2 <- tm_shape(th) + 
+  tm_polygons() +
+tm_shape(df_validate) + 
+  tm_polygons(col = "median_height_difference", title = "Difference from \nmedian height (m)") +
+tm_layout(legend.outside = FALSE) +   
+tm_scale_bar(position = c("left", "bottom"),  width = 0.15)
+
+tmap_arrange(p1, p2, ncol = 1)
+
+```
+
+For a robust conclusion of the utility of 90m raster heights for building level features, validation needs to be done across a larger area using more buildings with height values. I've picked the whole of the Upper West Side in New York City since 93% of building polygons in the area have non-null heights in OpenStreetMap. Note, I'm assuming OpenStreetMap heights are ground truth (which may not be the case?).
+
+The distribution of absolute difference in mean building height from the raster data and the actual heights in OpenStreetMap looks symmetric but strongly biased to summarised raster heights being larger. 
+
+
+```{r}
+#| warning: false
+#| output: false
+# Get building polygons
+uws_poly <- opq(getbb("upper west side new york")) %>%
+  add_osm_feature(key = 'admin_level', 
+                  value = "10") %>%
+  osmdata_sf() %>%
+  with(osm_multipolygons) %>% 
+  filter(name == "Manhattan Community Board 7") %>% 
+  st_cast("POLYGON") %>% 
+  st_make_valid()
+
+uws_buildings <- opq(getbb("upper west side new york")) %>%
+  add_osm_feature(key = "building") %>%
+  osmdata_sf() %>% 
+  with(osm_polygons)
+
+uws_buildings_crop <- st_intersection(uws_buildings, uws_poly)
+
+uws_bldg_height_90m <- st_crop(bldg_height_90m, uws_poly) %>% st_as_stars()
+
+uws_buildings_crop$mean_height <- exact_extract(
+   st_as_raster(uws_bldg_height_90m), uws_buildings_crop, 'mean')
+
+df_validate_uws <- uws_buildings_crop %>% 
+  mutate(height = as.numeric(height)) %>% 
+  mutate(
+    der_height = case_when(
+      is.na(height) & !is.na(building.levels) ~ as.numeric(building.levels) * 3,
+      TRUE ~ height
+      )
+    ) %>%
+  filter(!is.na(der_height)) %>% 
+  mutate(mean_height_difference = mean_height - der_height)
+```
+
+```{r}
+#| message: false
+#| warning: false
+#| output: false
+
+p1 <- tm_shape(df_validate_uws) + 
+  tm_polygons(col = "mean_height_difference", 
+              title = "Difference \nfrom mean \nheight (m)") +
+tm_layout(legend.outside = FALSE, 
+          legend.position = c("left", "top")) +   
+tm_scale_bar(position = c("right", "bottom"))
+
+p1_grob <- tmap_grob(p1)
+```
+
+```{r}
+#| out.width: "100%"
+#| message: false
+#| warning: false
+df_validate_uws_no_spat <- df_validate_uws %>% st_set_geometry(NULL)
+p2 <- ggplot(df_validate_uws_no_spat) + 
+  geom_histogram(aes(mean_height_difference)) + 
+  theme_minimal() + 
+  labs(x = "Difference from mean height (m)",
+       y = "Number of buildings")
+
+plot_grid(p2, p1_grob)
+
+```
+For a more succinct summary, I've split the OpenStreetMap building height into quantiles with a mean height per quantile. The table shows raster summaries from a 90m grid resolution over-estimate for every quantile - with buildings in the 25-75 percentile bands being over-estimated by almost 100%. 
+
+
+```{r}
+
+df_validate_uws_no_spat %>% 
+  arrange(der_height) %>%
+  mutate(percentile = ntile(der_height, 4)) %>% 
+  group_by(percentile) %>% 
+  summarise(
+    building_heights = mean(der_height, na.rm = TRUE),
+    value = mean(mean_height_difference, na.rm = TRUE)) %>%
+  mutate(percentile = paste(seq(25, 100, 25), "%", sep = ""),
+         value = round(value, 1)) %>% 
+  relocate(percentile) %>% 
+  rename(`Mean height difference (m)` = value, 
+         `Mean height in percentile (m)` = building_heights,
+         Percentile = percentile) %>%
+  kbl() %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+```
+
+
+In summary, the 90m grid is not a viable data source for accurate building level information. Since the availability of building height information is very poor for the developing world, satellite-derived values are the only way forward. My plan is to look at lower granularity data - starting with 10m grid data for Germany [@frantz_building_2020] that I will validate with EUBUCCO [@milojevic-dupont_nikola_eubucco_2022]. If this lower granularity works well, I have a big project coming up - applying the approach of Franz et al. [@frantz_national-scale_2021] to satellite data from Mumbai!
+
+
+### References
+
+::: {#refs}
+:::
+
+### Credits
+
+Post photo by <a href="https://unsplash.com/ja/@heysupersimi?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Simone Hutsch</a> on <a href="https://unsplash.com/photos/_wpce-AsLxk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
