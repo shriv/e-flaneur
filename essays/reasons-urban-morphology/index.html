@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Shrividya Ravi">
+<meta name="dcterms.date" content="2023-04-15">
 
-<title>e-flaneur - Essays</title>
+<title>e-flaneur - Reasons to study urban morphology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +22,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -60,50 +79,19 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">e-flaneur</span>
     </a>
   </div>
@@ -114,15 +102,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./essays.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../essays.html" rel="" target="">
  <span class="menu-text">Essays</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -145,83 +133,88 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Essays</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data science">data science <span class="quarto-category-count">(1)</span></div><div class="category" data-category="urban morphology">urban morphology <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Reasons to study urban morphology</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data science</div>
+    <div class="quarto-category">urban morphology</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shrividya Ravi </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 15, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>The design and structure of urban areas have a significant impact on our daily lives and overall well-being. Urban form, which includes the layout and connectivity of space, plays a crucial role in determining how people move, interact, and transact. Spatial organisation governs 60 - 80% of movement patterns <span class="citation" data-cites="stonorSpatialLayoutEfficiency"><a href="#ref-stonorSpatialLayoutEfficiency" role="doc-biblioref">[1]</a></span>, making it vital for economic prosperity and individual well-being. However, urban form also generates negative outcomes - with crimes like burglaries in poorly connected areas and pickpocketing thriving in highly connected areas <span class="citation" data-cites="stonorSpatialLayoutEfficiency"><a href="#ref-stonorSpatialLayoutEfficiency" role="doc-biblioref">[1]</a></span>.</p>
+<p>It is essential for policymakers to understand the spatial characteristics of urban areas and how they pertain to safety, efficiency, and utility. Without this understanding, it is difficult to bring about meaningful change through state intervention or market forces. Since urban transformation builds upon existing layers, what exists is an important determinant of what more it could be.</p>
+<blockquote class="blockquote">
+<p>.. waves of change rarely start from scratch. More commonly, they are added in a layered way. Over time, each phase, each change blends in with the rest of the urban fabric to give a city its uniquely distinct pattern that defines it almost as a strand of DNA.</p>
+</blockquote>
+<p>– Excerpt from Arribas-bel et al. <span class="citation" data-cites="arribas-belSpatialSignaturesUnderstanding2022"><a href="#ref-arribas-belSpatialSignaturesUnderstanding2022" role="doc-biblioref">[2]</a></span></p>
+<p>The challenges of inefficient or unsafe urban layout are especially poignant for developing countries. Many rural denizens have migrated from their ancestral homes to crowded cities and towns over the last few decades. The migration will continue with a projected increase to 68% urban population by 2050 (relative to 55% in 2018) - with 90% of the increase taking place in Asia and Africa <span class="citation" data-cites="nations68WorldPopulation"><a href="#ref-nations68WorldPopulation" role="doc-biblioref">[3]</a></span>.</p>
+<p>My interests lie in the unique challenges facing the Indian subcontinent. The inefficiency in spatial layout propagates large disparities in quality of life for the urban poor - many of whom are rural migrants. Indian cities are mainly private open space with draconian regulations governing development <span class="citation" data-cites="AlainBertaudBimal"><a href="#ref-AlainBertaudBimal" role="doc-biblioref">[4]</a></span>. Even though older examples of urban design in places like Mumbai have more public land, they still have too much land in the private domain that cannot be built upon <span class="citation" data-cites="AlainBertaudBimal"><a href="#ref-AlainBertaudBimal" role="doc-biblioref">[4]</a></span>.</p>
+<p>The present-day issues of urban form require study, consideration and deliberation before re-design and mitigation. Tensions abound in handling slums, creating accessible public amenities as well as the dilemma between conserving historical precincts vs.&nbsp;re-development.</p>
+<p>Throwing many people towards these challenges is the only way we can build a better place for all. We need policymakers, scientists and citizens working collaboratively and openly while making the fruits of their efforts open for comment and criticism.</p>
+<blockquote class="blockquote">
+<p>Two heads are better than one, not because either is infallible, but because they are unlikely to go wrong in the same direction.</p>
+</blockquote>
+<p>– Quote from C.S Lewis</p>
+<p>I’m hopeful that this blog, through its quantitative explorations of cities with open data and open source tools, is one such drip in the ocean of work yet to do. Even if it is not useful to anyone, these efforts will at least make me a more capable citizen with the requisite skills and understanding to work in urban development.</p>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-stonorSpatialLayoutEfficiency" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">T. Stonor, <span>“Spatial <span>Layout Efficiency</span> with <span>Tim Stonor</span> of <span>Space Syntax</span> - <span>YouTube</span>.”</span> <a href="https://www.youtube.com/watch?v=_MBZhNAaZL4">https://www.youtube.com/watch?v=_MBZhNAaZL4</a> (accessed Mar. 19, 2022).</div>
+</div>
+<div id="ref-arribas-belSpatialSignaturesUnderstanding2022" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">D. Arribas-Bel and M. Fleischmann, <span>“Spatial <span>Signatures</span> - <span>Understanding</span> (urban) spaces through form and function,”</span> <em>Habitat International</em>, vol. 128, p. 102641, Oct. 2022, doi: <a href="https://doi.org/10.1016/j.habitatint.2022.102641">10.1016/j.habitatint.2022.102641</a>.</div>
+</div>
+<div id="ref-nations68WorldPopulation" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline">U. Nations, <span>“68% of the world population projected to live in urban areas by 2050, says <span>UN</span>.”</span> <a href="https://www.un.org/en/desa/68-world-population-projected-live-urban-areas-2050-says-un">https://www.un.org/en/desa/68-world-population-projected-live-urban-areas-2050-says-un</a> (accessed Apr. 14, 2023).</div>
+</div>
+<div id="ref-AlainBertaudBimal" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline"><span>“Alain <span>Bertaud</span>, <span>Bimal Patel</span>, <span>Vidyadhar Phatak</span> on <span>Improving Indian Urban Planning</span> - <span>YouTube</span>.”</span> <a href="https://www.youtube.com/watch?v=A0_qAk_obLE">https://www.youtube.com/watch?v=A0_qAk_obLE</a> (accessed Aug. 06, 2022).</div>
+</div>
+</div>
+</section>
+<section id="credits" class="level3">
+<h3 class="anchored" data-anchor-id="credits">Credits</h3>
+<ul>
+<li>Post photo from <a href="https://unsplash.com/@marlinclark?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Marlin Clark</a> on <a href="https://unsplash.com/photos/vi4DEQIpYAM?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></li>
+</ul>
 
 
+</section>
 
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="data science,urban morphology" data-listing-date-sort="1681473600000" data-listing-file-modified-sort="1681521313753" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
-<div class="thumbnail">
-<p><a href="./essays/reasons-urban-morphology/index.html"> <img src="./essays/reasons-urban-morphology/image.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./essays/reasons-urban-morphology/index.html">
-<h3 class="no-anchor listing-title">
-Reasons to study urban morphology
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
-data science
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('urban morphology'); return false;">
-urban morphology
-</div>
-</div>
-<a href="./essays/reasons-urban-morphology/index.html">
-<div class="listing-description">
-The design and structure of urban areas have a significant impact on our daily lives and overall well-being. Urban form, which…<span class="citation" data-cites="stonorSpatialLayoutEfficiency"></span><span class="citation" data-cites="stonorSpatialLayoutEfficiency"></span>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./essays/reasons-urban-morphology/index.html">
-<div class="listing-date">
-Apr 15, 2023
-</div>
-<div class="listing-author">
-Shrividya Ravi
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
