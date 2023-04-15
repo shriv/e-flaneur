@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.306">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,9 +19,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -48,48 +49,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -103,8 +75,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -161,37 +132,39 @@ div.csl-indent {
     <span class="navbar-title">e-flaneur</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../essays.html">
+    <a class="nav-link" href="../../essays.html" rel="" target="">
  <span class="menu-text">Essays</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/shriv"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/shriv" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/ShrividyaRavi"><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/ShrividyaRavi" rel="" target=""><i class="bi bi-twitter" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -241,8 +214,8 @@ div.csl-indent {
 
 </header>
 
-<p>In the <a href="https://shriv.github.io/e-flaneur/posts/bldg-heights-footprints/">previous post</a>, we discussed the utility of retrieving a summarised height data from the overlaid raster cells of a particular building polygon. In this post, I look at a quick method do this using the package <code>exactextractr</code> <span class="citation" data-cites="exactextractr"><a href="#ref-exactextractr" role="doc-biblioref">[1]</a></span>. While typically used in the calculation of <code>zonal statistics</code>, it can also be applied to deriving features from raster layers for building polygons.</p>
-<p>Since I use <code>stars</code> to read and process raster data, I have an additional step before running the extraction function - converting the <code>stars</code> object to a <code>raster</code> with a <code>st_as_raster()</code> convenience function <span class="citation" data-cites="262588213843476_convert"><a href="#ref-262588213843476_convert" role="doc-biblioref">[2]</a></span>.</p>
+<p>The <a href="https://shriv.github.io/e-flaneur/posts/bldg-heights-footprints/">previous post</a>, noted the value of retrieving a summarised height data for a building polygon from the overlaid raster cells. In this post, I look at how the package <code>exactextractr</code> <span class="citation" data-cites="exactextractr"><a href="#ref-exactextractr" role="doc-biblioref">[1]</a></span>, typically used in the calculation of <code>zonal statistics</code>, can make my use case a fast and easy task.</p>
+<p>Since I use <code>stars</code> to read and process raster data, I have an additional step before running the extraction function - converting the <code>stars</code> object to a <code>raster</code> with the <code>st_as_raster()</code> convenience function <span class="citation" data-cites="262588213843476_convert"><a href="#ref-262588213843476_convert" role="doc-biblioref">[2]</a></span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>st_as_raster <span class="ot">&lt;-</span> <span class="cf">function</span>(rstars){</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  rext <span class="ot">&lt;-</span> <span class="fu">st_bbox</span>(rstars)</span>
@@ -251,94 +224,87 @@ div.csl-indent {
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">crs =</span> <span class="fu">st_crs</span>(rstars)<span class="sc">$</span>proj4string)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <code>exact_extract()</code> function assigns mean, median, minimum etc. values from the raster layer to the polygons. The full set of summary operations can be seen <a href="https://isciences.gitlab.io/exactextractr/#summary-operations">here</a>. I’ve opted for <code>mean</code> and <code>median</code> as summary statistics. At first glance it appears that areas with tall buildings are being capture well e.g.&nbsp;around Liverpool Street station (e.g.&nbsp;the Shard) on the eastern part of City of London and the tall buildings in Canary Wharf.</p>
+<p>The <code>exact_extract()</code> function assigns mean, median, minimum etc. values from the raster layer to the polygons. The full set of summary operations can be seen <a href="https://isciences.gitlab.io/exactextractr/#summary-operations">here</a>. I’ve opted for <code>mean</code> and <code>median</code> as summary statistics. At first glance it appears that areas with tall buildings are being captured well e.g.&nbsp;the eastern part of City of London around Liverpool Street station (e.g.&nbsp;the Shard) and the tall buildings in Canary Wharf.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
-<p>However, validation tells another story. Since only a small portion of buildings have height values in OpenStreetMap, I’ve used a conversion factor of 3 for deriving heights from building levels to increase the sample size for validation. The sample size is still small but considerably larger with building heights alone. The differences between raster-summarised heights and actual heights are very high in the Canary Wharf cluster - and there are good reasons for this.</p>
+<p>However, validation tells another story. Since only a small portion of buildings have height values in OpenStreetMap, I’ve used a conversion factor of 3 for deriving heights from building levels to increase the sample size for validation. The differences between raster-summarised heights and actual heights are very high in the Canary Wharf cluster - and there are good reasons for this.</p>
 <ul>
 <li>The grid is 90m but building footprints are typically 20m - 40m.</li>
 <li>Very tall buildings are often surrounded by much smaller buildings or parks making the polygon cell mean and median much lower.</li>
 <li>Depending on the coverage of the raster cell, the height of the very tall building can be associated with a significantly smaller neighbour and vice versa.</li>
 </ul>
 <div class="cell">
-
-</div>
-<div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
-<p>For a robust conclusion of the utility of 90m raster heights for building level features, validation needs to be done across a larger area using more buildings with height values. I’ve picked the whole of the Upper West Side in New York City since 93% of building polygons in the area have non-null heights in OpenStreetMap. Note, I’m assuming OpenStreetMap heights are ground truth (which may not be the case?).</p>
+<p>A robust conclusion of the utility of 90m raster heights for building level features needs better validation - across a larger area and a greater proportion of buildings with height values. I ended up picking the whole of the Upper West Side in New York City since 93% of building polygons in the area have non-null heights in OpenStreetMap. Note, I’m assuming OpenStreetMap heights are ground truth (which may not be the case?).</p>
 <p>The distribution of absolute difference in mean building height from the raster data and the actual heights in OpenStreetMap looks symmetric but strongly biased to summarised raster heights being larger.</p>
-<div class="cell">
-
-</div>
-<div class="cell">
-
-</div>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
-<p>For a more succinct summary, I’ve split the OpenStreetMap building height into quantiles with a mean height per quantile. The table shows raster summaries from a 90m grid resolution over-estimate for every quantile - with buildings in the 25-75 percentile bands being over-estimated by almost 100%.</p>
+<p>I’ve split the OpenStreetMap building height into quantiles with a mean height per quantile for a more succinct summary. The table below shows raster summaries from a 90m grid resolution over-estimate for every quantile - with buildings in the 25-75 percentile bands being over-estimated by almost 100%.</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> Percentile </th>
-   <th style="text-align:right;"> Mean height in percentile (m) </th>
-   <th style="text-align:right;"> Mean height difference (m) </th>
-  </tr>
- </thead>
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Percentile</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Mean height in percentile (m)</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Mean height difference (m)</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> 25% </td>
-   <td style="text-align:right;"> 13.63958 </td>
-   <td style="text-align:right;"> 22.4 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 50% </td>
-   <td style="text-align:right;"> 17.71011 </td>
-   <td style="text-align:right;"> 14.0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 75% </td>
-   <td style="text-align:right;"> 19.37925 </td>
-   <td style="text-align:right;"> 14.0 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> 100% </td>
-   <td style="text-align:right;"> 41.70860 </td>
-   <td style="text-align:right;"> 3.4 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">25%</td>
+<td style="text-align: right;">13.63958</td>
+<td style="text-align: right;">22.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">50%</td>
+<td style="text-align: right;">17.71011</td>
+<td style="text-align: right;">14.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">75%</td>
+<td style="text-align: right;">19.37925</td>
+<td style="text-align: right;">14.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">100%</td>
+<td style="text-align: right;">41.70860</td>
+<td style="text-align: right;">3.4</td>
+</tr>
 </tbody>
 </table>
+</div>
+
 
 </div>
 </div>
 <p>In summary, the 90m grid is not a viable data source for accurate building level information. Since the availability of building height information is very poor for the developing world, satellite-derived values are the only way forward. My plan is to look at lower granularity data - starting with 10m grid data for Germany <span class="citation" data-cites="frantz_building_2020"><a href="#ref-frantz_building_2020" role="doc-biblioref">[3]</a></span> that I will validate with EUBUCCO <span class="citation" data-cites="milojevic-dupont_nikola_eubucco_2022"><a href="#ref-milojevic-dupont_nikola_eubucco_2022" role="doc-biblioref">[4]</a></span>. If this lower granularity works well, I have a big project coming up - applying the approach of Franz et al. <span class="citation" data-cites="frantz_national-scale_2021"><a href="#ref-frantz_national-scale_2021" role="doc-biblioref">[5]</a></span> to satellite data from Mumbai!</p>
 <section id="references" class="level3">
 <h3 class="anchored" data-anchor-id="references">References</h3>
-<div id="refs" class="references csl-bib-body" role="doc-bibliography">
-<div id="ref-exactextractr" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-exactextractr" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[1] </div><div class="csl-right-inline"><span>“Fast extraction from raster datasets using polygons.”</span> <a href="https://isciences.gitlab.io/exactextractr/">https://isciences.gitlab.io/exactextractr/</a> (accessed Mar. 28, 2023).</div>
 </div>
-<div id="ref-262588213843476_convert" class="csl-entry" role="doc-biblioentry">
+<div id="ref-262588213843476_convert" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[2] </div><div class="csl-right-inline"><span>“Convert stars raster to raster::raster. Gist.”</span> <a href="https://gist.github.com/cbrown5/65ac150cb71de8cc6c7923313a2b72f5">https://gist.github.com/cbrown5/65ac150cb71de8cc6c7923313a2b72f5</a> (accessed Mar. 28, 2023).</div>
 </div>
-<div id="ref-frantz_building_2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-frantz_building_2020" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[3] </div><div class="csl-right-inline">D. Frantz <em>et al.</em>, <span>“Building height map of germany.”</span> Zenodo, Oct. 05, 2020. doi: <a href="https://doi.org/10.5281/zenodo.4066295">10.5281/zenodo.4066295</a>.</div>
 </div>
-<div id="ref-milojevic-dupont_nikola_eubucco_2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-milojevic-dupont_nikola_eubucco_2022" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[4] </div><div class="csl-right-inline">N. Milojevic-Dupont <em>et al.</em>, <span>“<span>EUBUCCO</span>.”</span> Zenodo, Oct. 20, 2022. doi: <a href="https://doi.org/10.5281/ZENODO.6524780">10.5281/ZENODO.6524780</a>.</div>
 </div>
-<div id="ref-frantz_national-scale_2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-frantz_national-scale_2021" class="csl-entry" role="listitem">
 <div class="csl-left-margin">[5] </div><div class="csl-right-inline">D. Frantz <em>et al.</em>, <span>“National-scale mapping of building height using sentinel-1 and sentinel-2 time series,”</span> <em>Remote Sensing of Environment</em>, vol. 252, p. 112128, Jan. 2021, doi: <a href="https://doi.org/10.1016/j.rse.2020.112128">10.1016/j.rse.2020.112128</a>.</div>
 </div>
 </div>
@@ -378,9 +344,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -445,6 +425,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
