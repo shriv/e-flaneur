@@ -1,0 +1,47 @@
+---
+title: "Reasons to study urban morphology"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2023-04-15"
+categories: [data science, urban morphology]
+image: "image.jpg"
+bibliography: "references.bib"
+csl: "ieee.csl"
+---
+
+The design and structure of urban areas have a significant impact on our daily lives and overall well-being. Urban form, which includes the layout and connectivity of space, plays a crucial role in determining how people move, interact, and transact. Spatial organisation governs 60 - 80% of movement patterns [@stonorSpatialLayoutEfficiency], making it vital for economic prosperity and individual well-being. However, urban form also generates negative outcomes - with crimes like burglaries in poorly connected areas and pickpocketing thriving in highly connected areas [@stonorSpatialLayoutEfficiency].
+
+
+It is essential for policymakers to understand the spatial characteristics of urban areas and how they pertain to safety, efficiency, and utility. Without this understanding, it is difficult to bring about meaningful change through state intervention or market forces.  Since urban transformation builds upon existing layers, what exists is an important determinant of what more it could be. 
+
+> .. waves of change rarely start from scratch. More commonly, they are added in a layered way. Over time, each phase, each change blends in with the rest of the urban fabric to give a city its uniquely distinct pattern that defines it almost as a strand of DNA.
+
+-- Excerpt from Arribas-bel et al. [@arribas-belSpatialSignaturesUnderstanding2022]
+
+The challenges of inefficient or unsafe urban layout are especially poignant for developing countries. Many rural denizens have migrated from their ancestral homes to crowded cities and towns over the last few decades. The migration will continue with a projected increase to 68% urban population by 2050 (relative to 55% in 2018) - with 90% of the increase taking place in Asia and Africa [@nations68WorldPopulation]. 
+
+My interests lie in the unique challenges facing the Indian subcontinent. The inefficiency in spatial layout propagates large disparities in quality of life for the urban poor - many of whom are rural migrants. Indian cities are mainly private open space with draconian regulations governing development [@AlainBertaudBimal]. Even though older examples of urban design in places like Mumbai have more public land, they still have too much land in the private domain that cannot be built upon [@AlainBertaudBimal]. 
+
+The present-day issues of urban form require study, consideration and deliberation before re-design and mitigation. Tensions abound in handling slums, creating accessible public amenities as well as the dilemma between conserving historical precincts vs. re-development. 
+
+Throwing many people towards these challenges is the only way we can build a better place for all. We need policymakers, scientists and citizens working collaboratively and openly while making the fruits of their efforts open for comment and criticism. 
+
+
+> Two heads are better than one, not because either is infallible, but because they are unlikely to go wrong in the same direction. 
+
+-- Quote from C.S Lewis
+
+
+I'm hopeful that this blog, through its quantitative explorations of cities with open data and open source tools, is one such drip in the ocean of work yet to do. Even if it is not useful to anyone, these efforts will at least make me a more capable citizen with the requisite skills and understanding to work in urban development. 
+
+### References
+
+::: {#refs}
+:::
+
+### Credits
+
+- Post photo from <a href="https://unsplash.com/@marlinclark?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Marlin Clark</a> on <a href="https://unsplash.com/photos/vi4DEQIpYAM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
