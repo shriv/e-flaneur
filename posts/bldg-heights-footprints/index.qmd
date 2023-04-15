@@ -13,7 +13,7 @@ csl: ieee.csl
 
 In the [previous post](https://shriv.github.io/e-flaneur/posts/bldg-heights-intro/), I quickly looked at two options for global building height rasters. The 90m grid from [@eschWorldSettlementFootprint2022] looked more useful option the lower granularity provided more realistic values of real-world building heights. However, finding suitable data is only the first baby step. Figuring out how to calculate derived metrics like Floor Area Ratio (FAR) or population density per built area requires multiple datasets in different formats. 
 
-For FAR we can either associate the building footprint area to a raster cell, or associate an average building height per building polygon. To better understand which option is more suitable, we first overlay the rasters for City of London (full boundary) and a portion of Tower Hamlets around the Canary Wharf area. 
+FAR can be associated with the raster cell (as an average) or the building polygon. To better understand the suitability of the latter approach, I visualise the overlay of the height raster with building polygons for City of London (full boundary) and a portion of Tower Hamlets - around the Canary Wharf area. 
 
 
 When preparing the data for the following maps, I learned a couple of useful tips:
@@ -32,7 +32,7 @@ boundaries_sf %>%
 
 In all my previous posts, I've stuck with the graphics workhorse, `ggplot2`. However, in this post I transitioned to the `tmap` package [@nowosadElegantInformativeMaps] and I highly recommend it. I am a relatively new user so I still don't know whether it's as comprehensive as `ggplot2` but so far many of the map conversions have come out considerably better (and with simpler code). Furthermore, `tmap` has two modes - where the same map can be viewed as static (`tmap_mode("plot")`) or interactive (`tmap_mode("view")`). 
 
-Now coming back to the original question of FAR calculation options. The maps show that building polygons are of comparable size or much smaller than the raster cells and both datasets are quite mis-aligned. The building-centric option could be more useful - especially if we want to also associate a population from a raster dataset like WorldPop [@SpatialDistributionPopulation]. It would be easier to assign a proportion of population to a building than trying to align two raster grids. 
+Now coming back to the original question of FAR calculation options. The maps show that building polygons are of comparable size or much smaller than the raster cells and both datasets are quite mis-aligned. The building-centric option could be more useful - especially if I also want to associate a population from a raster dataset like WorldPop [@SpatialDistributionPopulation]. I suspect it would be easier to assign a proportion of population to a building than trying to align two raster grids. 
 
 ```{r}
 #| include: false

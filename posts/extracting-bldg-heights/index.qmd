@@ -11,9 +11,9 @@ bibliography: references.bib
 csl: ieee.csl
 ---
 
-In the [previous post](https://shriv.github.io/e-flaneur/posts/bldg-heights-footprints/), we discussed the utility of retrieving a summarised height data from the overlaid raster cells of a particular building polygon. In this post, I look at a quick method do this using the package `exactextractr` [@exactextractr]. While typically used in the calculation of `zonal statistics`, it can also be applied to deriving features from raster layers for building polygons. 
+The [previous post](https://shriv.github.io/e-flaneur/posts/bldg-heights-footprints/), noted the value of retrieving a summarised height data for a building polygon from the overlaid raster cells. In this post, I look at how the package `exactextractr` [@exactextractr], typically used in the calculation of `zonal statistics`, can make my use case a fast and easy task. 
 
-Since I use `stars` to read and process raster data, I have an additional step before running the extraction function -  converting the `stars` object to a `raster` with a `st_as_raster()` convenience function [@262588213843476_convert].  
+Since I use `stars` to read and process raster data, I have an additional step before running the extraction function -  converting the `stars` object to a `raster` with the `st_as_raster()` convenience function [@262588213843476_convert].  
 
 ```{r}
 #| echo: true
@@ -53,7 +53,7 @@ lsoa <- st_read("~/Documents/london-boundaries/statistical-gis-boundaries-london
   st_transform(crs = 4326)
 ```
 
-The `exact_extract()` function assigns mean, median, minimum etc. values from the raster layer to the polygons. The full set of summary operations can be seen [here](https://isciences.gitlab.io/exactextractr/#summary-operations). I've opted for `mean` and `median` as summary statistics. At first glance it appears that areas with tall buildings are being capture well e.g. around Liverpool Street station (e.g. the Shard) on the eastern part of City of London and the tall buildings in Canary Wharf. 
+The `exact_extract()` function assigns mean, median, minimum etc. values from the raster layer to the polygons. The full set of summary operations can be seen [here](https://isciences.gitlab.io/exactextractr/#summary-operations). I've opted for `mean` and `median` as summary statistics. At first glance it appears that areas with tall buildings are being captured well e.g. the eastern part of City of London around Liverpool Street station (e.g. the Shard) and the tall buildings in Canary Wharf. 
 
 ```{r}
 #| include: false
@@ -132,7 +132,7 @@ tm_scale_bar(position = c("left", "bottom"), width = 0.15)
 tmap_arrange(p1, p2, ncol = 1)
 
 ```
-However, validation tells another story. Since only a small portion of buildings have height values in OpenStreetMap, I've used a conversion factor of 3 for deriving heights from building levels to increase the sample size for validation. The sample size is still small but considerably larger with building heights alone. The differences between raster-summarised heights and actual heights are very high in the Canary Wharf cluster - and there are good reasons for this. 
+However, validation tells another story. Since only a small portion of buildings have height values in OpenStreetMap, I've used a conversion factor of 3 for deriving heights from building levels to increase the sample size for validation. The differences between raster-summarised heights and actual heights are very high in the Canary Wharf cluster - and there are good reasons for this. 
 
 - The grid is 90m but building footprints are typically 20m - 40m. 
 - Very tall buildings are often surrounded by much smaller buildings or parks making the polygon cell mean and median much lower.
@@ -179,7 +179,7 @@ tmap_arrange(p1, p2, ncol = 1)
 
 ```
 
-For a robust conclusion of the utility of 90m raster heights for building level features, validation needs to be done across a larger area using more buildings with height values. I've picked the whole of the Upper West Side in New York City since 93% of building polygons in the area have non-null heights in OpenStreetMap. Note, I'm assuming OpenStreetMap heights are ground truth (which may not be the case?).
+A robust conclusion of the utility of 90m raster heights for building level features needs better validation - across a larger area and a greater proportion of buildings with height values. I ended up picking the whole of the Upper West Side in New York City since 93% of building polygons in the area have non-null heights in OpenStreetMap. Note, I'm assuming OpenStreetMap heights are ground truth (which may not be the case?).
 
 The distribution of absolute difference in mean building height from the raster data and the actual heights in OpenStreetMap looks symmetric but strongly biased to summarised raster heights being larger. 
 
@@ -250,7 +250,7 @@ p2 <- ggplot(df_validate_uws_no_spat) +
 plot_grid(p2, p1_grob)
 
 ```
-For a more succinct summary, I've split the OpenStreetMap building height into quantiles with a mean height per quantile. The table shows raster summaries from a 90m grid resolution over-estimate for every quantile - with buildings in the 25-75 percentile bands being over-estimated by almost 100%. 
+I've split the OpenStreetMap building height into quantiles with a mean height per quantile for a more succinct summary. The table below shows raster summaries from a 90m grid resolution over-estimate for every quantile - with buildings in the 25-75 percentile bands being over-estimated by almost 100%. 
 
 
 ```{r}
