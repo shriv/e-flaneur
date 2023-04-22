@@ -1,0 +1,41 @@
+---
+title: "Mapping for social awareness"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2023-04-22"
+categories: [data science, urban morphology]
+image: "image.jpg"
+bibliography: "references.bib"
+csl: "ieee.csl"
+---
+
+Facilitated by the cheek-by-jowl proximity of labour and business, slums are economic powerhouses where no task is too small. Indeed, their attention to the smallest of tasks, that most affluent countries consider worthless, can build global industries - like the recycling of hair waste to a multi-million dollar wig and hair extension industry [@doronWasteNationGarbage2018]. Despite popular misconception, slums have licensed businesses that even maintain formal associations representing their interests with the authorities to ensure business continuity and prosperity [@doronWasteNationGarbage2018]. 
+
+However, addressing misconceptions and changing minds requires understanding the web of connected beliefs [@galefScoutMindsetWhy2021]. Some beliefs are created and reinforced by reportage that push a persistent viewpoint with little nuance or balance. Maps and cartographic narratives can reclaim popular mis-perceptions - often as part of a larger, concerted parry to political responses that answer only to the mainstream clarion call. 
+
+![Map reproduced from chapter "A civic mapping project in an Indian megacity" in [@kollektivorangotangoThisNotAtlas2018] on p. 121](comparative-map.png)
+
+Counter cartographies from Hyderabad Urban Lab present perceptions of waste recycling from mainstream media and local perspectives [@kollektivorangotangoThisNotAtlas2018]. Media impressions focus on the negative externalities of waste work while locals perceive them as unique business niches that generate economic value, a sense of pride and contribute to social good. 
+
+This map `frames an argument` using more than one narrative archetype [@blountUnderstandingUseNarrative2020] - a dovetail of "Defamiliarisation" and "Repetition" design patterns. The map de-familiarises the reader by clashing the media stereotype with the opposing local perspective and repeating the onslaught of juxtapositions for several areas. The repetitive de-familiarisation forces a deep acknowledgement in the reader - that their views are influenced by outsider rather than local perspectives.
+
+The accompanying text recounts the use of participatory mapping to trace water pollution when the marginalised slum businesses were faced with the pressure of closure. Locals were motivated to contribute their intimate knowledge of place towards collection of water samples and mapping business locations. Together the data was able to show the poor correlation between the businesses threatened with closure and the source of water pollution. 
+
+> We understand counter-cartography as a political practice of mapping back.
+
+-- _This is not an atlas_ [@kollektivorangotangoThisNotAtlas2018]
+
+Counter cartographies and participatory mapping occupy an important intersection - of laypeople, especially the marginalised, creating maps and spatial data for activism. However, it's a type of data democracy that doesn't get as much attention in the popular hype of data-driven change. 
+
+ 
+### References
+
+::: {#refs}
+:::
+
+### Credits
+
+- Post photo by <a href="https://unsplash.com/pt-br/@oceancleanupgroup?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">OCG Saving The Ocean</a> on <a href="https://unsplash.com/photos/EPPS6W5LdXs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  

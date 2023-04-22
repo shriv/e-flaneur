@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Shrividya Ravi">
+<meta name="dcterms.date" content="2023-04-22">
 
-<title>e-flaneur - Essays</title>
+<title>e-flaneur - Mapping for social awareness</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +22,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -60,50 +79,19 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">e-flaneur</span>
     </a>
   </div>
@@ -114,15 +102,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./essays.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../essays.html" rel="" target="">
  <span class="menu-text">Essays</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
+    <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
 </ul>
@@ -145,121 +133,89 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">Essays</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="data science">data science <span class="quarto-category-count">(2)</span></div><div class="category" data-category="urban morphology">urban morphology <span class="quarto-category-count">(2)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Mapping for social awareness</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">data science</div>
+    <div class="quarto-category">urban morphology</div>
+  </div>
+  </div>
 
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shrividya Ravi </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 22, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Facilitated by the cheek-by-jowl proximity of labour and business, slums are economic powerhouses where no task is too small. Indeed, their attention to the smallest of tasks, that most affluent countries consider worthless, can build global industries - like the recycling of hair waste to a multi-million dollar wig and hair extension industry <span class="citation" data-cites="doronWasteNationGarbage2018"><a href="#ref-doronWasteNationGarbage2018" role="doc-biblioref">[1]</a></span>. Despite popular misconception, slums have licensed businesses that even maintain formal associations representing their interests with the authorities to ensure business continuity and prosperity <span class="citation" data-cites="doronWasteNationGarbage2018"><a href="#ref-doronWasteNationGarbage2018" role="doc-biblioref">[1]</a></span>.</p>
+<p>However, addressing misconceptions and changing minds requires understanding the web of connected beliefs <span class="citation" data-cites="galefScoutMindsetWhy2021"><a href="#ref-galefScoutMindsetWhy2021" role="doc-biblioref">[2]</a></span>. Some beliefs are created and reinforced by reportage that push a persistent viewpoint with little nuance or balance. Maps and cartographic narratives can reclaim popular mis-perceptions - often as part of a larger, concerted parry to political responses that answer only to the mainstream clarion call.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="comparative-map.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Map reproduced from chapter “A civic mapping project in an Indian megacity” in <span class="citation" data-cites="kollektivorangotangoThisNotAtlas2018"><a href="#ref-kollektivorangotangoThisNotAtlas2018" role="doc-biblioref">[3]</a></span> on p.&nbsp;121</figcaption><p></p>
+</figure>
+</div>
+<p>Counter cartographies from Hyderabad Urban Lab present perceptions of waste recycling from mainstream media and local perspectives <span class="citation" data-cites="kollektivorangotangoThisNotAtlas2018"><a href="#ref-kollektivorangotangoThisNotAtlas2018" role="doc-biblioref">[3]</a></span>. Media impressions focus on the negative externalities of waste work while locals perceive them as unique business niches that generate economic value, a sense of pride and contribute to social good.</p>
+<p>This map <code>frames an argument</code> using more than one narrative archetype <span class="citation" data-cites="blountUnderstandingUseNarrative2020"><a href="#ref-blountUnderstandingUseNarrative2020" role="doc-biblioref">[4]</a></span> - a dovetail of “Defamiliarisation” and “Repetition” design patterns. The map de-familiarises the reader by clashing the media stereotype with the opposing local perspective and repeating the onslaught of juxtapositions for several areas. The repetitive de-familiarisation forces a deep acknowledgement in the reader - that their views are influenced by outsider rather than local perspectives.</p>
+<p>The accompanying text recounts the use of participatory mapping to trace water pollution when the marginalised slum businesses were faced with the pressure of closure. Locals were motivated to contribute their intimate knowledge of place towards collection of water samples and mapping business locations. Together the data was able to show the poor correlation between the businesses threatened with closure and the source of water pollution.</p>
+<blockquote class="blockquote">
+<p>We understand counter-cartography as a political practice of mapping back.</p>
+</blockquote>
+<p>– <em>This is not an atlas</em> <span class="citation" data-cites="kollektivorangotangoThisNotAtlas2018"><a href="#ref-kollektivorangotangoThisNotAtlas2018" role="doc-biblioref">[3]</a></span></p>
+<p>Counter cartographies and participatory mapping occupy an important intersection - of laypeople, especially the marginalised, creating maps and spatial data for activism. However, it’s a type of data democracy that doesn’t get as much attention in the popular hype of data-driven change.</p>
+<section id="references" class="level3">
+<h3 class="anchored" data-anchor-id="references">References</h3>
+<div id="refs" class="references csl-bib-body" role="list">
+<div id="ref-doronWasteNationGarbage2018" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[1] </div><div class="csl-right-inline">A. Doron and R. Jeffrey, <em>Waste of a nation: Garbage and growth in <span>India</span></em>. <span>Cambridge, Massachusetts</span>: <span>Harvard University Press</span>, 2018.</div>
+</div>
+<div id="ref-galefScoutMindsetWhy2021" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[2] </div><div class="csl-right-inline">J. Galef, <em>The <span>Scout Mindset</span>: <span>Why Some People See Things Clearly</span> and <span>Others Don</span>’t</em>. <span>London, UK</span>: <span>Piatkus</span>, 2021.</div>
+</div>
+<div id="ref-kollektivorangotangoThisNotAtlas2018" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[3] </div><div class="csl-right-inline"><span>“This is not an atlas: A global collection of counter-cartographies.”</span> <span>Transcript Verlag</span>, <span>Bielefeld</span>, 2018. Available: <a href="https://notanatlas.org/book/">https://notanatlas.org/book/</a></div>
+</div>
+<div id="ref-blountUnderstandingUseNarrative2020" class="csl-entry" role="listitem">
+<div class="csl-left-margin">[4] </div><div class="csl-right-inline">T. Blount, L. Koesten, Y. Zhao, and E. Simperl, <span>“Understanding the <span>Use</span> of <span>Narrative Patterns</span> by <span>Novice Data Storytellers</span>:”</span> in <em>Proceedings of the 4th <span>International Conference</span> on <span>Computer-Human Interaction Research</span> and <span>Applications</span></em>, 2020, pp. 128–138. doi: <a href="https://doi.org/10.5220/0010121601280138">10.5220/0010121601280138</a>.</div>
+</div>
+</div>
+</section>
+<section id="credits" class="level3">
+<h3 class="anchored" data-anchor-id="credits">Credits</h3>
+<ul>
+<li>Post photo by <a href="https://unsplash.com/pt-br/@oceancleanupgroup?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">OCG Saving The Ocean</a> on <a href="https://unsplash.com/photos/EPPS6W5LdXs?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></li>
+</ul>
 
 
+</section>
 
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="data science,urban morphology" data-listing-date-sort="1682078400000" data-listing-file-modified-sort="1682193141649" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
-<div class="thumbnail">
-<p><a href="./essays/mapping-for-change/index.html"> <img src="./essays/mapping-for-change/image.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./essays/mapping-for-change/index.html">
-<h3 class="no-anchor listing-title">
-Mapping for social awareness
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
-data science
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('urban morphology'); return false;">
-urban morphology
-</div>
-</div>
-<a href="./essays/mapping-for-change/index.html">
-<div class="listing-description">
-Facilitated by the cheek-by-jowl proximity of labour and business, slums are economic powerhouses where no task is too small. Indeed, their attention to the smallest of…<span class="citation" data-cites="doronWasteNationGarbage2018"></span><span class="citation" data-cites="doronWasteNationGarbage2018"></span>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./essays/mapping-for-change/index.html">
-<div class="listing-date">
-Apr 22, 2023
-</div>
-<div class="listing-author">
-Shrividya Ravi
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="data science,urban morphology" data-listing-date-sort="1681473600000" data-listing-file-modified-sort="1681546929043" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
-<div class="thumbnail">
-<p><a href="./essays/reasons-urban-morphology/index.html"> <img src="./essays/reasons-urban-morphology/image.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./essays/reasons-urban-morphology/index.html">
-<h3 class="no-anchor listing-title">
-Reasons to study urban morphology
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
-data science
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('urban morphology'); return false;">
-urban morphology
-</div>
-</div>
-<a href="./essays/reasons-urban-morphology/index.html">
-<div class="listing-description">
-Urban…<span class="citation" data-cites="stonorSpatialLayoutEfficiency"></span><span class="citation" data-cites="stonorSpatialLayoutEfficiency"></span>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./essays/reasons-urban-morphology/index.html">
-<div class="listing-date">
-Apr 15, 2023
-</div>
-<div class="listing-author">
-Shrividya Ravi
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
