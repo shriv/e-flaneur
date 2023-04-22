@@ -15,11 +15,14 @@ Facilitated by the cheek-by-jowl proximity of labour and business, slums are eco
 
 However, addressing misconceptions and changing minds requires understanding the web of connected beliefs [@galefScoutMindsetWhy2021]. Some beliefs are created and reinforced by reportage that push a persistent viewpoint with little nuance or balance. Maps and cartographic narratives can reclaim popular mis-perceptions - often as part of a larger, concerted parry to political responses that answer only to the mainstream clarion call. 
 
-![Map reproduced from chapter "A civic mapping project in an Indian megacity" in [@kollektivorangotangoThisNotAtlas2018] on p. 121](comparative-map.png)
-
 Counter cartographies from Hyderabad Urban Lab present perceptions of waste recycling from mainstream media and local perspectives [@kollektivorangotangoThisNotAtlas2018]. Media impressions focus on the negative externalities of waste work while locals perceive them as unique business niches that generate economic value, a sense of pride and contribute to social good. 
 
+
 This map `frames an argument` using more than one narrative archetype [@blountUnderstandingUseNarrative2020] - a dovetail of "Defamiliarisation" and "Repetition" design patterns. The map de-familiarises the reader by clashing the media stereotype with the opposing local perspective and repeating the onslaught of juxtapositions for several areas. The repetitive de-familiarisation forces a deep acknowledgement in the reader - that their views are influenced by outsider rather than local perspectives.
+
+![Map reproduced from chapter "A civic mapping project in an Indian megacity" in [@kollektivorangotangoThisNotAtlas2018] on p. 121](comparative-map.png)
+
+
 
 The accompanying text recounts the use of participatory mapping to trace water pollution when the marginalised slum businesses were faced with the pressure of closure. Locals were motivated to contribute their intimate knowledge of place towards collection of water samples and mapping business locations. Together the data was able to show the poor correlation between the businesses threatened with closure and the source of water pollution. 
 
@@ -27,7 +30,7 @@ The accompanying text recounts the use of participatory mapping to trace water p
 
 -- _This is not an atlas_ [@kollektivorangotangoThisNotAtlas2018]
 
-Counter cartographies and participatory mapping occupy an important intersection - of laypeople, especially the marginalised, creating maps and spatial data for activism. However, it's a type of data democracy that doesn't get as much attention in the popular hype of data-driven change. 
+Counter cartographies and participatory mapping occupy an important intersection - of laypeople, especially the marginalised, creating maps and spatial data for activism. However, it's a type of data democracy that doesn't get as much attention as it deserves in the popular hype of data-driven change. 
 
  
 ### References
