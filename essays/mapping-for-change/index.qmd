@@ -30,8 +30,11 @@ The accompanying text recounts the use of participatory mapping to trace water p
 
 -- _This is not an atlas_ [@kollektivorangotangoThisNotAtlas2018]
 
-Counter cartographies and participatory mapping occupy an important intersection - of laypeople, especially the marginalised, creating maps and spatial data for activism. However, it's a type of data democracy that doesn't get as much attention as it deserves in the popular hype of data-driven change. 
+Counter cartographies and participatory mapping occupy an important intersection - of laypeople, especially the marginalised, creating maps and spatial data for social awareness and activism. To date, these pushes for data democracy and data-driven change have not received as much attention as they deserve in popular hype. Perhaps the tide will change once the world enters the _third wave of open data_ [@ThirdWaveOpen]?
 
+> .. the genesis of a Third Wave of Open Data that can unlock these silos and unleash the public good potential of data for the digital era. The Third Wave takes a much more purpose-directed approach than prior waves; it seeks not simply to open data, but to do so in a way that focuses on impactful reuse, especially through inter-sectoral collaborations and partnerships. 
+
+-- Open data policy lab [@ThirdWaveOpen]
  
 ### References
 
