@@ -1,0 +1,42 @@
+---
+title: "Importance of buildings in urban studies"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2023-06-05"
+categories: [data science, urban morphology, buildings]
+image: "image.jpg"
+bibliography: "references.bib"
+csl: "ieee.csl"
+---
+
+Buildings and streets, with the occasional punctuation of greenery, define the urban built environment. Our daily trips typically start and end in buildings making them anchors of our activities - from leisure to work to residence. However, streets and roads make a bigger impact as they dictate the efficiency of movement and ultimately, access to amenities and opportunities at the larger urban scale. 
+
+Street networks are hierarchical by design [@RoadHierarchy2023]. Changes in local streets elicit grumbles from residents but small, sudden changes to critical segments like arterial roads can affect a large number of people at short time scales. We are less mindful of almost all changes that happen to buildings. Construction takes months or years to complete and evolution of use (e.g. more ground floor storefronts) occurs over even longer time scales. These changes are less intrusive in daily lives except for people in the immediate neighbourhood. Instead, changes are reminisced as nostalgic tales of neighbourhood character over the decades.
+
+The perspective that streets are more relevant to our daily lives carries over to the academic where street network analysis is a burgeoning field of research. Papers span a wide range of topics whose scale, split by _grain_ and _extent_ [@fleischmannMeasuringUrbanForm2021], directly connects to the relevant real-world applications. Local street network analysis, with low grain (i.e. high spatial resolution) and low extent (spatial coverage), has applications to neighbourhood level walkability [@simonsNetworkCentralityMeasures2021]. Intra-urban analyses tend have larger extent with (typically) high grain for applications like access to opportunities and amenities are relevant to economic and social well-being [@huangAccessibilityStreetNetwork2020]. Due to the coverage of OpenStreetMap ([OSM](https://www.openstreetmap.org/)), analyses have the flexibility to focus on a single area or compare multiple parts of world. 
+
+Unlike street networks from OSM, building data is not available and /or has quality issues across multiple administrative scales - limiting study even within a single country [@biljeckiOpenGovernmentGeospatial2021]. Furthermore, data is often only available as footprints i.e. the shape on the ground without accompanying useful information like the amenities it houses, number of floors, available dwellings or height. This paucity of information is especially challenging for analysis of urban settlements in the global south - clashing uncomfortably with their higher need.
+
+![Building in Ghatkhopar, Mumbai with no other information than shape and basic tag in OpenStreetMap.](building-with-tag-only.png)
+
+
+Well-designed buildings and neighbourhoods are crucial for sustainable development in the global south. However, the understanding of interventions required for built environment change cannot be obtained with the better datasets and expertise of the global north since urbanism of the global south exhibits distinctive characteristics and statistically different issues [@nagendraUrbanSouthPredicament2018] . For example, buildings anchor large parts of a city in the global south since designed streets don't exist in informal settlements [@wangEOMorphometricsUnderstanding2023]. In Mumbai, slums have "gullies", the informal parlance for extremely narrow alleys, rather than formally managed or designed streets. Given the pervasive slum typologies in the city (e.g. [slum map](https://shriv.github.io/e-flaneur/posts/mumbai-slums/)), street network analysis or learnings from a vastly different city like Rotterdam cannot provide any useful insights.
+
+![Dense slums contrasting with high development urbanism in Andheri West, Mumbai. Photo by <a href="https://unsplash.com/@alfarnassolkar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Alfarnas Solkar</a> on <a href="https://unsplash.com/photos/oqjl1kTw_Bo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>](slum-highrise.jpg)
+
+Luckily, open source tools of data science, especially geospatial data science, are now sophisticated enough to tackle problems of data poverty. Tools like [`momepy`](http://docs.momepy.org/en/stable/#) can infer considerable insights from small amounts of consistent data. Machine learning methods trained on vast amounts of satellite imagery can generate missing data e.g. adding missing building polygons [@microsoftGlobalMLBuildingFootprintsWorldwideBuilding], inferring building heights [@tripathyGeneratingMegacityscaleBuilding2022b] or measuring levels of inequality in urban areas [@zhouSatelliteMappingUrban2022]. 
+
+These open source tools offer a unique opportunity for urban enthusiasts and researchers to expand the sparse research on the urban global south. For example, `momepy` can infer plot area around buildings - which can be used to quantify the amount of unused, private land in Indian cities [@AlainBertaudBimal]. Derived building heights from satellite data [@tripathyGeneratingMegacityscaleBuilding2022b] combined with building footprints can be used to evaluate urban planning metrics like the Floor Space Index (FSI). For the ambitious, building these datasets with simple analyses is only the beginning. The data can be used to test urban interventions, like densifying specific locales, or simulating trajectories of change by intervention policy.   
+
+
+### References
+
+::: {#refs}
+:::
+
+### Credits
+
+- Post photo by <a href="https://unsplash.com/de/@mysticalmumbai?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Mystical Mumbai</a> on <a href="https://unsplash.com/photos/zRYDQejPrzw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
