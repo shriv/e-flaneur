@@ -1,0 +1,48 @@
+---
+title: "Indian urban regeneration with a Jane Jacobs formula"
+execute:
+  echo: false
+  message: false
+author: "Shrividya Ravi"
+date: "2023-06-10"
+categories: [data science, urban morphology, buildings, jane jacobs, india]
+image: "image.jpg"
+bibliography: "references.bib"
+csl: "ieee.csl"
+---
+
+Over the last few decades urban sprawl has resulted in large scale losses of green space in the global south. In Mumbai, dense vegetation has reduced by 50% lost in the recent three decades from 1988 - 2018 [@rahamanSpatiotemporalChangesGreen2021]. Sprawl is also directly connected to the wellbeing of citizens and their exposure to the increasing consequences of climate change. Unchecked expansion of grey infrastructure without appropriate tree cover and green spaces results in poor resilience to extreme weather events - from urban heat islands that magnify temperatures well above thermal comfort [@vinayakImpactsFutureUrbanization2022] and widespread flooding [@paulIncreasedSpatialVariability2018] during intense storm or monsoon downpours. 
+
+The myriad drivers of urban sprawl [@oecdCausesConsequencesUrban2018] include restrictive FSI (Floor Space Index a.k.a Floor Area Ratio, FAR)  and other antiquated building regulations e.g. plot to building area ratios. In cities with low building area coverage and low FSI regulations, growth cannot happen in the more productive urban centre and is forced outwards. 
+
+![Solid lines represent the urban area that has evolved without any maximum restriction on building height; dashed lines represent the urban area that has evolved with a maximum floor-to-area ratio of fifteen floors (horizontal dashed line in left panel). The vertical lines designate the boundaries of the area directly affected by the restriction. Figure and caption reproduced from [@oecdCausesConsequencesUrban2018].](sprawl-fsi.png)
+
+In recent years, a flurry of regulation changes have increased the allowed FSI in urban areas. However, meaningfully improved urban development requires active engagement from urban planners. In his recent step-by-step analysis of urban intervention in the large Indian city of Ahmedabad,  Dr. Bimal Patel [@puneinternationalcentreSessionManagingUrban2023] emphasises the importance of actions that increase public infrastructure alongside the FSI. 
+
+Indian cities usually lack good street network connectivity [@barrington-leighGlobalTrendsUrban2020] [@jameelaahmedRoadTestNine2020] to cope with the expected increase in population and traffic volumes brought about by the FSI changes. Addressing this deficit needs more active management than just changing a number in the building code. Dr. Patel recommends additional actions for planners along with increasing FSI:
+
+- **buying un-utilised private land**, currently languishing as private and un-used open space in many Indian cities [@AlainBertaudBimal] due to building regulations that ossified urban form to low efficiency layouts. This land can be used to add streets that improve street network connectivity or increase existing capacity. 
+- **restricting vehicular entry to side streets**. Where required, these side streets can be added by partitioning large blocks into shorter blocks and built with purchased private land. 
+- **ensuring building fronts are set back from the main road** for continuity in pedestrian movement. Over time, the setback space can be converted to covered arcades
+
+![Dr. Patel refers to British colonial era covered arcades from Ballard Estate in Mumbai as inspiration for invigorating new developments with pedestrian movement. Photo credit Hemant Mishra /Mint. Sourced from [Mint](https://www.livemint.com/Industry/JJzqGA8U6dzNgOsC4iClFI/Lifestyle-brands-eye-Mumbais-Horniman-Circle.html).](ballard-estate-causeway.jpeg)
+
+Without an explicit connection, this plan exemplifies the four generators of urban vitality à la Jane  Jacobs [@jacobsDeathLifeGreat1992] [@JaneJacobsGenerators]. 
+
+-  **Density**. Increasing the FSI incentivises developers to make the most of the land and enables higher density. They can build up as well as out within the plot - especially if money was made by selling land to the municipality for new streets resulted in a smaller plot to work with for the actual building.
+- **Mingled buildings**. Incremental additions of newer, taller buildings (depending on the pace of development) amidst the older ones without specifically stipulating that outcome. 
+-  **Short blocks**. Adding new streets that break up a large block resulting in the shorter blocks of Jacobsian preference though the Dr. Patel favours side streets for vehicular ins and outs.  
+- **Mixed uses**. Creating more floor area in urban zones with higher land prices and demand encourages mixed use - businesses along the more valuable street fronts and residential apartments in the higher floors. With regulations ensuring the street fronts of buildings are un-interrupted by vehicular entry, businesses have the confidence of captialising on pedestrian traffic. 
+
+Though Dr. Patel's project is an example, there is hope that his pragmatic advice will catch on among Indian urban planners. With changes like this, Indian cities can hope for a higher quality of urban living than the unbridled urban development of the last few decades. However, the road to urban development in the global south has a long way to go. Urban regeneration must account for water, sanitation and electricity infrastructure as well as transit options, longer and safer pedestrian mobility, and resilience to extreme weather events.  
+
+
+### References
+
+::: {#refs}
+:::
+
+### Credits
+
+- Post photo by <a href="https://unsplash.com/@unstable_affliction?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Ivan Bandura</a> on <a href="https://unsplash.com/photos/0-no6ywKMPY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+  
