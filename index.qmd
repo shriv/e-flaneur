@@ -1,12 +1,22 @@
 ---
-title: "Blog"
-listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
-page-layout: full
-title-block-banner: true
+title: "Shrividya Ravi"
+about:
+  id: hero-heading
+  template: jolla
+  image: avatar.jpg
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com/ShrividyaRavi
+    - icon: github
+      text: Github
+      href: https://github.com/shriv
 ---
+
+
+:::{#hero-heading}
+
+Shrividya is a Principal Data Analyst at Te Manatū Waka (Ministry of Transport) in New Zealand. Her main blog and website can be found [here](https://shriv-portfolio.netlify.app/). This site is dedicated to learning urbanism through practice - mainly in R but also some Python. The blog is a repository of raw thoughts and short technical lessons while essays are pieces with a little more heft and consideration. Everything here is my own personal opinion.  
+
+:::
+

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>e-flaneur - Essays</title>
+<title>e-flaneur - Blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,11 +115,11 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html" rel="" target="">
+    <a class="nav-link active" href="./blog.html" rel="" target="" aria-current="page">
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./essays.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./essays.html" rel="" target="">
  <span class="menu-text">Essays</span></a>
   </li>  
   <li class="nav-item">
@@ -149,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-page-left">
-      <h1 class="title">Essays</h1>
+      <h1 class="title">Blog</h1>
                       </div>
   </div>
     
@@ -167,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="buildings">buildings <span class="quarto-category-count">(2)</span></div><div class="category" data-category="data science">data science <span class="quarto-category-count">(4)</span></div><div class="category" data-category="india">india <span class="quarto-category-count">(1)</span></div><div class="category" data-category="jane jacobs">jane jacobs <span class="quarto-category-count">(1)</span></div><div class="category" data-category="urban morphology">urban morphology <span class="quarto-category-count">(4)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(10)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(2)</span></div><div class="category" data-category="buildings">buildings <span class="quarto-category-count">(5)</span></div><div class="category" data-category="data science">data science <span class="quarto-category-count">(10)</span></div><div class="category" data-category="india">india <span class="quarto-category-count">(7)</span></div><div class="category" data-category="london">london <span class="quarto-category-count">(4)</span></div><div class="category" data-category="mumbai">mumbai <span class="quarto-category-count">(7)</span></div><div class="category" data-category="new york city">new york city <span class="quarto-category-count">(2)</span></div><div class="category" data-category="raster">raster <span class="quarto-category-count">(2)</span></div><div class="category" data-category="urban">urban <span class="quarto-category-count">(10)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -180,14 +180,14 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="data science,urban morphology,buildings,jane jacobs,india" data-listing-date-sort="1686312000000" data-listing-file-modified-sort="1695095396444" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="0" data-categories="data science,urban,london,new york city,buildings,raster" data-listing-date-sort="1680260400000" data-listing-file-modified-sort="1695095396478" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
 <div class="thumbnail">
-<p><a href="./essays/jane-jacobs-in-indian-urbanism/index.html"> <img src="./essays/jane-jacobs-in-indian-urbanism/image.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/extracting-bldg-heights/index.html"> <img src="./posts/extracting-bldg-heights/image.jpg" class="thumbnail-image"> </a></p>
 </div>
 <div class="body">
-<a href="./essays/jane-jacobs-in-indian-urbanism/index.html">
+<a href="./posts/extracting-bldg-heights/index.html">
 <h3 class="no-anchor listing-title">
-Indian urban regeneration with a Jane Jacobs formula
+Raster heights to building heights
 </h3>
 <div class="listing-subtitle">
 
@@ -197,29 +197,176 @@ Indian urban regeneration with a Jane Jacobs formula
 <div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
 data science
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('urban morphology'); return false;">
-urban morphology
+<div class="listing-category" onclick="window.quartoListingCategory('urban'); return false;">
+urban
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('london'); return false;">
+london
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('new york city'); return false;">
+new york city
 </div>
 <div class="listing-category" onclick="window.quartoListingCategory('buildings'); return false;">
 buildings
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('jane jacobs'); return false;">
-jane jacobs
+<div class="listing-category" onclick="window.quartoListingCategory('raster'); return false;">
+raster
+</div>
+</div>
+<a href="./posts/extracting-bldg-heights/index.html">
+<div class="listing-description">
+The previous post discussed the value of calculating heights for building polygon from the overlaid raster cells. In this post, I look at how the package <code>exactextractr</code> <span class="citation" data-cites="exactextractr">[1]</span>, typically used in the…<code></code>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/extracting-bldg-heights/index.html">
+<div class="listing-date">
+Apr 1, 2023
+</div>
+<div class="listing-author">
+Shrividya Ravi
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="data science,urban,london,buildings,raster" data-listing-date-sort="1679655600000" data-listing-file-modified-sort="1695095396472" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="thumbnail">
+<p><a href="./posts/bldg-heights-footprints/index.html"> <img src="./posts/bldg-heights-footprints/image.jpg" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/bldg-heights-footprints/index.html">
+<h3 class="no-anchor listing-title">
+Overlaying building heights and footprints
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
+data science
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('urban'); return false;">
+urban
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('london'); return false;">
+london
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('buildings'); return false;">
+buildings
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('raster'); return false;">
+raster
+</div>
+</div>
+<a href="./posts/bldg-heights-footprints/index.html">
+<div class="listing-description">
+In the previous post, I quickly looked at two options for global building height rasters. The 90m grid from <span class="citation" data-cites="eschWorldSettlementFootprint2022">[1]</span> looked more useful option the lower granularity provided more realistic values of real-world building heights. However, finding suitable data is only the first baby step.…
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/bldg-heights-footprints/index.html">
+<div class="listing-date">
+Mar 25, 2023
+</div>
+<div class="listing-author">
+Shrividya Ravi
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-categories="data science,urban,london,buildings" data-listing-date-sort="1679137200000" data-listing-file-modified-sort="1695095396474" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="thumbnail">
+<p><a href="./posts/bldg-heights-intro/index.html"> <img src="./posts/bldg-heights-intro/image.jpg" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/bldg-heights-intro/index.html">
+<h3 class="no-anchor listing-title">
+A first look at building heights data
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
+data science
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('urban'); return false;">
+urban
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('london'); return false;">
+london
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('buildings'); return false;">
+buildings
+</div>
+</div>
+<a href="./posts/bldg-heights-intro/index.html">
+<div class="listing-description">
+Building heights are an important indicator for various urban analyses - from population / m<span class="math inline">\(^{2}\)</span> to Floor Area Ratio (FAR). However, getting this data is not easy. Building polygons in OpenStreetMap usually don’t have this attribute unless it was part of a bulk…<span class="citation" data-cites="NYCBuildingHeights"></span>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/bldg-heights-intro/index.html">
+<div class="listing-date">
+Mar 19, 2023
+</div>
+<div class="listing-author">
+Shrividya Ravi
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-categories="urban,R,data science,india,mumbai,london,new york city" data-listing-date-sort="1678359600000" data-listing-file-modified-sort="1695095396479" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="thumbnail">
+<p><a href="./posts/figure-ground/index.html"> <img src="./posts/figure-ground/image.jpg" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/figure-ground/index.html">
+<h3 class="no-anchor listing-title">
+Learning about figure-ground diagrams
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('urban'); return false;">
+urban
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
+data science
 </div>
 <div class="listing-category" onclick="window.quartoListingCategory('india'); return false;">
 india
 </div>
+<div class="listing-category" onclick="window.quartoListingCategory('mumbai'); return false;">
+mumbai
 </div>
-<a href="./essays/jane-jacobs-in-indian-urbanism/index.html">
+<div class="listing-category" onclick="window.quartoListingCategory('london'); return false;">
+london
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('new york city'); return false;">
+new york city
+</div>
+</div>
+<a href="./posts/figure-ground/index.html">
 <div class="listing-description">
-Over the last few decades…<span class="citation" data-cites="rahamanSpatiotemporalChangesGreen2021"></span><span class="citation" data-cites="vinayakImpactsFutureUrbanization2022"></span><span class="citation" data-cites="paulIncreasedSpatialVariability2018"></span>
+When I wrote my earlier posts on urban form schematics (see here and here), I was unaware that they are known as <code>figure-ground</code> diagrams - whose main purpose is to highlight <code>bu…</code><code></code><code></code><code></code><code></code><code></code><code></code>
 </div>
 </a>
 </div>
 <div class="metadata">
-<a href="./essays/jane-jacobs-in-indian-urbanism/index.html">
+<a href="./posts/figure-ground/index.html">
 <div class="listing-date">
-Jun 10, 2023
+Mar 10, 2023
 </div>
 <div class="listing-author">
 Shrividya Ravi
@@ -227,14 +374,14 @@ Shrividya Ravi
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="data science,urban morphology,buildings" data-listing-date-sort="1685880000000" data-listing-file-modified-sort="1695095396436" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="4" data-categories="data science,urban,india,mumbai" data-listing-date-sort="1676718000000" data-listing-file-modified-sort="1701937603630" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
 <div class="thumbnail">
-<p><a href="./essays/importance-buildings-urban-morphology/index.html"> <img src="./essays/importance-buildings-urban-morphology/image.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/charming-mumbai/index.html"> <img src="./posts/charming-mumbai/assets/parsi-colony.jpeg" class="thumbnail-image"> </a></p>
 </div>
 <div class="body">
-<a href="./essays/importance-buildings-urban-morphology/index.html">
+<a href="./posts/charming-mumbai/index.html">
 <h3 class="no-anchor listing-title">
-Importance of buildings in urban studies
+Charming neighbourhoods of Mumbai
 </h3>
 <div class="listing-subtitle">
 
@@ -244,23 +391,117 @@ Importance of buildings in urban studies
 <div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
 data science
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('urban morphology'); return false;">
-urban morphology
+<div class="listing-category" onclick="window.quartoListingCategory('urban'); return false;">
+urban
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('india'); return false;">
+india
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mumbai'); return false;">
+mumbai
+</div>
+</div>
+<a href="./posts/charming-mumbai/index.html">
+<div class="listing-description">
+One…<span class="citation" data-cites="DadarParsiColony2022"></span><span class="citation" data-cites="BallardEstate2022"></span>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/charming-mumbai/index.html">
+<div class="listing-date">
+Feb 19, 2023
+</div>
+<div class="listing-author">
+Shrividya Ravi
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-categories="data science,urban,india,mumbai" data-listing-date-sort="1675162800000" data-listing-file-modified-sort="1695095396487" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="thumbnail">
+<p><a href="./posts/mumbai-slums/index.html"> <img src="./posts/mumbai-slums/image.jpg" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/mumbai-slums/index.html">
+<h3 class="no-anchor listing-title">
+Getting GIS data of Mumbai slums
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
+data science
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('urban'); return false;">
+urban
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('india'); return false;">
+india
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mumbai'); return false;">
+mumbai
+</div>
+</div>
+<a href="./posts/mumbai-slums/index.html">
+<div class="listing-description">
+According the 2011 census, around 42% of the population resides in slums <span class="citation" data-cites="MumbaiGreaterMumbai">[1]</span>. Given the rapid rates of growth in a megacity like Mumbai, it’s likely that both the extent and the population of slum residents has only…<span class="citation" data-cites="GISMISSlumData"></span>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/mumbai-slums/index.html">
+<div class="listing-date">
+Feb 1, 2023
+</div>
+<div class="listing-author">
+Shrividya Ravi
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-categories="data science,urban,india,mumbai,buildings" data-listing-date-sort="1675162800000" data-listing-file-modified-sort="1695095396487" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="thumbnail">
+<p><a href="./posts/osm-mumbai/index.html"> <img src="./posts/osm-mumbai/image.png" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/osm-mumbai/index.html">
+<h3 class="no-anchor listing-title">
+Building footprints for Mumbai
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
+data science
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('urban'); return false;">
+urban
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('india'); return false;">
+india
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mumbai'); return false;">
+mumbai
 </div>
 <div class="listing-category" onclick="window.quartoListingCategory('buildings'); return false;">
 buildings
 </div>
 </div>
-<a href="./essays/importance-buildings-urban-morphology/index.html">
+<a href="./posts/osm-mumbai/index.html">
 <div class="listing-description">
-Buildings and streets, with the occasional punctuation of greenery, define the urban built environment. Our day-to-day trips are anchored by buildings as we move between…
+I rely heavily on Openstreetmap (OSM) for my geospatial analyses as I mainly work with vector data of buildings and streets. However, OSM is not always reliable - with…<code></code><span class="citation" data-cites="MicrosoftGlobalMLBuildingFootprints2023"></span><code></code>
 </div>
 </a>
 </div>
 <div class="metadata">
-<a href="./essays/importance-buildings-urban-morphology/index.html">
+<a href="./posts/osm-mumbai/index.html">
 <div class="listing-date">
-Jun 5, 2023
+Feb 1, 2023
 </div>
 <div class="listing-author">
 Shrividya Ravi
@@ -268,14 +509,14 @@ Shrividya Ravi
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="data science,urban morphology" data-listing-date-sort="1682078400000" data-listing-file-modified-sort="1695095396460" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="7" data-categories="data science,urban,india,mumbai,buildings" data-listing-date-sort="1675162800000" data-listing-file-modified-sort="1695095396479" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<p><a href="./essays/mapping-for-change/index.html"> <img src="./essays/mapping-for-change/image.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/global-ml/index.html"> <img src="./posts/global-ml/image.png" class="thumbnail-image"> </a></p>
 </div>
 <div class="body">
-<a href="./essays/mapping-for-change/index.html">
+<a href="./posts/global-ml/index.html">
 <h3 class="no-anchor listing-title">
-Mapping for social awareness
+Building footprints from Global ML
 </h3>
 <div class="listing-subtitle">
 
@@ -285,20 +526,29 @@ Mapping for social awareness
 <div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
 data science
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('urban morphology'); return false;">
-urban morphology
+<div class="listing-category" onclick="window.quartoListingCategory('urban'); return false;">
+urban
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('india'); return false;">
+india
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mumbai'); return false;">
+mumbai
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('buildings'); return false;">
+buildings
 </div>
 </div>
-<a href="./essays/mapping-for-change/index.html">
+<a href="./posts/global-ml/index.html">
 <div class="listing-description">
-Facilitated by the cheek-by-jowl proximity of labour and business, slums are economic powerhouses where no task is too small. Indeed, their attention to the smallest of…<span class="citation" data-cites="doronWasteNationGarbage2018"></span>
+I’ve recently learned of the <code>GlobalML</code> dataset from Microsoft <span class="citation" data-cites="MicrosoftGlobalMLBuildingFootprints2023">[1]</span> which has extracted building footprints from satellite imagery. However, accessing the data is not trivial as only a handful of countries have specific data…<code></code>
 </div>
 </a>
 </div>
 <div class="metadata">
-<a href="./essays/mapping-for-change/index.html">
+<a href="./posts/global-ml/index.html">
 <div class="listing-date">
-Apr 22, 2023
+Feb 1, 2023
 </div>
 <div class="listing-author">
 Shrividya Ravi
@@ -306,14 +556,14 @@ Shrividya Ravi
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="data science,urban morphology" data-listing-date-sort="1681473600000" data-listing-file-modified-sort="1695095396466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="8" data-categories="data science,urban,india,mumbai,R" data-listing-date-sort="1667214000000" data-listing-file-modified-sort="1695095396488" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
 <div class="thumbnail">
-<p><a href="./essays/reasons-urban-morphology/index.html"> <img src="./essays/reasons-urban-morphology/image.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/osmplotr/index.html"> <img src="./posts/osmplotr/image.jpg" class="thumbnail-image"> </a></p>
 </div>
 <div class="body">
-<a href="./essays/reasons-urban-morphology/index.html">
+<a href="./posts/osmplotr/index.html">
 <h3 class="no-anchor listing-title">
-Reasons to study urban morphology
+Schematic maps of urban form
 </h3>
 <div class="listing-subtitle">
 
@@ -323,20 +573,73 @@ Reasons to study urban morphology
 <div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
 data science
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('urban morphology'); return false;">
-urban morphology
+<div class="listing-category" onclick="window.quartoListingCategory('urban'); return false;">
+urban
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('india'); return false;">
+india
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mumbai'); return false;">
+mumbai
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
 </div>
 </div>
-<a href="./essays/reasons-urban-morphology/index.html">
+<a href="./posts/osmplotr/index.html">
 <div class="listing-description">
-Urban morphology is the study of urban…<span class="citation" data-cites="stonorSpatialLayoutEfficiency"></span><span class="citation" data-cites="stonorSpatialLayoutEfficiency"></span>
+I became interested in the qualitative and quantitative analysis of urban form over a year ago. Architects like Bimal Patel <span class="citation" data-cites="AlainBertaudBimal">[1]</span> dominate the vast literature of urban form and their classic set of explanatory images are 200m - 500m square schematics of building footprints, plots and street networks.…
 </div>
 </a>
 </div>
 <div class="metadata">
-<a href="./essays/reasons-urban-morphology/index.html">
+<a href="./posts/osmplotr/index.html">
 <div class="listing-date">
-Apr 15, 2023
+Nov 1, 2022
+</div>
+<div class="listing-author">
+Shrividya Ravi
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="9" data-categories="data science,urban,india,mumbai" data-listing-date-sort="1659268800000" data-listing-file-modified-sort="1695095396483" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="thumbnail">
+<p><a href="./posts/mumbai-pop/index.html"> <img src="./posts/mumbai-pop/image.jpg" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/mumbai-pop/index.html">
+<h3 class="no-anchor listing-title">
+Population distribution in Mumbai
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('data science'); return false;">
+data science
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('urban'); return false;">
+urban
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('india'); return false;">
+india
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('mumbai'); return false;">
+mumbai
+</div>
+</div>
+<a href="./posts/mumbai-pop/index.html">
+<div class="listing-description">
+Mumbai is a city of incredible heterogeneity and diversity. One of the many indicators of this aspect is how and where people live. To answer questions of…<span class="citation" data-cites="MumbaiGreaterMumbai"></span>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/mumbai-pop/index.html">
+<div class="listing-date">
+Aug 1, 2022
 </div>
 <div class="listing-author">
 Shrividya Ravi
