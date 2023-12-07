@@ -22,5 +22,20 @@
       "/posts/osmplotr/index.html",
       "/posts/mumbai-pop/index.html"
     ]
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/extracting-bldg-heights/index.html",
+      "/posts/bldg-heights-footprints/index.html",
+      "/posts/bldg-heights-intro/index.html",
+      "/posts/figure-ground/index.html",
+      "/posts/charming-mumbai/index.html",
+      "/posts/mumbai-slums/index.html",
+      "/posts/osm-mumbai/index.html",
+      "/posts/global-ml/index.html",
+      "/posts/osmplotr/index.html",
+      "/posts/mumbai-pop/index.html"
+    ]
   }
 ]
