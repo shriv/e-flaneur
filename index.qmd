@@ -1,9 +1,9 @@
 ---
-title: "Shrividya Ravi"
+title: "e-flâneur"
 about:
   id: hero-heading
   template: jolla
-  image: avatar.jpg
+  image: tokyo.jpg
   links:
     - icon: twitter
       text: twitter
@@ -13,10 +13,6 @@ about:
       href: https://github.com/shriv
 ---
 
+This site is dedicated to learning urbanism through data science and research. The blog is a repository of raw thoughts and short technical lessons while essays are a synthesis of topics I come across in urbanism research. Everything here is my own personal opinion. I also write about [forests and the environment](https://shriv.github.io/forest-sense/) and [data science](https://shriv-portfolio.netlify.app/). 
 
-:::{#hero-heading}
-
-Shrividya is a Principal Data Analyst at Te Manatū Waka (Ministry of Transport) in New Zealand. Her main blog and website can be found [here](https://shriv-portfolio.netlify.app/). This site is dedicated to learning urbanism through practice - mainly in R but also some Python. The blog is a repository of raw thoughts and short technical lessons while essays are pieces with a little more heft and consideration. Everything here is my own personal opinion.  
-
-:::
-
+Photo by <a href="https://unsplash.com/@hellocolor?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Pawel Nolbert</a> on <a href="https://unsplash.com/photos/timelapse-photography-of-vehicles-and-buildings-4u2U8EO9OzY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
