@@ -1,5 +1,6 @@
 ---
 title: "Building footprints from Global ML"
+description: "Exploring Global ML building data for Mumbai in R."
 execute:
   echo: false
   message: false

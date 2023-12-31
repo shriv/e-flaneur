@@ -1,5 +1,6 @@
 ---
 title: "Raster heights to building heights"
+description: "Assiging building height from 90m raster data to OSM footprints."
 execute:
   echo: false
   message: false

@@ -1,5 +1,6 @@
 ---
 title: "Learning about figure-ground diagrams"
+description: "Visualising urban form of Mumbai, London and New York City."
 execute:
   echo: false
   message: false

@@ -1,5 +1,6 @@
 ---
 title: "Building footprints for Mumbai"
+description: "Comparing building footprints from different sources."
 execute:
   echo: false
   message: false

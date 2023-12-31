@@ -1,5 +1,6 @@
 ---
 title: "Charming neighbourhoods of Mumbai"
+description: "A virtual and visual foray into Parsi Colony and Ballard Estate."
 execute:
   echo: false
   message: false

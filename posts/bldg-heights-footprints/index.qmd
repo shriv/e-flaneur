@@ -1,5 +1,6 @@
 ---
 title: "Overlaying building heights and footprints"
+description: "Visualising building height rastters and OSM footprints for London."
 execute:
   echo: false
   message: false

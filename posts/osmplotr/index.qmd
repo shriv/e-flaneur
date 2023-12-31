@@ -1,5 +1,6 @@
 ---
 title: "Schematic maps of urban form"
+description: "Visualising urban form with R."
 execute:
   echo: false
   message: false

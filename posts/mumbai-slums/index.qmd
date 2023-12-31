@@ -1,5 +1,6 @@
 ---
 title: "Getting GIS data of Mumbai slums"
+description: "Exploring slum GIS data for Mumbai in R."
 execute:
   echo: false
   message: false

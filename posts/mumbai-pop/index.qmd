@@ -1,5 +1,6 @@
 ---
 title: "Population distribution in Mumbai"
+description: "Expoloring WorldPop 2020 data for Mumbai."
 execute:
   echo: false
   message: false

@@ -1,5 +1,6 @@
 ---
 title: "A first look at building heights data"
+description: "Visual comparison of building height rasters for London."
 execute:
   echo: false
   message: false
